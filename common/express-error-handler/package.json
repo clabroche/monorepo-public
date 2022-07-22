@@ -1,0 +1,20 @@
+{
+  "name": "@clabroche-org/common-express-error-handler",
+  "version": "1.1.0",
+  "description": "",
+  "repository": "https://github.com/clabroche-org/monorepo",
+  "main": "src/errorHandler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@clabroche-org/common-express-http-error": "workspace:*",
+    "@clabroche-org/common-express-logger": "workspace:*"
+  },
+  "gitHead": "130d53f826acd5311d738a4097b22ce0a2861c49",
+  "devDependencies": {
+    "@clabroche-org/common-retrigger-all-build": "workspace:*"
+  }
+}
