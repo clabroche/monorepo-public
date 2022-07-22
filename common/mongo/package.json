@@ -1,0 +1,19 @@
+{
+  "name": "@clabroche-org/common-mongo",
+  "version": "1.1.0",
+  "description": "",
+  "repository": "https://github.com/clabroche-org/monorepo",
+  "main": "src/mongo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^4.5.0"
+  },
+  "gitHead": "130d53f826acd5311d738a4097b22ce0a2861c49",
+  "devDependencies": {
+    "@clabroche-org/common-retrigger-all-build": "workspace:*"
+  }
+}
