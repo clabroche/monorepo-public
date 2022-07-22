@@ -1,0 +1,28 @@
+{
+  "name": "@clabroche-org/common-context",
+  "version": "1.1.0",
+  "description": "",
+  "repository": "https://github.com/clabroche-org/monorepo",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "clabroche-org-jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@clabroche-org/common-jest": "workspace:*",
+    "@clabroche-org/common-retrigger-all-build": "workspace:*",
+    "@shelf/jest-mongodb": "2.2.2",
+    "bluebird": "^3.7.2",
+    "express": "^4.18.1",
+    "supertest": "^6.2.2"
+  },
+  "dependencies": {
+    "@babel/core": "7.18.2",
+    "jest": "27.5.1",
+    "jest-environment-node": "27.5.1",
+    "jest-sonar-reporter": "2.0.0",
+    "uuid": "^8.3.2"
+  },
+  "gitHead": "130d53f826acd5311d738a4097b22ce0a2861c49"
+}

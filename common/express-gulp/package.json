@@ -1,0 +1,21 @@
+{
+  "name": "@clabroche-org/common-express-gulp",
+  "version": "1.1.0",
+  "description": "",
+  "repository": "https://github.com/clabroche-org/monorepo",
+  "main": "src/gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "gulp": "^4.0.2",
+    "kill-port": "^1.6.1"
+  },
+  "gitHead": "130d53f826acd5311d738a4097b22ce0a2861c49",
+  "devDependencies": {
+    "@clabroche-org/common-retrigger-all-build": "workspace:*"
+  }
+}
