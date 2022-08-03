@@ -64,10 +64,12 @@ Logger.prototype.error = function (err) {
 
 /**@param {String}  stack*/
 function formatStack(stack = '') {
-  return stack
-    .split('\n')
-    .map((line) => `├── ${line}`)
-    .join('\n')
+  return stack.split
+    ? stack
+      .split('\n')
+      .map((line) => `├── ${line}`)
+      .join('\n')
+    : stack
 }
 
 module.exports = Logger
