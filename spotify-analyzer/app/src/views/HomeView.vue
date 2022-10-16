@@ -214,6 +214,9 @@ const features = computed(() => {
 
 </script>
 <style lang="scss" scoped>
+h1 {
+  text-align: center;
+}
 .root.line {
   display: flex;
   flex-wrap: wrap;
