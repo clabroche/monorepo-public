@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "bin": {
-    "spotify-analyzer-server": "bin/www"
-  },
+  "bin": "bin/www",
   "scripts": {
     "serve": "gulp",
     "test": "",
