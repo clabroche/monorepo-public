@@ -21,13 +21,17 @@ import {ref, onMounted, computed, onBeforeUnmount} from 'vue'
 import TitleInfosLine from './TitleInfosLine.vue';
 import Popover from './common/Popover.vue';
 import dayjs from 'dayjs';
+import Dictionnary from '../services/Dictionnary';
 window.innerWidth
 /** @type {import('vue').Ref<import('@clabroche-org/spotify-analyzer-models/src/models/History')[]>} */
 const history = ref([])
 const windowWidth = ref(window.innerWidth)
-
 onMounted(async () => {
   history.value = await History.recentlyPlayed()
+  History.updated.subscribe(async () => {
+    history.value = await History.recentlyPlayed()
+    history.value.map(h => Dictionnary.addTrack(h.trackId))
+  })
 })
 
 const onResize = () => windowWidth.value = window.innerWidth

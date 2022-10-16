@@ -24,8 +24,21 @@ import BottomBar from "./components/common/BottomBar.vue";
 import { core } from "@clabroche-org/spotify-analyzer-models/src/apis/Core";
 import Credential from "@clabroche-org/spotify-analyzer-models/src/models/Credential";
 import HistorySection from "./components/HistorySection.vue";
+import {Room, Socket} from '@iryu54/room-lib-front';
+import History from "@clabroche-org/spotify-analyzer-models/src/models/History";
 
 Auth.getUser()
+  .then(async () => {
+    const email = Auth.user.value?.email
+    if (email) {
+      await Room.getRoom()
+        .catch(() => Room.createRoom(email, email))
+      Socket.socket.emit('connectRoom', email, email)
+      Socket.socket.on("update:histories", test => {
+        History.updated.next()
+      })
+    }
+  })
 core.errorObservable.subscribe(async err => {
   if (err?.response?.status === 401) {
     notif.next("error", "Vous n'êtes pas authentifié.");
