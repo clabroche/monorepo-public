@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.17](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.16...v1.1.1-beta.17) (2022-10-16)
+
+### Bug Fixes
+
+* **spotify-analyzer:** add dates &&  responsive ([aab3515](https://github.com/clabroche-org/monorepo/commit/aab3515f817cd3a24b8ffa529787dfe916647e28))
+* **spotify-analyzer:** add header on main contenent ([3b3c922](https://github.com/clabroche-org/monorepo/commit/3b3c922978814b06c646324476dc02ecff334c20))
+* **spotify-analyzer:** remove hover on main content ([20081cf](https://github.com/clabroche-org/monorepo/commit/20081cf4a2fca9429933eeb78c2c9c6eb2be8d0e))
+
 ## [1.1.1-beta.16](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.15...v1.1.1-beta.16) (2022-10-16)
 
 ### Bug Fixes
