@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "spotify-analyzer-server": "bin/www"
+  },
   "scripts": {
     "serve": "gulp",
-    "test": ""
+    "test": "",
+    "postpublish": "EVENT_TYPE=spotify-analyzer-server REPO=clabroche-org/monorepo npx @clabroche-org/common-trigger-workflow"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +19,7 @@
     "@clabroche-org/common-express-gulp": "workspace:*",
     "@clabroche-org/common-jwt": "workspace:*",
     "@clabroche-org/common-mongo": "workspace:*",
+    "@clabroche-org/common-trigger-workflow": "workspace:*",
     "@clabroche-org/common-typings": "workspace:*",
     "@clabroche-org/mybank-modules-auth": "workspace:*",
     "@clabroche-org/spotify-analyzer-models": "workspace:*",
