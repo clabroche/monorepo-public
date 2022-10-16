@@ -16,7 +16,8 @@
     "capacitor:android:generate:keystore": "keytool -genkey -v -keystore my-release-key.keystore -alias spotify-analyzer -keyalg RSA -keysize 2048 -validity 1000000 && keytool -importkeystore -srckeystore my-release-key.keystore -destkeystore my-release-key.keystore -deststoretype pkcs12",
     "capacitor:build": "cd android && ./build.sh",
     "preview": "vite preview --port 5050",
-    "postpublish": "EVENT_TYPE=spotify-analyzer-app REPO=clabroche-org/monorepo npx @clabroche-org/common-trigger-workflow"
+    "postpublish": "EVENT_TYPE=spotify-analyzer-app REPO=clabroche-org/monorepo npx @clabroche-org/common-trigger-workflow",
+    "test": ""
   },
   "type": "module",
   "dependencies": {

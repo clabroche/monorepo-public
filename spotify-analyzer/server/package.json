@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "gulp",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": ""
   },
   "author": "",
   "license": "ISC",
@@ -15,7 +15,6 @@
     "@clabroche-org/common-express-gulp": "workspace:*",
     "@clabroche-org/common-jwt": "workspace:*",
     "@clabroche-org/common-mongo": "workspace:*",
-    "@clabroche-org/common-retrigger-all-build": "workspace:*",
     "@clabroche-org/common-typings": "workspace:*",
     "@clabroche-org/mybank-modules-auth": "workspace:*",
     "@clabroche-org/spotify-analyzer-models": "workspace:*",
@@ -24,5 +23,8 @@
     "dayjs": "^1.11.5",
     "gulp": "^4.0.2",
     "spotify-web-api-node": "^5.0.2"
+  }, 
+  "devDependencies": {
+    "@clabroche-org/common-retrigger-all-build": "workspace:*"
   }
 }
