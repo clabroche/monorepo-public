@@ -30,9 +30,7 @@ class Artist {
   }
 
   static async all(filter) {
-    let { data: artists } = await core.instance.get(`/api/spotify/artists`, {
-      params: { filter }
-    })
+    let { data: artists } = await core.instance.post(`/api/spotify/artists`, { filter })
     if (!artists) artists = []
     return artists.map(track => new Artist(track))
   }

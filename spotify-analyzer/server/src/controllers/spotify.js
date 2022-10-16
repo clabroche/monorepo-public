@@ -1,17 +1,12 @@
 const { express } = require('@clabroche-org/common-express')
 const { userIsAuthenticated, getJwt } = require('@clabroche-org/common-jwt')
 const { mongo } = require('@clabroche-org/common-mongo')
-const Album = require('../models/Album')
-const Track = require('../models/Track')
 const { shouldBeConnectedToSpotify } = require('../middlewares/spotify')
 const Credential = require('../models/Credential')
-const { getClient } = require('../services/spotify')
 const { User } = require('@clabroche-org/mybank-modules-auth').models
-const PromiseB = require('bluebird')
 const spotify = require('../services/spotify')
 const ArtistPersistence = require('../models/Artist')
 const HistoryPersistence = require('../models/History')
-const SpotifyWebApi = require('spotify-web-api-node')
 const TrackPersistence = require('../models/Track')
 const AlbumPersistence = require('../models/Album')
 const router = express.Router()
@@ -27,15 +22,13 @@ router.post('/tracks', userIsAuthenticated, async (req, res, next) => {
   const tracks = await TrackPersistence.find(req.body)
   res.json(tracks)
 })
-router.get('/albums', userIsAuthenticated, async (req, res, next) => {
-  const filter = JSON.parse(req.query.filter?.toString() || '{}')
-  const albums = await AlbumPersistence.find({ filter })
+router.post('/albums', userIsAuthenticated, async (req, res, next) => {
+  const albums = await AlbumPersistence.find(req.body)
   res.json(albums)
 })
 
-router.get('/artists', userIsAuthenticated, async (req, res, next) => {
-  const filter = JSON.parse(req.query.filter?.toString() || '{}')
-  const artists = await ArtistPersistence.find({ filter })
+router.post('/artists', userIsAuthenticated, async (req, res, next) => {
+  const artists = await ArtistPersistence.find(req.body)
   res.json(artists)
 })
 
