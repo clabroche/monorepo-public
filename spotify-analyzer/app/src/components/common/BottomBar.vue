@@ -1,7 +1,7 @@
 <template>
   <div class="root-bottom-bar">
-    <button class="bordered" @click="$router.push({ name: 'transactions' })">
-      <i class="fas fa-list"></i>
+    <button class="bordered">
+      <!-- <i class="fas fa-list"></i> -->
     </button>
     <button class="bordered main" @click="$router.push({ name: 'home' })">
       <i class="fas fa-home"></i>
