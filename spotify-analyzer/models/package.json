@@ -1,0 +1,25 @@
+{
+  "name": "@clabroche-org/spotify-analyzer-models",
+  "version": "1.1.1-beta.8",
+  "description": "",
+  "repository": "https://github.com/clabroche-org/monorepo",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "7.18.2",
+    "@clabroche-org/common-context": "workspace:*",
+    "@clabroche-org/common-custom-observable": "workspace:*",
+    "@clabroche-org/common-typings": "workspace:*",
+    "@clabroche-org/spotify-analyzer-env": "workspace:*",
+    "axios": "^0.26.1",
+    "jest-environment-node": "27.5.1"
+  },
+  "gitHead": "130d53f826acd5311d738a4097b22ce0a2861c49",
+  "devDependencies": {
+    "@clabroche-org/common-retrigger-all-build": "workspace:*"
+  }
+}
