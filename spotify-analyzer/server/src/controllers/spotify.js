@@ -41,20 +41,20 @@ router.get('/stats', userIsAuthenticated, async (req, res, next) => {
   const from = dayjs(fromQuery.toString()).startOf('day').toISOString()
   const to = dayjs(toQuery.toString()).endOf('day').toISOString()
   const jwt = getJwt()
-  res.json([
-    {
-      type: 'bestArtists',
-      leaderBoard: await HistoryPersistence.getBestArtists(jwt.user_id, from, to)
-    },
-    {
-      type: 'bestTitles',
-      leaderBoard: await HistoryPersistence.getBestTitles(jwt.user_id, from, to)
-    },
-    {
-      type: 'features',
-      leaderBoard: await HistoryPersistence.getFeatures(jwt.user_id, from, to)
-    }
-  ])
+  res.json([{
+    type: 'bestArtists',
+    leaderBoard: await HistoryPersistence.getBestArtists(jwt.user_id, from, to)
+  },{
+    type: 'bestTitles',
+    leaderBoard: await HistoryPersistence.getBestTitles(jwt.user_id, from, to)
+  },{
+    type: 'features',
+    leaderBoard: await HistoryPersistence.getFeatures(jwt.user_id, from, to)
+  },{
+    type: 'differentArtists',
+    nbDifferentArtists: await HistoryPersistence.getNbDifferentArtists(jwt.user_id, from, to),
+    newArtists: await HistoryPersistence.getNewArtists(jwt.user_id, from, to)
+  }])
 })
 router.get('/callback', async (req, res, next) => {
   const {code, state} = req.query

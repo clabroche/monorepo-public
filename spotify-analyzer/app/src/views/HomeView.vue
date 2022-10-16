@@ -53,6 +53,35 @@
               </div>
             </section>
           </template>
+          <template v-if="stat.type ==='differentArtists'">
+            <section class="history">
+              <h2>Nombres d'artistes différents</h2>
+              <div class="leaderboard">
+                <div class="line-feature" :class="{line: artistsStat.type !== 'leaderBoard'}" v-for="artistsStat of artistsStats">
+                  <div>
+                    <i :class="artistsStat.icon"></i>
+                    {{artistsStat.label}}
+                  </div>
+                  <Progress v-if="artistsStat.type === 'bar'" class="stat-score progress" :value="artistsStat.score || 0"
+                    :max="artistsStat.max || 100" :noLabel="true" />
+                  <div v-else-if="artistsStat.type === 'leaderBoard'">
+                    <div class="leaderboard column">
+                      <div class="line" v-for="artist of artistsStat.score.slice(0, 40)">
+                        <Line 
+                          :img="Dictionnary.artists.value[artist._id]?.images?.[0]?.url"
+                          :infos="[
+                            {text: `${artist.count} écoutes`, icon:'fas fa-redo'},
+                            {text: Dictionnary.artists.value[artist._id]?.name, icon:'fas fa-user'}
+                          ]"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div v-else class="stat-score">{{artistsStat.score}}{{artistsStat.suffix}}</div>
+                </div>
+              </div>
+            </section>
+          </template>
         </template>
       </div>
   </div>
@@ -200,8 +229,31 @@ const analyze = {
     }
   },
   
+  nbDifferentArtists(score) {
+    return {
+      label: 'Artistes différents sur la période',
+      icon: 'fas fa-users',
+      score
+    }
+  },
+  newArtists(score) {
+    return {
+      label: 'Artistes découverts',
+      icon: 'fas fa-users',
+      type: 'leaderBoard',
+      score
+    }
+  }
 }
-
+const artistsStats = computed(() => {
+  const differentArtists = stats.value.find(stat => stat.type === "differentArtists");
+  return [
+    'nbDifferentArtists',
+    'newArtists',
+  ].map((statName) => {
+    return analyze[statName] ? analyze[statName](differentArtists[statName], differentArtists) : null
+  }).filter(a => a)
+})
 const features = computed(() => {
   const featureStat = stats.value.find(stat => stat.type === "features");
   return [

@@ -124,6 +124,70 @@ class HistoryPersistence extends History{
     ]).toArray()
   }
   /**
+ * 
+ * @param {string} ownerId 
+ * @param {string} from 
+ * @param {string} to 
+ * @returns 
+ */
+  static async getNbDifferentArtists(ownerId, from, to) {
+    if (!ownerId) throw new Error('ownerId is required')
+    return HistoryPersistence.getDifferentArtists(ownerId,from, to)
+      .then(res => res.length)
+  }
+
+  static async getDifferentArtists(ownerId, from, to) {
+    return mongo.collection(base.collectionName).aggregate([
+      {
+        $match: {
+          ownerId: mongo.getID(ownerId),
+          played_at: {
+            $gt: dayjs(from).toISOString(),
+            $lt: dayjs(to).toISOString()
+          },
+        }
+      },
+      {
+        $lookup: {
+          from: `${mongo.prefix}-${require('./Track').collectionName}`,
+          localField: "trackId",
+          foreignField: "_id",
+          as: "track"
+        }
+      },
+      { $unwind: '$track' },
+      { $unwind: '$track.artistsIds' },
+      {
+        $group: {
+          _id: "$track.artistsIds",
+          count: {$sum: 1}
+        }
+      },
+      {
+        $sort: {count: -1}
+      }
+    ]).toArray()
+  }
+
+
+
+  /**
+ * 
+ * @param {string} ownerId 
+ * @param {string} from 
+ * @param {string} to 
+ * @returns 
+ */
+  static async getNewArtists(ownerId, from, to) {
+    if (!ownerId) throw new Error('ownerId is required')
+    const differentArtistsFromPeriod = await HistoryPersistence.getDifferentArtists(ownerId, from, to)
+    const differentArtistsBefore = await HistoryPersistence.getDifferentArtists(ownerId, dayjs().subtract(100, 'years').toISOString(), from)
+    const idsBefore = differentArtistsBefore.map(a => a._id)
+    const newArtists = differentArtistsFromPeriod
+      .filter(stat => !idsBefore.includes(stat._id))
+    return newArtists
+  }
+  /**
    * 
    * @param {string} ownerId 
    * @param {string} from 
