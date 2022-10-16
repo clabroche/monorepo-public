@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.18](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.17...v1.1.1-beta.18) (2022-10-16)
+
+### Bug Fixes
+
+* **spotify-analyzer:** add stats for different and new artists ([712d25d](https://github.com/clabroche-org/monorepo/commit/712d25d1396e4101ff9300bfc9e44b5870760e51))
+
 ## [1.1.1-beta.17](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.16...v1.1.1-beta.17) (2022-10-16)
 
 ### Bug Fixes
