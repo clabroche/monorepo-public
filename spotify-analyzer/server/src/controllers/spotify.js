@@ -10,12 +10,29 @@ const HistoryPersistence = require('../models/History')
 const TrackPersistence = require('../models/Track')
 const AlbumPersistence = require('../models/Album')
 const dayjs = require('dayjs')
+const { getClient } = require('../services/spotify')
+const CredentialPersistence = require('../models/Credential')
+const {sockets} = require('@iryu54/room-lib-server')
 const router = express.Router()
 
 router.get('/recently-played', userIsAuthenticated, shouldBeConnectedToSpotify, async (req, res, next) => {
   const jwt = getJwt()
   const user = await User.findOne({ _id: jwt.user_id })
-  const allHistory = await HistoryPersistence.find({ filter: { ownerId: user._id }, sort: {played_at: -1}})
+  const allHistory = await HistoryPersistence.find({ filter: { ownerId: user._id }, sort: { played_at: -1 } })
+  res.json(allHistory)
+})
+router.post('/recently-played', userIsAuthenticated, shouldBeConnectedToSpotify, async (req, res, next) => {
+  const jwt = getJwt()
+  const user = await User.findOne({ _id: jwt.user_id })
+  const allHistory = await HistoryPersistence.find({ filter: { ownerId: user._id }, sort: { played_at: -1 } })
+  const credentials = await CredentialPersistence.findOne({ownerId: user._id})
+  await HistoryPersistence.parseHistory(
+    getClient(credentials.access_token, credentials.refresh_token),
+    user
+  )
+  await ArtistPersistence.enrich()
+  await TrackPersistence.enrich()
+  sockets.io.to(user.email).emit('update:histories')
   res.json(allHistory)
 })
 
@@ -32,6 +49,8 @@ router.post('/artists', userIsAuthenticated, async (req, res, next) => {
   const artists = await ArtistPersistence.find(req.body)
   res.json(artists)
 })
+
+
 
 
 router.get('/stats', userIsAuthenticated, async (req, res, next) => {
