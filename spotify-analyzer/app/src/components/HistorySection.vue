@@ -2,22 +2,29 @@
   <section class="history">
     <h2>Mon historique</h2>
     <div class="lines">
-      <TitleInfosLine  v-for="trackHistory of history" :trackId="trackHistory.trackId"/>
+      <TitleInfosLine  v-for="trackHistory of history" :trackId="trackHistory.trackId" :onlyImg="onlyImg"/>
     </div>
   </section>
 </template>
 
 <script setup>
 import History from '@clabroche-org/spotify-analyzer-models/src/models/History';
-import {ref, onMounted} from 'vue'
+import {ref, onMounted, computed, onBeforeUnmount} from 'vue'
 import TitleInfosLine from './TitleInfosLine.vue';
-
+window.innerWidth
 /** @type {import('vue').Ref<import('@clabroche-org/spotify-analyzer-models/src/models/History')[]>} */
 const history = ref([])
+const windowWidth = ref(window.innerWidth)
 
 onMounted(async () => {
   history.value = await History.recentlyPlayed()
 })
+
+const onResize = () => windowWidth.value = window.innerWidth
+onMounted(() => window.addEventListener('resize', onResize))
+onBeforeUnmount(() => window.removeEventListener('resize', onResize))
+
+const onlyImg = computed(() => windowWidth.value < 800 ? true : false)
 
 </script>
 
@@ -36,15 +43,29 @@ section:first-of-type {
   width: 300px;
   border-right: 1px solid #ddd;
   box-shadow: 0 0 10px 0 #ddd;
+
   h2 {
     margin-top: 0;
   }
 }
+
 .lines {
   height: 100%;
   gap: 10px;
   display: flex;
   flex-direction: column;
   overflow: auto;
+}
+@media (max-width: 800px) {
+  .history {
+    width: 90px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  h2 {
+    display: none;
+  }
+
 }
 </style>

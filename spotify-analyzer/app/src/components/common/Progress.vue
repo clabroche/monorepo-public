@@ -24,6 +24,7 @@ export default {
   display: flex;
   align-items: center;
   flex-grow: 1;
+  min-width: 60px;
   .progress-label {
     font-size: 0.8em;
   }

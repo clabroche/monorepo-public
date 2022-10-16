@@ -6,6 +6,7 @@ const TrackPersistence = require('./Track');
 const { History } = require("@clabroche-org/spotify-analyzer-models").models;
 const PromiseB = require('bluebird');
 const SpotifyWebApi = require('spotify-web-api-node');
+const dayjs = require('dayjs');
 
 const base = Base({ collectionName: 'histories' })
 
@@ -91,10 +92,23 @@ class HistoryPersistence extends History{
     })
   }
 
-  static async getBestArtists(ownerId) {
+  /**
+   * 
+   * @param {string} ownerId 
+   * @param {string} from 
+   * @param {string} to 
+   * @returns 
+   */
+  static async getBestArtists(ownerId, from, to) {
     if (!ownerId) throw new Error('ownerId is required')
     return mongo.collection(base.collectionName).aggregate([
-      { $match: { ownerId } },
+      { $match: {
+        ownerId: mongo.getID(ownerId),
+        played_at: { 
+          $gt: dayjs(from).toISOString(),
+          $lt: dayjs(to).toISOString()
+        },
+      }},
       {
         $lookup: {
           from: `${mongo.prefix}-${require('./Track').collectionName}`,
@@ -109,10 +123,23 @@ class HistoryPersistence extends History{
       { $sort: { count: -1 } }
     ]).toArray()
   }
-  static async getBestTitles(ownerId) {
+  /**
+   * 
+   * @param {string} ownerId 
+   * @param {string} from 
+   * @param {string} to 
+   * @returns 
+   */
+  static async getBestTitles(ownerId, from, to) {
     if (!ownerId) throw new Error('ownerId is required')
     return mongo.collection(base.collectionName).aggregate([
-      { $match: { ownerId } },
+      { $match: {
+        ownerId: mongo.getID(ownerId),
+        played_at: { 
+          $gt: dayjs(from).toISOString(),
+          $lt: dayjs(to).toISOString()
+        },
+      }},
       {
         $lookup: {
           from: `${mongo.prefix}-${require('./Track').collectionName}`,
@@ -127,10 +154,23 @@ class HistoryPersistence extends History{
     ]).toArray()
   }
 
-  static async getFeatures(ownerId) {
+  /**
+   * 
+   * @param {string} ownerId 
+   * @param {string} from 
+   * @param {string} to 
+   * @returns 
+   */
+  static async getFeatures(ownerId, from, to) {
     if (!ownerId) throw new Error('ownerId is required')
     return mongo.collection(HistoryPersistence.collectionName).aggregate([
-      { $match: { ownerId } },
+      { $match: {
+        ownerId: mongo.getID(ownerId),
+        played_at: { 
+          $gt: dayjs(from).toISOString(),
+          $lt: dayjs(to).toISOString()
+        },
+      }},
       {
         $lookup: {
           from: `${mongo.prefix}-${TrackPersistence.collectionName}`,
@@ -170,7 +210,9 @@ class HistoryPersistence extends History{
           avg_time_signature: { $avg: "$time_signature" },
         }
       },
-    ]).toArray().then(a => a[0])
+    ]).toArray().then(a => {
+      return a[0] || {}
+    })
   }
   
 
