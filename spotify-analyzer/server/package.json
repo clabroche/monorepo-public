@@ -1,0 +1,28 @@
+{
+  "name": "@clabroche-org/spotify-analyzer-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "gulp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@clabroche-org/common-crud": "workspace:*",
+    "@clabroche-org/common-express": "workspace:*",
+    "@clabroche-org/common-express-gulp": "workspace:*",
+    "@clabroche-org/common-jwt": "workspace:*",
+    "@clabroche-org/common-mongo": "workspace:*",
+    "@clabroche-org/common-retrigger-all-build": "workspace:*",
+    "@clabroche-org/common-typings": "workspace:*",
+    "@clabroche-org/mybank-modules-auth": "workspace:*",
+    "@clabroche-org/spotify-analyzer-models": "workspace:*",
+    "axios": "^1.1.2",
+    "bluebird": "^3.7.2",
+    "dayjs": "^1.11.5",
+    "gulp": "^4.0.2",
+    "spotify-web-api-node": "^5.0.2"
+  }
+}

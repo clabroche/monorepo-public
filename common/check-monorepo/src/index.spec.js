@@ -53,12 +53,20 @@ describe('Dependencies', () => {
   })
 })
 
-describe('Dependencies', () => {
+describe('Files', () => {
   describe('All packages should have a npmrc to the root of package', () => {
     getWorkspaces().forEach(workspace => {
       it(workspace.packageJSON.name + ' should have a npmrc to the root of package', () => {
         const hasNpmRC = fse.existsSync(pathfs.resolve(workspace.path, '.npmrc'))
         expect(hasNpmRC).toBe(true)
+      })
+    })
+  })
+  describe('All packages should not have a packagelock to the root of package', () => {
+    getWorkspaces().forEach(workspace => {
+      it(workspace.packageJSON.name + ' should have a npmrc to the root of package', () => {
+        const hasPackageLock = fse.existsSync(pathfs.resolve(workspace.path, 'package-lock.json'))
+        expect(hasPackageLock).toBe(false)
       })
     })
   })
