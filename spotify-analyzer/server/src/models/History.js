@@ -56,7 +56,6 @@ class HistoryPersistence extends History{
       /** @type {TrackPersistence} */
       let track
       if (!await TrackPersistence.findOne({ _id: item.track.id })) {
-        console.log(item.track.artists[0].name)
         track = new TrackPersistence(item.track)
         await track.save()
       }

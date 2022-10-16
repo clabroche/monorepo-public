@@ -30,7 +30,6 @@ const addAlbum = async(..._albumsIds) => {
 const addTrack = async(..._tracksIds) => {
   const curatedTrackIds = _tracksIds.filter(trackId => !tracks.value[trackId] && trackId)
   tracksId.value.push(...curatedTrackIds)
-  console.log('push')
 }
 export default {
   artists,albums,tracks,

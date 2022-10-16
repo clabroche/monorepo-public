@@ -60,7 +60,6 @@ class TrackPersistence extends Track{
     await PromiseB.map(chunckedTracks, async (chunck) => {
       const res = await client.getAudioFeaturesForTracks(chunck.map(c => c._id))
       await PromiseB.map(res.body.audio_features, async (spotFeatures) => {
-        console.log('update')
         const track = await TrackPersistence.findOne({ _id: spotFeatures.id })
         track.features = spotFeatures
         await track.save()

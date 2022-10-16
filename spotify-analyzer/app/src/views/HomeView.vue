@@ -7,7 +7,7 @@
           <div class="leaderboard">
             <div class="line" v-for="artist of stat.leaderBoard">
               <Line 
-                :img="Dictionnary.artists.value[artist._id]?.images?.[0].url"
+                :img="Dictionnary.artists.value[artist._id]?.images?.[0]?.url"
                 :infos="[
                   {text: `${artist.count} écoutes`, icon:'fas fa-redo'},
                   {text: Dictionnary.artists.value[artist._id]?.name, icon:'fas fa-user'}
