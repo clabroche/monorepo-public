@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.16](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.15...v1.1.1-beta.16) (2022-10-16)
+
+### Bug Fixes
+
+* **spotify-analyzer:** dont break ui on artist images not here ([d3ac5a0](https://github.com/clabroche-org/monorepo/commit/d3ac5a0d36df0aef6ef096237414af316d89b46a))
+
 ## [1.1.1-beta.15](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.14...v1.1.1-beta.15) (2022-10-16)
 
 ### Bug Fixes
