@@ -35,9 +35,7 @@ class Album {
 
   /** @return {Promise<Album[]>} */
   static async all(filter) {
-    let { data: albums } = await core.instance.get(`/api/spotify/albums`, {
-      params: { filter }
-    })
+    let { data: albums } = await core.instance.post(`/api/spotify/albums`, { filter })
     if (!albums) albums = []
     return albums.map(album => new Album(album))
   }

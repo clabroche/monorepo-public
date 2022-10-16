@@ -23,20 +23,26 @@ const { User } = require('@clabroche-org/mybank-modules-auth').models;
     controllers: require('./controllers/index'),
   })
   .then(async()=> {
-    setInterval(async() => {
-      refreshAllTokenThatNeedIt()
-      detectAllExpiredTokens()
-      resyncHistory()
-    }, 3000);
-    setInterval(async () => {
-      TrackPersistence.enrich()
-      ArtistPersistence.enrich()
-    }, 2 * 60 * 1000);
-    detectAllExpiredTokens()
-    refreshAllTokenThatNeedIt()
-    resyncHistory()
-    ArtistPersistence.enrich()
-    TrackPersistence.enrich()
+    try {
+      setInterval(async() => {
+        refreshAllTokenThatNeedIt().catch(console.error)
+        detectAllExpiredTokens().catch(console.error)
+        resyncHistory().catch(console.error)
+      }, 3000);
+      setInterval(async () => {
+        TrackPersistence.enrich().catch(console.error)
+        ArtistPersistence.enrich().catch(console.error)
+      }, 2 * 60 * 1000);
+      detectAllExpiredTokens().catch(console.error)
+      refreshAllTokenThatNeedIt().catch(console.error)
+        .then(() => {
+          resyncHistory().catch(console.error)
+          ArtistPersistence.enrich().catch(console.error)
+          TrackPersistence.enrich().catch(console.error)
+        })
+    } catch (error) {
+      console.error(error)      
+    }
   })
 })()
 
