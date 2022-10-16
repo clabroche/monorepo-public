@@ -1,7 +1,9 @@
 <template>
-<div class="root">
+<div class="root" :style="{
+  justifyContent: !infos?.length ? 'center' : 'flex-start'
+}">
   <img class="logo" :src="img" alt="">
-  <div class="infos">
+  <div class="infos" v-if="infos?.length">
     <div class="info-line" v-for="info of infos">
       <i :class="info?.icon"></i>
       {{info?.text}}

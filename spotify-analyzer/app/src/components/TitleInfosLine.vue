@@ -1,11 +1,11 @@
 <template>
   <Line
     :img="album?.images?.[0]?.url"
-    :infos="[
+    :infos="!onlyImg ? [
       ...additionalInfos,
       { icon: 'fas fa-user', text: artist?.name },
       { icon: 'fas fa-music', text: track?.name }
-    ]"
+    ] : []"
     />
 
 </template>
@@ -17,6 +17,7 @@ import Line from './Line.vue';
 
 const props = defineProps({
   trackId: { required: true, type: String },
+  onlyImg: { type: Boolean, default: false },
   additionalInfos: {
     /**@type {{icon:string, text: string}[]} */
     default: []

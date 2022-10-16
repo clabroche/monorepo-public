@@ -72,4 +72,6 @@ core.errorObservable.subscribe(async err => {
       overflow: auto;
     }
   }
+
+  
 </style>
