@@ -1,6 +1,8 @@
+const CustomObservable = require('@clabroche-org/common-custom-observable')
 const { core } = require('../apis/Core')
 
 class History {
+  static updated = new CustomObservable()
   /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<Account>} accounts */
   constructor(accounts = {}) {
     /** @type {import('mongodb').ObjectID} */
@@ -26,6 +28,12 @@ class History {
     })
     if (!histories?.length) histories = []
     return histories.map(h => new History(h))
+  }
+
+  /**
+ */
+  static async sync() {
+    await core.instance.post(`/api/spotify/recently-played`)
   }
 
   /**

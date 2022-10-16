@@ -101,14 +101,18 @@ dayjs.extend(duration)
 dayjs.extend(relativeTime)
 
 const stats = ref([])
+const triggerUpdate = ref(0)
 const from = ref(dayjs().format('YYYY-MM-DD'))
 const to = ref(dayjs().format('YYYY-MM-DD'))
 onMounted(async () => {
-  
+
+  History.updated.subscribe(async () => {
+    triggerUpdate.value++
+  })
 })
 
 watchEffect(async () => {
-  console.log(from.value)
+  triggerUpdate.value
   stats.value = await History.stats(from.value, to.value)
   await stats.value.forEach(stat => {
     if (stat.type === 'bestArtists') Dictionnary.addArtist(...stat.leaderBoard.map(l => l._id))
