@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.14](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.13...v1.1.1-beta.14) (2022-10-16)
+
+### Bug Fixes
+
+* **spotify-analyzer:** fix publish ID ([9d46198](https://github.com/clabroche-org/monorepo/commit/9d461986c54cc0095b494a344439c208cd2a99c1))
+
 ## [1.1.1-beta.13](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.12...v1.1.1-beta.13) (2022-10-16)
 
 ### Bug Fixes
