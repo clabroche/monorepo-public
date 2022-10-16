@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.20](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.19...v1.1.1-beta.20) (2022-10-16)
+
+### Bug Fixes
+
+* **spotify-analyzer:** add production env core url ([b42e405](https://github.com/clabroche-org/monorepo/commit/b42e40525e7d53f06ff6d17d19eae9068548972c))
+
 ## [1.1.1-beta.19](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.18...v1.1.1-beta.19) (2022-10-16)
 
 ### Bug Fixes
