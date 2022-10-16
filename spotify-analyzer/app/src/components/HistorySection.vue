@@ -2,7 +2,15 @@
   <section class="history">
     <h2>Mon historique</h2>
     <div class="lines">
-      <TitleInfosLine  v-for="trackHistory of history" :trackId="trackHistory.trackId" :onlyImg="onlyImg"/>
+      <Popover  v-for="trackHistory of history" placement="right" trigger="mouseenter">
+        <template #trigger>
+          <TitleInfosLine :trackId="trackHistory.trackId" :onlyImg="onlyImg"/>
+        </template>
+        <template #content>
+          Joué le 
+          {{dayjs(trackHistory.played_at).format('DD/MM/YYYY à hh:mm')}}
+        </template>
+      </Popover>
     </div>
   </section>
 </template>
@@ -11,6 +19,8 @@
 import History from '@clabroche-org/spotify-analyzer-models/src/models/History';
 import {ref, onMounted, computed, onBeforeUnmount} from 'vue'
 import TitleInfosLine from './TitleInfosLine.vue';
+import Popover from './common/Popover.vue';
+import dayjs from 'dayjs';
 window.innerWidth
 /** @type {import('vue').Ref<import('@clabroche-org/spotify-analyzer-models/src/models/History')[]>} */
 const history = ref([])
