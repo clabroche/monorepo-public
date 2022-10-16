@@ -1,4 +1,5 @@
 <template>
+  <h1>Analyse de vos musique</h1>
   <div class="root line">
     <template v-for="stat of stats">
       <template v-if="stat.type ==='bestArtists'">
@@ -218,6 +219,9 @@ const features = computed(() => {
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+  &:hover {
+    background-color: inherit;
+  }
 }
 section {
   background-color: white;
