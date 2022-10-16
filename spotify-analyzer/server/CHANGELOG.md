@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.21](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.20...v1.1.1-beta.21) (2022-10-16)
+
+### Bug Fixes
+
+* **spotify-analyzer:** safe property access when history not exists ([b14a649](https://github.com/clabroche-org/monorepo/commit/b14a6497ea3f3e963ca82d3428ab2204740ec900))
+
 ## [1.1.1-beta.19](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.18...v1.1.1-beta.19) (2022-10-16)
 
 ### Bug Fixes
