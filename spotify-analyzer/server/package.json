@@ -23,7 +23,7 @@
     "dayjs": "^1.11.5",
     "gulp": "^4.0.2",
     "spotify-web-api-node": "^5.0.2"
-  }, 
+  },
   "devDependencies": {
     "@clabroche-org/common-retrigger-all-build": "workspace:*"
   }
