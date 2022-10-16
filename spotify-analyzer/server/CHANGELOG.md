@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.15](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.14...v1.1.1-beta.15) (2022-10-16)
+
+### Bug Fixes
+
+* **spotify-analyzer:** dont crash on boot ([062b957](https://github.com/clabroche-org/monorepo/commit/062b9575e7de7a6340ac4303d514ca6f4ca90363))
+
 ## [1.1.1-beta.12](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.11...v1.1.1-beta.12) (2022-10-16)
 
 ### Bug Fixes
