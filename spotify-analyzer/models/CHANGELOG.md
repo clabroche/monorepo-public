@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.19](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.18...v1.1.1-beta.19) (2022-10-16)
+
+### Bug Fixes
+
+* **spotify-analyzer:** add synchro with websockets ([0a89645](https://github.com/clabroche-org/monorepo/commit/0a89645a812375ea8601eae3a57e26bb1ec2a4fc))
+
 ## [1.1.1-beta.17](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.16...v1.1.1-beta.17) (2022-10-16)
 
 ### Bug Fixes
