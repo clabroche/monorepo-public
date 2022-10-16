@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.21](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.20...v1.1.1-beta.21) (2022-10-16)
+
+### Bug Fixes
+
+* **spotify-analyzer:** add title ([4547153](https://github.com/clabroche-org/monorepo/commit/4547153990f71be82c5351f1208e24eb46f62a9d))
+* **spotify-analyzer:** can login just with an email not pseudo ([3cfa689](https://github.com/clabroche-org/monorepo/commit/3cfa689dc4fa59f96dee2e6f64f63aad8f086720))
+
 ## [1.1.1-beta.20](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.19...v1.1.1-beta.20) (2022-10-16)
 
 ### Bug Fixes
