@@ -28,11 +28,16 @@ class History {
     return histories.map(h => new History(h))
   }
 
-  static async stats() {
-    let { data: stats } = await core.instance.get(`/api/spotify/stats`, )
+  /**
+   * 
+   * @param {string} from 
+   * @param {string} to 
+   * @returns 
+   */
+  static async stats(from, to) {
+    let { data: stats } = await core.instance.get(`/api/spotify/stats`, {params: {from, to}})
     return stats
   }
-
 }
 
 module.exports = History

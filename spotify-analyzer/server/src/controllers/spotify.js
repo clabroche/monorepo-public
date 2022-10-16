@@ -9,6 +9,7 @@ const ArtistPersistence = require('../models/Artist')
 const HistoryPersistence = require('../models/History')
 const TrackPersistence = require('../models/Track')
 const AlbumPersistence = require('../models/Album')
+const dayjs = require('dayjs')
 const router = express.Router()
 
 router.get('/recently-played', userIsAuthenticated, shouldBeConnectedToSpotify, async (req, res, next) => {
@@ -34,19 +35,24 @@ router.post('/artists', userIsAuthenticated, async (req, res, next) => {
 
 
 router.get('/stats', userIsAuthenticated, async (req, res, next) => {
+  const {from: fromQuery, to: toQuery} = req.query
+  if (!fromQuery) return res.status(400).send('"from" query parameter is required')
+  if (!toQuery) return res.status(400).send('"to" query parameter is required')
+  const from = dayjs(fromQuery.toString()).startOf('day').toISOString()
+  const to = dayjs(toQuery.toString()).endOf('day').toISOString()
   const jwt = getJwt()
   res.json([
     {
       type: 'bestArtists',
-      leaderBoard: await HistoryPersistence.getBestArtists(mongo.getID(jwt.user_id))
+      leaderBoard: await HistoryPersistence.getBestArtists(jwt.user_id, from, to)
     },
     {
       type: 'bestTitles',
-      leaderBoard: await HistoryPersistence.getBestTitles(mongo.getID(jwt.user_id))
+      leaderBoard: await HistoryPersistence.getBestTitles(jwt.user_id, from, to)
     },
     {
       type: 'features',
-      leaderBoard: await HistoryPersistence.getFeatures(mongo.getID(jwt.user_id))
+      leaderBoard: await HistoryPersistence.getFeatures(jwt.user_id, from, to)
     }
   ])
 })

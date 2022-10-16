@@ -1,61 +1,67 @@
 <template>
-  <div class="root line">
-    <template v-for="stat of stats">
-      <template v-if="stat.type ==='bestArtists'">
-        <section class="history">
-          <h2>Mes artistes préférés</h2>
-          <div class="leaderboard">
-            <div class="line" v-for="artist of stat.leaderBoard">
-              <Line 
-                :img="Dictionnary.artists.value[artist._id]?.images?.[0]?.url"
-                :infos="[
-                  {text: `${artist.count} écoutes`, icon:'fas fa-redo'},
-                  {text: Dictionnary.artists.value[artist._id]?.name, icon:'fas fa-user'}
-                ]"
-              />
-            </div>
-          </div>
-        </section>
-      </template>
-      <template v-if="stat.type ==='bestTitles'">
-        <section class="history">
-          <h2>Mes titres préférés</h2>
-          <div class="leaderboard">
-            <div class="line" v-for="track of stat.leaderBoard">
-              <TitleInfosLine :track-id="track._id" :additionalInfos="[
-                {text: `${track.count} écoutes`, icon:'fas fa-redo'},
-              ]"/>
-            </div>
-          </div>
-        </section>
-      </template>
-      <template v-if="stat.type ==='features'">
-        <section class="history">
-          <h2>Statistiques sur les musiques</h2>
-          <div class="leaderboard">
-            <div class="line" v-for="feature of features">
-              <div>
-                <i :class="feature.icon"></i>
-                {{feature.label}}  
+  <div class="root-home">
+      <h1>Analyses de vos musique</h1>
+      <div class="dates">
+        <input type="date" v-model="from"> <i class="fas fa-arrow-right"/> <input type="date" v-model="to">
+      </div>
+      <div class="container line">
+        <template v-for="stat of stats">
+          <template v-if="stat.type ==='bestArtists'">
+            <section class="history">
+              <h2>Mes artistes préférés</h2>
+              <div class="leaderboard">
+                <div class="line" v-for="artist of stat.leaderBoard.slice(0, 40)">
+                  <Line 
+                    :img="Dictionnary.artists.value[artist._id]?.images?.[0]?.url"
+                    :infos="[
+                      {text: `${artist.count} écoutes`, icon:'fas fa-redo'},
+                      {text: Dictionnary.artists.value[artist._id]?.name, icon:'fas fa-user'}
+                    ]"
+                  />
+                </div>
               </div>
-              <Progress v-if="feature.type === 'bar'" class="stat-score progress"
-                :value="feature.score || 0"
-                :max="feature.max || 100"
-                :noLabel="true"
-              />
-              <div v-else class="stat-score">{{feature.score}}{{feature.suffix}}</div>
-            </div>
-          </div>
-        </section>
-      </template>
-    </template>
+            </section>
+          </template>
+          <template v-if="stat.type ==='bestTitles'">
+            <section class="history">
+              <h2>Mes titres préférés</h2>
+              <div class="leaderboard">
+                <div class="line" v-for="track of stat.leaderBoard.slice(0, 40)">
+                  <TitleInfosLine :track-id="track._id" :additionalInfos="[
+                    {text: `${track.count} écoutes`, icon:'fas fa-redo'},
+                  ]"/>
+                </div>
+              </div>
+            </section>
+          </template>
+          <template v-if="stat.type ==='features'">
+            <section class="history">
+              <h2>Statistiques sur les musiques</h2>
+              <div class="leaderboard">
+                <div class="line line-feature" v-for="feature of features">
+                  <div>
+                    <i :class="feature.icon"></i>
+                    {{feature.label}}  
+                  </div>
+                  <Progress v-if="feature.type === 'bar'" class="stat-score progress"
+                    :value="feature.score || 0"
+                    :max="feature.max || 100"
+                    :noLabel="true"
+                  />
+                  <div v-else class="stat-score">{{feature.score}}{{feature.suffix}}</div>
+                </div>
+              </div>
+            </section>
+          </template>
+        </template>
+      </div>
   </div>
 </template>
 
 <script setup>
 import History from "@clabroche-org/spotify-analyzer-models/src/models/History";
 import Dictionnary from '../services/Dictionnary'
-import {onMounted, ref, computed} from 'vue'
+import {onMounted, ref, computed, watchEffect} from 'vue'
 import TitleInfosLine from "../components/TitleInfosLine.vue";
 import Line from "../components/Line.vue";
 import Progress from "../components/common/Progress.vue";
@@ -66,8 +72,15 @@ dayjs.extend(duration)
 dayjs.extend(relativeTime)
 
 const stats = ref([])
+const from = ref(dayjs().format('YYYY-MM-DD'))
+const to = ref(dayjs().format('YYYY-MM-DD'))
 onMounted(async () => {
-  stats.value = await History.stats()
+  
+})
+
+watchEffect(async () => {
+  console.log(from.value)
+  stats.value = await History.stats(from.value, to.value)
   await stats.value.forEach(stat => {
     if (stat.type === 'bestArtists') Dictionnary.addArtist(...stat.leaderBoard.map(l => l._id))
     if (stat.type === 'bestTitles') Dictionnary.addTrack(...stat.leaderBoard.map(l => l._id))
@@ -213,15 +226,28 @@ const features = computed(() => {
 
 </script>
 <style lang="scss" scoped>
-.root.line {
+.root-home {
+  padding: 30px;
+  box-sizing: border-box;
+}
+h1 {
+  text-align: center;
+  margin: 0;
+}
+.container.line {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+  &:hover {
+    background-color: inherit;
+  }
 }
 section {
   background-color: white;
-  width: 400px;
+  min-width: 300px;
+  max-width: 500px;
+  flex: 1;
   border-radius: 50px;
   height: 400px;
   display: flex;
@@ -273,5 +299,59 @@ section {
   height: 40px;
   width: 40px;
   border-radius: 50%;
+}
+
+.dates {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  input {
+    width: 150px;
+    font-size: 1em;
+    border: none;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px 0 #ddd;
+    padding: 0 10px;
+    font-weight: bold;
+    color: var(--headerBgColorAccent)
+  }
+}
+
+@media (max-width: 800px) {
+  .root-home {
+    padding: 5px;
+    h1 {
+      margin-top: 10px;
+    }
+  }
+  .dates {
+    gap: 0;
+    flex-direction: column;
+    i {
+      transform: rotate(90deg);
+    }
+  }
+  .line-feature {
+    flex-direction: column;
+    align-items: flex-start;
+    .stat-score {
+      margin-left: 15px;
+      font-size: 1em;
+      max-width: 100%;
+    }
+  }
+}
+@media (max-width: 400px) {
+  .root-home {
+    font-size: 0.8em;
+    section {
+      min-width: 200px;
+    }
+  }
 }
 </style>
