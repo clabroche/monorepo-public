@@ -120,7 +120,7 @@ async function resyncHistory() {
           filter: { ownerId: user._id },
           sort: { played_at: -1 }
         })
-        if(newLastHistory[0]._id?.toString() !== lastHistory[0]._id?.toString()) {
+        if(newLastHistory[0]?._id?.toString() !== lastHistory[0]?._id?.toString()) {
           emailsToNotify.push(user.email)
         }
       } catch (error) {
