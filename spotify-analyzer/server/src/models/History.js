@@ -52,7 +52,7 @@ class HistoryPersistence extends History{
    * @returns 
    */
   static async parseHistory(client, user) {
-    const tracks = await client.getMyRecentlyPlayedTracks({limit:50})
+    const tracks = await client.getMyRecentlyPlayedTracks({limit:50}) // Took ~200ms
     return PromiseB.map(tracks.body?.items || [], async item => {
       /** @type {TrackPersistence} */
       let track

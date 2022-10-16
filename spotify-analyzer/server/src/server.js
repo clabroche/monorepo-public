@@ -3,8 +3,9 @@ const { launch } = require('@clabroche-org/common-express')
 const path = require('path')
 const { readFileSync } = require('fs-extra');
 const reconnectTemplate = readFileSync(path.resolve(__dirname, 'templatesEmail','reconnect.html'), 'utf-8')
+const { sockets } = require('@iryu54/room-lib-server')
+const { Rooms } = require('@iryu54/room-lib-server').models
 
-  ; const spotify = require('./services/spotify');
 ; const PromiseB = require('bluebird');
 const CredentialPersistence = require('./models/Credential');
 const dayjs = require('dayjs');
@@ -22,24 +23,19 @@ const { User } = require('@clabroche-org/mybank-modules-auth').models;
     port: process.env.PORT || 3204,
     controllers: require('./controllers/index'),
   })
-  .then(async()=> {
+  .then(async(server)=> {
+    sockets.connect(server)
     try {
       setInterval(async() => {
-        refreshAllTokenThatNeedIt().catch(console.error)
-        detectAllExpiredTokens().catch(console.error)
-        resyncHistory().catch(console.error)
+        await refreshAllTokenThatNeedIt().catch(console.error)
+        await detectAllExpiredTokens().catch(console.error)
       }, 3000);
       setInterval(async () => {
-        TrackPersistence.enrich().catch(console.error)
-        ArtistPersistence.enrich().catch(console.error)
-      }, 2 * 60 * 1000);
-      detectAllExpiredTokens().catch(console.error)
-      refreshAllTokenThatNeedIt().catch(console.error)
-        .then(() => {
-          resyncHistory().catch(console.error)
-          ArtistPersistence.enrich().catch(console.error)
-          TrackPersistence.enrich().catch(console.error)
-        })
+        await resyncHistory().catch(console.error)
+      }, 30 * 1000);
+      await detectAllExpiredTokens().catch(console.error)
+      await refreshAllTokenThatNeedIt().catch(console.error)
+      await resyncHistory().catch(console.error)
     } catch (error) {
       console.error(error)      
     }
@@ -92,7 +88,6 @@ async function detectAllExpiredTokens() {
           _id: mongo.getID(credential.ownerId)
         })
         await sendinblue.send(user.email, user.email, reconnectTemplate)
-        console.log('send' , user.email)
       } catch (error) {
         console.error(error)
       }
@@ -111,15 +106,33 @@ async function resyncHistory() {
         }
       }
     })
+    const emailsToNotify = []
     await PromiseB.map(credentialNotExpired, async credential => {
       try {
         const user = await User.findOne({ _id: mongo.getID(credential.ownerId) })
         const client = getClient(credential.access_token, credential.refresh_token)
+        const lastHistory = await HistoryPersistence.find({
+        filter: {ownerId: user._id},
+          sort: {played_at: -1}
+        })
         await HistoryPersistence.parseHistory(client, user)
+        const newLastHistory = await HistoryPersistence.find({
+          filter: { ownerId: user._id },
+          sort: { played_at: -1 }
+        })
+        if(newLastHistory[0]._id?.toString() !== lastHistory[0]._id?.toString()) {
+          emailsToNotify.push(user.email)
+        }
       } catch (error) {
         console.error(error)
       }
     })
+    
+    await ArtistPersistence.enrich()
+    await TrackPersistence.enrich()
+    setTimeout(() => {
+      emailsToNotify.map(email => sockets.io.to(email).emit('update:histories'))
+    }, 100);
   } catch (error) {
     console.error(error)
   }
