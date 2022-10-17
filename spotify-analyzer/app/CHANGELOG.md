@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.23](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.22...v1.1.1-beta.23) (2022-10-17)
+
+### Bug Fixes
+
+* **spotify-analyzer:** add listening top day ([cd95fbc](https://github.com/clabroche-org/monorepo/commit/cd95fbc83f1df788ec771c406d9f52df5c0e4aa1))
+* **spotify-analyzer:** force charts to be adaptive to parent height ([f3b3ce9](https://github.com/clabroche-org/monorepo/commit/f3b3ce95646f0d1ab1fb3ebc9d4a18c5bce4d6e1))
+
 ## [1.1.1-beta.22](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.21...v1.1.1-beta.22) (2022-10-17)
 
 ### Bug Fixes
