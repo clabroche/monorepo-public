@@ -53,6 +53,57 @@
               </div>
             </section>
           </template>
+          <template v-if="stat.type ==='genres'">
+            <section class="history">
+              <h2>Mes Genres préférés</h2>
+              <div class="leaderboard">
+                <div class="line" v-for="genre of stat.genres.slice(0, 40)">
+                  <Line :infos="[
+                    {text: `${genre.count} écoutes`, icon:'fas fa-redo'},
+                    {text: genre._id, icon:'fas fa-volume-off'}
+                  ]" />
+                </div>
+              </div>
+            </section>
+          </template>
+          <template v-if="stat.type ==='listeningByDays'">
+            <section class="history" style="overflow: hidden;">
+              <h2>Mon nombre d'écoutes par jour</h2>
+              <AreaTimeSeriesChart class="chart" 
+                :startDate="dayjs(from).toISOString()"
+                :endDate="dayjs(to).toISOString()"
+                :x="[{
+                  fill: {
+                    target: 'origin',
+                    above: 'rgba(70,108,128, 0.2)',   // Area will be red above the origin
+                  }
+                },{
+                  data: stat.value?.map(val => ({x: val.date, y: val.nbListening}))
+                }]"
+              />
+            </section>
+          </template>
+          <template v-if="stat.type ==='listeningTopHours'">
+            <section class="history" style="overflow: hidden;">
+              <h2>Mes meilleurs heures d'écoutes</h2>
+
+              <Area class="chart" 
+                :startDate="dayjs(from).toISOString()"
+                :endDate="dayjs(to).toISOString()"
+                :x="[{
+                  fill: {
+                    target: 'origin',
+                    above: 'rgba(70,108,128, 0.2)',   // Area will be red above the origin
+                  }
+                },{
+                  data: stat.value.map(val => ({
+                    x: val._id,
+                    y: val.count
+                  }))
+                }]"
+              />
+            </section>
+          </template>
           <template v-if="stat.type ==='differentArtists'">
             <section class="history">
               <h2>Nombres d'artistes différents</h2>
@@ -97,15 +148,17 @@ import Progress from "../components/common/Progress.vue";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration"
 import relativeTime from "dayjs/plugin/relativeTime"
+import Area from "../components/common/charts/Area.vue";
+import AreaTimeSeriesChart from "../components/common/charts/AreaTimeSeriesChart.vue";
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
 
 const stats = ref([])
 const triggerUpdate = ref(0)
-const from = ref(dayjs().format('YYYY-MM-DD'))
+const from = ref(dayjs().subtract(1, 'week').format('YYYY-MM-DD'))
 const to = ref(dayjs().format('YYYY-MM-DD'))
 onMounted(async () => {
-
+  triggerUpdate.value++
   History.updated.subscribe(async () => {
     triggerUpdate.value++
   })
@@ -376,6 +429,10 @@ section {
     font-weight: bold;
     color: var(--headerBgColorAccent)
   }
+}
+.chart {
+  flex-grow: 1;
+  height: calc(100% - 100px);
 }
 
 @media (max-width: 800px) {
