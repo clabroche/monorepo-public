@@ -75,7 +75,7 @@
                 :x="[{
                   fill: {
                     target: 'origin',
-                    above: 'rgba(70,108,128, 0.2)',   // Area will be red above the origin
+                    above: 'rgba(70,108,128, 0.2)', 
                   }
                 },{
                   data: stat.value?.map(val => ({x: val.date, y: val.nbListening}))
@@ -85,15 +85,44 @@
           </template>
           <template v-if="stat.type ==='listeningTopHours'">
             <section class="history" style="overflow: hidden;">
-              <h2>Mes meilleurs heures d'écoutes</h2>
-
-              <Area class="chart" 
+              <h2>Mes meilleures heures d'écoutes</h2>
+              <Bar class="chart" 
                 :startDate="dayjs(from).toISOString()"
                 :endDate="dayjs(to).toISOString()"
+                suffix=" écoutes"
+                :ticksX="{count: 24, stepSize: 1}"
+                :scaleX="{min: 0, max: 24}"
+                :labelFormatter="value => (value + 'h')"
                 :x="[{
                   fill: {
                     target: 'origin',
-                    above: 'rgba(70,108,128, 0.2)',   // Area will be red above the origin
+                    above: 'rgba(70,108,128, 0.2)', 
+                  }
+                },{
+                  data: stat.value.map(val => ({
+                    x: val._id,
+                    y: val.count
+                  }))
+                }]"
+              />
+            </section>
+          </template>
+
+          <template v-if="stat.type ==='listeningTopDays'">
+            <section class="history" style="overflow: hidden;">
+              <h2>Mes meilleures jours d'écoutes</h2>
+              <Bar class="chart" 
+                :startDate="dayjs(from).toISOString()"
+                :endDate="dayjs(to).toISOString()"
+                :ticksX="{count: 7, stepSize: 1}"
+                :scaleX="{min: 1, max: 7}"
+                :labelFormatter="value => ([
+                  '', 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'
+                ][value])"
+                :x="[{
+                  fill: {
+                    target: 'origin',
+                    above: 'rgba(70,108,128, 0.2)', 
                   }
                 },{
                   data: stat.value.map(val => ({
@@ -146,10 +175,12 @@ import TitleInfosLine from "../components/TitleInfosLine.vue";
 import Line from "../components/Line.vue";
 import Progress from "../components/common/Progress.vue";
 import dayjs from "dayjs";
+import fr from "dayjs/locale/fr";
 import duration from "dayjs/plugin/duration"
 import relativeTime from "dayjs/plugin/relativeTime"
-import Area from "../components/common/charts/Area.vue";
 import AreaTimeSeriesChart from "../components/common/charts/AreaTimeSeriesChart.vue";
+import Bar from "../components/common/charts/Bar.vue";
+dayjs.locale(fr)
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
 
@@ -259,13 +290,13 @@ const analyze = {
     }
   },
   avg_valence(score) {
-    if (score < 0.20) score = 'Négatif'
-    else if (score < 0.40) score = 'Plutôt négatif'
+    if (score < 0.20) score = 'Négative'
+    else if (score < 0.40) score = 'Plutôt négative'
     else if (score < 0.60) score = 'Neutre'
-    else if (score < 0.80) score = 'Plutôt positif'
-    else score = 'Positif'
+    else if (score < 0.80) score = 'Plutôt positive'
+    else score = 'Positive'
     return {
-      label: 'Humeurs',
+      label: 'Positivité musicale',
       icon: 'fas fa-cloud-sun',
       score: score,
     }
@@ -281,6 +312,14 @@ const analyze = {
   avg_duration_ms(score) {
     return {
       label: 'Durée moyenne',
+      icon: 'fas fa-clock',
+      score: dayjs.duration(score, 'milliseconds').humanize(),
+    }
+  },
+
+  sum_duration_ms(score) {
+    return {
+      label: 'Durée cumulée',
       icon: 'fas fa-clock',
       score: dayjs.duration(score, 'milliseconds').humanize(),
     }
@@ -326,6 +365,7 @@ const features = computed(() => {
     'avg_valence',
     'avg_tempo',
     'avg_duration_ms',
+    'sum_duration_ms',
   ].map((feature) => {
     return analyze[feature] ? analyze[feature](featureStat.leaderBoard[feature], featureStat.leaderBoard) : null
   }).filter(a => a)
@@ -429,10 +469,6 @@ section {
     font-weight: bold;
     color: var(--headerBgColorAccent)
   }
-}
-.chart {
-  flex-grow: 1;
-  height: calc(100% - 100px);
 }
 
 @media (max-width: 800px) {
