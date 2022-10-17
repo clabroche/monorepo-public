@@ -20,6 +20,7 @@ module.exports = {
     if (!toName) throw new Error('To name required')
     if (!msg) throw new Error('Msg required')
     const email = 'corentinlabroche@gmail.com'
+    if(process.env.NODE_ENV !== 'production') return
     await sib.post("/smtp/email", {
       sender: {
         name: 'Spotify Analyzer', email

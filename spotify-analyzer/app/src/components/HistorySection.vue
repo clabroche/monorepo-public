@@ -8,7 +8,7 @@
         </template>
         <template #content>
           Joué le 
-          {{dayjs(trackHistory.played_at).format('DD/MM/YYYY à hh:mm')}}
+          {{dayjs(trackHistory.played_at).format('DD/MM/YYYY à HH:mm')}}
         </template>
       </Popover>
     </div>

@@ -46,7 +46,8 @@ export default {
           },
           point: {
             borderColor: 'rgba(70,108,128, 0.7)',
-            backgroundColor: 'rgba(70,108,128, 0.7)',
+            backgroundColor: 'rgba(70,108,128, 1)',
+            hitRadius: 20
           }
         },
         scales: {
