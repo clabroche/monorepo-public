@@ -63,16 +63,25 @@ router.get('/stats', userIsAuthenticated, async (req, res, next) => {
   res.json([{
     type: 'bestArtists',
     leaderBoard: await HistoryPersistence.getBestArtists(jwt.user_id, from, to)
-  },{
+  }, {
     type: 'bestTitles',
     leaderBoard: await HistoryPersistence.getBestTitles(jwt.user_id, from, to)
-  },{
+  }, {
     type: 'features',
     leaderBoard: await HistoryPersistence.getFeatures(jwt.user_id, from, to)
-  },{
+  }, {
     type: 'differentArtists',
     nbDifferentArtists: await HistoryPersistence.getNbDifferentArtists(jwt.user_id, from, to),
     newArtists: await HistoryPersistence.getNewArtists(jwt.user_id, from, to)
+  }, {
+    type: 'genres',
+    genres: await HistoryPersistence.getGenres(jwt.user_id, from, to),
+  }, {
+    type: 'listeningByDays',
+    value: await HistoryPersistence.getNbListeningByDays(jwt.user_id, from, to),
+  }, {
+    type: 'listeningTopHours',
+    value: await HistoryPersistence.getListeningTopHours(jwt.user_id, from, to),
   }])
 })
 router.get('/callback', async (req, res, next) => {
