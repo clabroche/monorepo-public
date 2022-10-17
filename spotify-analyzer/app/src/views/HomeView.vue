@@ -430,10 +430,6 @@ section {
     color: var(--headerBgColorAccent)
   }
 }
-.chart {
-  flex-grow: 1;
-  height: calc(100% - 100px);
-}
 
 @media (max-width: 800px) {
   .root-home {
