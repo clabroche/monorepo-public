@@ -7,21 +7,25 @@
     ></apexchart>
 </template>
 <script>
-import { Line } from "vue-chartjs";
+import { Bar } from "vue-chartjs";
 import 'chartjs-adapter-luxon';
-import { Chart as ChartJS, LinearScale, CategoryScale, PointElement, LineElement, Title, Tooltip, Filler } from 'chart.js'
-ChartJS.register(LinearScale, CategoryScale, PointElement, LineElement, Title, Tooltip, Filler) 
+import { Chart as ChartJS, LinearScale, CategoryScale, BarElement, LineElement, Title, Tooltip, Filler } from 'chart.js'
+ChartJS.register(LinearScale, CategoryScale, BarElement, LineElement, Title, Tooltip, Filler) 
 import dayjs from 'dayjs';
 import { ref, computed, onMounted } from 'vue';
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 dayjs.extend(weekOfYear)
 export default {
   components: {
-    apexchart: Line,
+    apexchart: Bar,
   },
   props: {
     startDate: { default: dayjs().subtract(1, 'month') },
     endDate: { default: dayjs() },
+    suffix: { default: '' },
+    labelFormatter: { default: () => label => label },
+    ticksX: { default: () => ({}) },
+    scaleX: { default: () => ({}) },
     indicators: { default: () => ([]) },
     x: { default: () => ([]) },
     by: { default: 'days' },
@@ -44,21 +48,22 @@ export default {
             fill: true,
             borderColor: 'rgba(70,108,128, 0.7)',
           },
-          point: {
+          bar: {
             borderColor: 'rgba(70,108,128, 0.7)',
-            backgroundColor: 'rgba(70,108,128, 1)',
+            backgroundColor: 'rgba(70,108,128, 0.6)',
             hitRadius: 20
           }
         },
         scales: {
           x: {
-            min: 0,
-            max: 23,
             type: 'linear',
+            bounds: 'ticks',
+            ...props.scaleX,
             ticks: {
-              callback: function (value) {
-                return value + 'h';
-              }
+              autoSkip: false,
+              minRotation: 90,
+              callback: props.labelFormatter,
+              ...props.ticksX,
             }
           }
         },
@@ -66,8 +71,7 @@ export default {
           tooltip: {
             callbacks: {
               label: function (tooltipItem, data) {
-                console.log(tooltipItem)
-                return tooltipItem.formattedValue + ' écoutes';
+                return tooltipItem.formattedValue + props.suffix || '';
               }
             }
           }

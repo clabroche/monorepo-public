@@ -82,6 +82,9 @@ router.get('/stats', userIsAuthenticated, async (req, res, next) => {
   }, {
     type: 'listeningTopHours',
     value: await HistoryPersistence.getListeningTopHours(jwt.user_id, from, to),
+  }, {
+    type: 'listeningTopDays',
+    value: await HistoryPersistence.getListeningTopDays(jwt.user_id, from, to),
   }])
 })
 router.get('/callback', async (req, res, next) => {
