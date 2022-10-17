@@ -297,19 +297,65 @@ class HistoryPersistence extends History{
         $addFields: {
           date: {
             $dateFromString: {
-              dateString: '$played_at'
+              dateString: '$played_at',
             }
           },
         }
       },
       {
         $project: {
-          hour: { $hour: "$date" },
+          hour: { $hour: { date: "$date" } },
           trackId: 1
         }
       }, {
         $group: {
           _id: "$hour",
+          count: { $sum: 1 },
+          titles: { $push: '$trackId' }
+        }
+      }, {
+        $sort: {
+          _id: 1
+        }
+      }
+    ]).toArray()
+  }
+  /**
+   * 
+   * @param {string} ownerId 
+   * @param {string} from 
+   * @param {string} to 
+   * @returns 
+   */
+  static async getListeningTopDays(ownerId, from, to) {
+    if (!ownerId) throw new Error('ownerId is required')
+    if (!ownerId) throw new Error('ownerId is required')
+    return mongo.collection(base.collectionName).aggregate([
+      {
+        $match: {
+          ownerId: mongo.getID(ownerId),
+          played_at: {
+            $gt: dayjs(from).startOf('day').toISOString(),
+            $lt: dayjs(to).endOf('day').toISOString()
+          },
+        }
+      }, {
+        $addFields: {
+          date: {
+            $dateFromString: {
+              dateString: '$played_at',
+            }
+          },
+        }
+      },
+      {
+        $project: {
+          day: { $dayOfWeek: { date: "$date" , timezone: 'Europe/Paris'} },
+          trackId: 1
+        }
+      }, {
+        $group: {
+          _id: "$day",
           count: { $sum: 1 },
           titles: { $push: '$trackId' }
         }
@@ -329,29 +375,20 @@ class HistoryPersistence extends History{
    */
   static async getListeningForDay(ownerId, day) {
     if (!ownerId) throw new Error('ownerId is required')
-    const from = dayjs(day).set('hours', 5).startOf('day').toISOString()
-    const to = dayjs(day).set('hours', 5).endOf('day').toISOString()
+    const from = dayjs(day).startOf('day').toISOString()
+    const to = dayjs(day).endOf('day').toISOString()
+    console.log('2', dayjs(from).startOf('day').toISOString(), dayjs(from).endOf('day').toISOString())
     return mongo.collection(base.collectionName).aggregate([
       {
         $match: {
           ownerId: mongo.getID(ownerId),
           played_at: {
-            $gt: dayjs(from).toISOString(),
-            $lt: dayjs(to).toISOString()
+            $gt: from,
+            $lt: to
           },
         }
       },
-      {
-        $lookup: {
-          from: `${mongo.prefix}-${require('./Track').collectionName}`,
-          localField: "trackId",
-          foreignField: "_id",
-          as: "track"
-        }
-      },
-      { $unwind: '$track' },
-      { $group: { _id: "$track._id", count: { $sum: 1 } } },
-      { $sort: { count: -1 } }
+      { $sort: { played_at: -1 } }
     ]).toArray()
   }
 
@@ -408,6 +445,7 @@ class HistoryPersistence extends History{
           avg_valence: { $avg: "$valence" },
           avg_tempo: { $avg: "$tempo" },
           avg_duration_ms: { $avg: "$duration_ms" },
+          sum_duration_ms: { $sum: "$duration_ms" },
           avg_time_signature: { $avg: "$time_signature" },
         }
       },
