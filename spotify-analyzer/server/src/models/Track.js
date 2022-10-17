@@ -39,15 +39,25 @@ class TrackPersistence extends Track{
   }
 
 
-  save() {
+  async save() {
+    if(!this.genres) {
+      const artist = await require('./Artist').findOne({_id: this.artistsIds[0]})
+      this.genres = artist?.genres
+    }
     return base.updateOrCreate({ obj: this, Obj: TrackPersistence })
   }
 
   static async enrich() {
+    await TrackPersistence.enrichWithFeatures().catch(console.error)
+    await TrackPersistence.enrichWithGenres().catch(console.error)
+  }
+  static async enrichWithGenres() {
+    const tracks = await TrackPersistence.find({filter: {'genres.0': {$exists:false}}})
+    await PromiseB.map(tracks, track => track.save(), {concurrency: 8})
+  }
+  static async enrichWithFeatures() {
     const tracks = await TrackPersistence.find({
-      filter: {
-        'features.danceability': null
-      },
+      filter: { 'features.danceability': null },
     })
     const credential = await CredentialPersistence.findOne({
       alreadyNotifyed: { $ne: true },

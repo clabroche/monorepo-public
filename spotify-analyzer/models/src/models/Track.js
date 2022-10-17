@@ -1,4 +1,5 @@
-const { core } = require('../apis/Core')
+const { core } = require('../apis/Core');
+const genres = require('./genres');
 
 class Track {
   /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<Track>} track */
@@ -38,10 +39,11 @@ class Track {
     this.uri = track.uri
     /**@type {string}*/
     this.albumId = track.albumId
-    if(track.album) this.albumId = track.album.id
+    if (track.album) this.albumId = track.album.id
     /**@type {number}*/
     this.popularity = track.popularity
-
+    /**@type {string[]}*/
+    this.genres = track.genres
     
     /** @type {{
       * danceability: number
