@@ -7,6 +7,7 @@ const { History } = require("@clabroche-org/spotify-analyzer-models").models;
 const PromiseB = require('bluebird');
 const SpotifyWebApi = require('spotify-web-api-node');
 const dayjs = require('dayjs');
+const { getAllDatesBetween } = require('../services/dates');
 
 const base = Base({ collectionName: 'histories' })
 
@@ -56,20 +57,20 @@ class HistoryPersistence extends History{
     return PromiseB.map(tracks.body?.items || [], async item => {
       /** @type {TrackPersistence} */
       let track
-      if (!await TrackPersistence.findOne({ _id: item.track.id })) {
-        track = new TrackPersistence(item.track)
-        await track.save()
-      }
-      if (!await AlbumPersistence.findOne({ _id: item.track.album.id })) {
-        const album = new AlbumPersistence(item.track.album)
-        await album.save()
-      }
       await PromiseB.map(item.track.artists, async artist => {
         if(!await ArtistPersistence.findOne({_id: artist.id})) {
           const artistPersistence = new ArtistPersistence(artist)
           await artistPersistence.save()
         }
       })
+      if (!await AlbumPersistence.findOne({ _id: item.track.album.id })) {
+        const album = new AlbumPersistence(item.track.album)
+        await album.save()
+      }
+      if (!await TrackPersistence.findOne({ _id: item.track.id })) {
+        track = new TrackPersistence(item.track)
+        await track.save()
+      }
       let history = await HistoryPersistence.findOne({
         ownerId: user._id,
         trackId: item.track.id,
@@ -102,13 +103,15 @@ class HistoryPersistence extends History{
   static async getBestArtists(ownerId, from, to) {
     if (!ownerId) throw new Error('ownerId is required')
     return mongo.collection(base.collectionName).aggregate([
-      { $match: {
-        ownerId: mongo.getID(ownerId),
-        played_at: { 
-          $gt: dayjs(from).toISOString(),
-          $lt: dayjs(to).toISOString()
-        },
-      }},
+      {
+        $match: {
+          ownerId: mongo.getID(ownerId),
+          played_at: {
+            $gt: dayjs(from).toISOString(),
+            $lt: dayjs(to).toISOString()
+          },
+        }
+      },
       {
         $lookup: {
           from: `${mongo.prefix}-${require('./Track').collectionName}`,
@@ -120,6 +123,40 @@ class HistoryPersistence extends History{
       { $unwind: '$track' },
       { $unwind: '$track.artistsIds' },
       { $group: { _id: "$track.artistsIds", count: { $sum: 1 } } },
+      { $sort: { count: -1 } }
+    ]).toArray()
+  }
+
+  /**
+   * 
+   * @param {string} ownerId 
+   * @param {string} from 
+   * @param {string} to 
+   * @returns 
+   */
+  static async getGenres(ownerId, from, to) {
+    if (!ownerId) throw new Error('ownerId is required')
+    return mongo.collection(base.collectionName).aggregate([
+      {
+        $match: {
+          ownerId: mongo.getID(ownerId),
+          played_at: {
+            $gt: dayjs(from).toISOString(),
+            $lt: dayjs(to).toISOString()
+          },
+        }
+      },
+      {
+        $lookup: {
+          from: `${mongo.prefix}-${require('./Track').collectionName}`,
+          localField: "trackId",
+          foreignField: "_id",
+          as: "track"
+        }
+      },
+      { $unwind: '$track' },
+      { $unwind: '$track.genres' },
+      { $group: { _id: "$track.genres", count: { $sum: 1 } } },
       { $sort: { count: -1 } }
     ]).toArray()
   }
@@ -197,13 +234,113 @@ class HistoryPersistence extends History{
   static async getBestTitles(ownerId, from, to) {
     if (!ownerId) throw new Error('ownerId is required')
     return mongo.collection(base.collectionName).aggregate([
-      { $match: {
-        ownerId: mongo.getID(ownerId),
-        played_at: { 
-          $gt: dayjs(from).toISOString(),
-          $lt: dayjs(to).toISOString()
-        },
-      }},
+      {
+        $match: {
+          ownerId: mongo.getID(ownerId),
+          played_at: {
+            $gt: dayjs(from).toISOString(),
+            $lt: dayjs(to).toISOString()
+          },
+        }
+      },
+      {
+        $lookup: {
+          from: `${mongo.prefix}-${require('./Track').collectionName}`,
+          localField: "trackId",
+          foreignField: "_id",
+          as: "track"
+        }
+      },
+      { $unwind: '$track' },
+      { $group: { _id: "$track._id", count: { $sum: 1 } } },
+      { $sort: { count: -1 } }
+    ]).toArray()
+  }
+
+  /**
+   * 
+   * @param {string} ownerId 
+   * @param {string} from 
+   * @param {string} to 
+   * @returns 
+   */
+  static async getNbListeningByDays(ownerId, from, to) {
+    if (!ownerId) throw new Error('ownerId is required')
+    return PromiseB.map(getAllDatesBetween(from, to), async date => {
+      return {
+        date: dayjs(date).toISOString(),
+        nbListening: (await this.getListeningForDay(ownerId, date))?.length || 0
+      }
+    })
+  }
+
+  /**
+   * 
+   * @param {string} ownerId 
+   * @param {string} from 
+   * @param {string} to 
+   * @returns 
+   */
+  static async getListeningTopHours(ownerId, from, to) {
+    if (!ownerId) throw new Error('ownerId is required')
+    if (!ownerId) throw new Error('ownerId is required')
+    return mongo.collection(base.collectionName).aggregate([
+      {
+        $match: {
+          ownerId: mongo.getID(ownerId),
+          played_at: {
+            $gt: dayjs(from).toISOString(),
+            $lt: dayjs(to).toISOString()
+          },
+        }
+      }, {
+        $addFields: {
+          date: {
+            $dateFromString: {
+              dateString: '$played_at'
+            }
+          },
+        }
+      },
+      {
+        $project: {
+          hour: { $hour: "$date" },
+          trackId: 1
+        }
+      }, {
+        $group: {
+          _id: "$hour",
+          count: { $sum: 1 },
+          titles: { $push: '$trackId' }
+        }
+      }, {
+        $sort: {
+          _id: 1
+        }
+      }
+    ]).toArray()
+  }
+
+  /**
+   * 
+   * @param {string} ownerId 
+   * @param {string} day 
+   * @returns 
+   */
+  static async getListeningForDay(ownerId, day) {
+    if (!ownerId) throw new Error('ownerId is required')
+    const from = dayjs(day).set('hours', 5).startOf('day').toISOString()
+    const to = dayjs(day).set('hours', 5).endOf('day').toISOString()
+    return mongo.collection(base.collectionName).aggregate([
+      {
+        $match: {
+          ownerId: mongo.getID(ownerId),
+          played_at: {
+            $gt: dayjs(from).toISOString(),
+            $lt: dayjs(to).toISOString()
+          },
+        }
+      },
       {
         $lookup: {
           from: `${mongo.prefix}-${require('./Track').collectionName}`,

@@ -1,4 +1,5 @@
 const { core } = require('../apis/Core')
+const genres = require('./genres')
 
 class Artist {
   /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<Account>} accounts */
