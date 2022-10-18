@@ -28,7 +28,6 @@ function getDaysArray (start, end) {
   start = new Date(start).getTime() - oneDayInMs
   end = new Date(end).getTime() - oneDayInMs
   for (var arr = [], dt = start; dt < end; arr.push(dt += oneDayInMs));
-  console.log(arr)
   return arr;
 }
 

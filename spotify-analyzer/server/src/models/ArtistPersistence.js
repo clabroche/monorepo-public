@@ -4,7 +4,7 @@ const { Artist } = require("@clabroche-org/spotify-analyzer-models").models;
 const PromiseB = require('bluebird');
 const { getClient } = require('../services/spotify');
 const dayjs = require('dayjs');
-const CredentialPersistence = require('./Credential');
+const CredentialPersistence = require('./CredentialPersistence');
 const base = Base({ collectionName: 'artists' })
 
 class ArtistPersistence extends Artist{
@@ -49,7 +49,7 @@ class ArtistPersistence extends Artist{
         images: null
       },
     })
-    const missingArtists = await mongo.collection(require('./Track').collectionName).aggregate([
+    const missingArtists = await mongo.collection(require('./TrackPersistence').collectionName).aggregate([
       { $unwind: '$artistsIds' },
       { $project: { artistsIds: 1 } },
       {
