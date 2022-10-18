@@ -1,13 +1,17 @@
 const {mongo} = require('@clabroche-org/common-mongo')
 const { Base } = require("@clabroche-org/common-crud");
-const ArtistPersistence = require('./Artist');
-const AlbumPersistence = require('./Album');
-const TrackPersistence = require('./Track');
+const ArtistPersistence = require('./ArtistPersistence');
+const AlbumPersistence = require('./AlbumPersistence');
+const TrackPersistence = require('./TrackPersistence');
 const { History } = require("@clabroche-org/spotify-analyzer-models").models;
 const PromiseB = require('bluebird');
 const SpotifyWebApi = require('spotify-web-api-node');
 const dayjs = require('dayjs');
 const { getAllDatesBetween } = require('../services/dates');
+const CredentialPersistence = require('./CredentialPersistence');
+const { getClient } = require('../services/spotify');
+const UsersPersistence = require('@clabroche-org/mybank-modules-auth/src/models/Users');
+const { sockets } = require('@clabroche-org/common-socket-server');
 
 const base = Base({ collectionName: 'histories' })
 
@@ -114,7 +118,7 @@ class HistoryPersistence extends History{
       },
       {
         $lookup: {
-          from: `${mongo.prefix}-${require('./Track').collectionName}`,
+          from: `${mongo.prefix}-${require('./TrackPersistence').collectionName}`,
           localField: "trackId",
           foreignField: "_id",
           as: "track"
@@ -148,7 +152,7 @@ class HistoryPersistence extends History{
       },
       {
         $lookup: {
-          from: `${mongo.prefix}-${require('./Track').collectionName}`,
+          from: `${mongo.prefix}-${TrackPersistence.collectionName}`,
           localField: "trackId",
           foreignField: "_id",
           as: "track"
@@ -186,7 +190,7 @@ class HistoryPersistence extends History{
       },
       {
         $lookup: {
-          from: `${mongo.prefix}-${require('./Track').collectionName}`,
+          from: `${mongo.prefix}-${TrackPersistence.collectionName}`,
           localField: "trackId",
           foreignField: "_id",
           as: "track"
@@ -245,7 +249,7 @@ class HistoryPersistence extends History{
       },
       {
         $lookup: {
-          from: `${mongo.prefix}-${require('./Track').collectionName}`,
+          from: `${mongo.prefix}-${TrackPersistence.collectionName}`,
           localField: "trackId",
           foreignField: "_id",
           as: "track"
@@ -377,7 +381,6 @@ class HistoryPersistence extends History{
     if (!ownerId) throw new Error('ownerId is required')
     const from = dayjs(day).startOf('day').toISOString()
     const to = dayjs(day).endOf('day').toISOString()
-    console.log('2', dayjs(from).startOf('day').toISOString(), dayjs(from).endOf('day').toISOString())
     return mongo.collection(base.collectionName).aggregate([
       {
         $match: {
@@ -454,6 +457,48 @@ class HistoryPersistence extends History{
     })
   }
   
+  static async resyncHistory() {
+    try {
+      const credentialNotExpired = await CredentialPersistence.find({
+        filter: {
+          expires_at: {
+            $gt: dayjs().toISOString()
+          }
+        }
+      })
+      const emailsToNotify = []
+      await PromiseB.map(credentialNotExpired, async credential => {
+        try {
+          const user = await UsersPersistence.findOne({ _id: mongo.getID(credential.ownerId) })
+          const client = getClient(credential.access_token, credential.refresh_token)
+          const lastHistory = await HistoryPersistence.find({
+            filter: { ownerId: user._id },
+            sort: { played_at: -1 }
+          })
+          await HistoryPersistence.parseHistory(client, user)
+          const newLastHistory = await HistoryPersistence.find({
+            filter: { ownerId: user._id },
+            sort: { played_at: -1 }
+          })
+          if (newLastHistory[0]?._id?.toString() !== lastHistory[0]?._id?.toString()) {
+            emailsToNotify.push(user.email)
+          }
+        } catch (error) {
+          console.error(error)
+        }
+      })
+
+      await ArtistPersistence.enrich()
+      await TrackPersistence.enrich()
+      setTimeout(() => {
+        emailsToNotify.map(email => sockets.emit(email, 'update:histories'))
+      }, 100);
+    } catch (error) {
+      console.error(error)
+    }
+
+  }
+
 
 }
 

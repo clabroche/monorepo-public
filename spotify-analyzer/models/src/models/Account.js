@@ -3,14 +3,14 @@ const { core } = require('../apis/Core')
 class Account {
   /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<Account>} accounts */
   constructor(accounts = {}) {
-    /** @type {import('mongodb').ObjectID | string} */
+    /** @type {string | undefined} */
     this._id = accounts._id
-    /** @type {string} */
+    /** @type {string | undefined} */
     this.password = undefined
   }
   /**
-   * @param {import('mongodb').ObjectID | string} _id
-   * @returns {Promise<Account>}
+   * @param {string} _id
+   * @returns {Promise<Account | null>}
    */
   static async get(_id) {
     if (!_id) throw new Error('_id param is empty')

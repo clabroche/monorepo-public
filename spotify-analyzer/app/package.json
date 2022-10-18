@@ -24,7 +24,7 @@
     "@capacitor/android": "^3.6.0",
     "@capacitor/cli": "^3.6.0",
     "@capacitor/core": "^3.6.0",
-    "@iryu54/room-lib-front": "^1.1.0",
+    "@clabroche-org/common-socket-front": "workspace:*",
     "chart.js": "^3.9.1",
     "chartjs-adapter-luxon": "^1.2.0",
     "debounce": "^1.2.1",
