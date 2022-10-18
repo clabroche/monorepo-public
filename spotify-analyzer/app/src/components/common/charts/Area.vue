@@ -65,8 +65,7 @@ export default {
         plugins: {
           tooltip: {
             callbacks: {
-              label: function (tooltipItem, data) {
-                console.log(tooltipItem)
+              label: function (tooltipItem) {
                 return tooltipItem.formattedValue + ' écoutes';
               }
             }

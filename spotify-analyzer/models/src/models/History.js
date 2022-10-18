@@ -3,23 +3,23 @@ const { core } = require('../apis/Core')
 
 class History {
   static updated = new CustomObservable()
-  /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<Account>} accounts */
-  constructor(accounts = {}) {
-    /** @type {import('mongodb').ObjectID} */
-    this._id = accounts._id
-    /** @type {string} */
-    this.trackId = accounts.trackId
-    /** @type {import('mongodb').ObjectID} */
-    this.ownerId = accounts.ownerId
-    /** @type {string} */
-    this.played_at = accounts.played_at
+  /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<History>} history */
+  constructor(history = {}) {
+    /** @type {string | undefined} */
+    this._id = history._id
+    /** @type {string | undefined} */
+    this.trackId = history.trackId
+    /** @type {string | undefined} */
+    this.ownerId = history.ownerId
+    /** @type {string | undefined} */
+    this.played_at = history.played_at
   }
 
   /**
  * @returns {Promise<History[]>}
  */
   static async recentlyPlayed() {
-    let { data: histories } = await core.instance.get(`/api/spotify/recently-played`, {
+    let { data: histories } = await core.instance.get(`/api/histories`, {
       params: {
         sort: {
           played_at: -1
@@ -33,7 +33,7 @@ class History {
   /**
  */
   static async sync() {
-    await core.instance.post(`/api/spotify/recently-played`)
+    await core.instance.post(`/api/histories`)
   }
 
   /**
@@ -43,7 +43,7 @@ class History {
    * @returns 
    */
   static async stats(from, to) {
-    let { data: stats } = await core.instance.get(`/api/spotify/stats`, {params: {from, to}})
+    let { data: stats } = await core.instance.get(`/api/stats`, {params: {from, to}})
     return stats
   }
 }

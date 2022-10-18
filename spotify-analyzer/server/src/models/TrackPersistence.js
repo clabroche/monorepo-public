@@ -1,6 +1,5 @@
-const {mongo} = require('@clabroche-org/common-mongo')
 const { Base } = require("@clabroche-org/common-crud");
-const CredentialPersistence = require('./Credential');
+const CredentialPersistence = require('./CredentialPersistence');
 const dayjs = require('dayjs');
 const { getClient } = require('../services/spotify');
 const { Track } = require("@clabroche-org/spotify-analyzer-models").models;
@@ -41,7 +40,7 @@ class TrackPersistence extends Track{
 
   async save() {
     if(!this.genres) {
-      const artist = await require('./Artist').findOne({_id: this.artistsIds[0]})
+      const artist = await require('./ArtistPersistence').findOne({_id: this.artistsIds[0]})
       this.genres = artist?.genres
     }
     return base.updateOrCreate({ obj: this, Obj: TrackPersistence })
