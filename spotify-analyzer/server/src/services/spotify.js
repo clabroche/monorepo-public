@@ -1,6 +1,6 @@
 const dayjs = require('dayjs');
 const SpotifyWebApi = require('spotify-web-api-node');
-const redirectUri = `${process.env.URL_CORE}/api/spotify/callback`
+const redirectUri = `${process.env.URL_CORE}/api/spotify-auth/callback`
 const clientId = process.env.secretId
 const clientSecret = process.env.secretKey
 
