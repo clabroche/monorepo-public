@@ -51,6 +51,69 @@ class HistoryPersistence extends History{
     return base.updateOrCreate({ obj: this, Obj: HistoryPersistence })
   }
 
+  static async importFromFile(ownerId, file) {
+    if(!ownerId) throw new Error('ownerId not found')
+    const histories = await PromiseB.map(file, async history => {
+      const {endTime,artistName,trackName,msPlayed} = history
+      const trackId = await TrackPersistence.searchTrackIdFromArtistAndTitle(trackName, artistName)
+      return {
+        endTime, artistName, trackName, msPlayed, trackId
+      }
+    }, {concurrency: 8})
+    const goodHistories = histories.filter(h => h.trackId)
+    const badHistories = histories.filter(h => !h.trackId)
+    let i = 0
+    await PromiseB.map(badHistories, async history => {
+      i++
+      console.log('Process missing tracks from db', `${i}/${badHistories.length}`)
+      const { endTime, artistName, trackName, msPlayed } = history
+      
+      const trackIdFromMongo = await TrackPersistence.searchTrackIdFromArtistAndTitle(trackName, artistName)
+      if (trackIdFromMongo) {
+        goodHistories.push({
+          artistName,
+          endTime,
+          trackId: trackIdFromMongo,
+          trackName,
+          msPlayed
+        })
+      } else {
+        const track = await TrackPersistence.search({
+          artist: artistName,
+          track: trackName
+        }).catch(err => {
+          console.error(err)
+        })
+        if(track) {
+          goodHistories.push({
+            artistName,
+            endTime,
+            trackId: track._id,
+            trackName,
+            msPlayed
+          })
+        }
+        await new Promise(res => setTimeout(res, 1000)) 
+      }
+    }, {concurrency: 8})
+
+
+    await PromiseB.map(goodHistories, async history => {
+      const historyToInsert = {
+        ownerId,
+        played_at: dayjs(history.endTime).toISOString(),
+        trackId: history.trackId
+      }
+      const existingHistory = await HistoryPersistence.findOne(historyToInsert)
+      if(!existingHistory) {
+        const historyPersistence = new HistoryPersistence(historyToInsert)
+        await historyPersistence.save()
+      }
+    }, {concurrency: 8})
+    console.log('end')
+  }
+
+
   /**
    * 
    * @param {SpotifyWebApi} client 
