@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="bottom-bar" v-if="!['login', 'register'].includes($route.name)">
-      <BottomBar></BottomBar>
+      <BottomBar></BottomBar >
     </div>
   </div>
   <notification></notification>
