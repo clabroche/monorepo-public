@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.25](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.24...v1.1.1-beta.25) (2022-10-20)
+
+### Bug Fixes
+
+* **spotify-analyzer:** can import datas from spotify ([31a0db3](https://github.com/clabroche-org/monorepo/commit/31a0db3863af5b588ac82960fa91091bf99379b8))
+* **spotify-analyzer:** remove double bottombar ([2d05643](https://github.com/clabroche-org/monorepo/commit/2d056436474f6ab1c7218b42abf79f1c3b63fdba))
+
 ## [1.1.1-beta.24](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.23...v1.1.1-beta.24) (2022-10-18)
 
 ### Bug Fixes
