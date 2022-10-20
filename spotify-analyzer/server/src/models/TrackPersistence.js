@@ -4,7 +4,8 @@ const dayjs = require('dayjs');
 const { getClient } = require('../services/spotify');
 const { Track } = require("@clabroche-org/spotify-analyzer-models").models;
 const base = Base({ collectionName: 'tracks' })
-const PromiseB = require('bluebird')
+const PromiseB = require('bluebird');
+const { mongo } = require("@clabroche-org/common-mongo");
 
 class TrackPersistence extends Track{
   static collectionName = base.collectionName
@@ -44,6 +45,71 @@ class TrackPersistence extends Track{
       this.genres = artist?.genres
     }
     return base.updateOrCreate({ obj: this, Obj: TrackPersistence })
+  }
+
+  static async search(filter) {
+    const credential = await CredentialPersistence.findOne({
+      alreadyNotifyed: { $ne: true },
+      expires_at: {
+        $gt: dayjs().add(1, 'minutes').toISOString()
+      }
+    })
+    const client = getClient(credential.access_token, credential.refresh_token)
+    const searchstring = Object.keys(filter).map(key => (`${key}:${filter[key]}`)).join(' ')
+    const search = await client.searchTracks(searchstring,{
+      limit:1,
+    })
+    const item = search.body.tracks?.items?.[0]
+    if (item) {
+      const track = new TrackPersistence(item)
+      const ArtistPersistence = require('./ArtistPersistence')
+      const AlbumPersistence = require('./AlbumPersistence')
+      await PromiseB.map(item.artists, async artist => {
+        if (!await ArtistPersistence.findOne({ _id: artist.id })) {
+          const artistPersistence = new ArtistPersistence(artist)
+          await artistPersistence.save()
+        }
+      })
+      if (!await AlbumPersistence.findOne({ _id: item.album.id })) {
+        const album = new AlbumPersistence(item.album)
+        await album.save()
+      }
+      if (!await TrackPersistence.findOne({ _id: item.id })) {
+        await track.save()
+      }
+      return track
+    }
+  }
+
+  /**
+   * 
+   * @param {string} trackName 
+   * @param {string} artistName 
+   * @returns {Promise<string | undefined>}
+   */
+  static async searchTrackIdFromArtistAndTitle(trackName, artistName) {
+    const tracksFromMongo = await mongo.collection("tracks").aggregate([{
+      $match: {
+        name: trackName
+      },
+    }, {
+      $lookup: {
+        from: `${mongo.prefix}-${require('./ArtistPersistence').collectionName}`,
+        localField: "artistsIds",
+        foreignField: "id",
+        as: "artists"
+      }
+    }, {
+      $project: {
+        artists: 1
+      }
+    }, {
+      $match: {
+        'artists.name': artistName
+      }
+    }
+    ]).toArray()
+    return tracksFromMongo?.[0]?._id 
   }
 
   static async enrich() {
