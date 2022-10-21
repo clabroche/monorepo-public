@@ -95,7 +95,7 @@ class HistoryPersistence extends History{
         }
         await new Promise(res => setTimeout(res, 1000)) 
       }
-    }, {concurrency: 8})
+    }, {concurrency: 2})
 
 
     await PromiseB.map(goodHistories, async history => {
