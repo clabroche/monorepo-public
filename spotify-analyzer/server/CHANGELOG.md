@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.28](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.27...v1.1.1-beta.28) (2022-10-21)
+
+### Bug Fixes
+
+* **spotify-analyzer:** make stats more performant ([bee1450](https://github.com/clabroche-org/monorepo/commit/bee1450188f21132f6fbde806a719b8c79d52701))
+
 ## [1.1.1-beta.27](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.26...v1.1.1-beta.27) (2022-10-21)
 
 ### Bug Fixes

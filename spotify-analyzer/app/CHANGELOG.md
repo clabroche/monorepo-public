@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.28](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.27...v1.1.1-beta.28) (2022-10-21)
+
+### Bug Fixes
+
+* **spotify-analyzer:** cosmetic changes on area chart ([c80360d](https://github.com/clabroche-org/monorepo/commit/c80360d2d8bf476839e7f25a4142d5928d2afd42))
+* **spotify-analyzer:** make Homeview more safe on properties access ([a98fbf4](https://github.com/clabroche-org/monorepo/commit/a98fbf46bde09a122afcac89fd93563c76957d1b))
+
 ## [1.1.1-beta.25](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.24...v1.1.1-beta.25) (2022-10-20)
 
 ### Bug Fixes
