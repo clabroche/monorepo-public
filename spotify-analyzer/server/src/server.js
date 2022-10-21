@@ -15,6 +15,10 @@ const HistoryPersistence = require('./models/HistoryPersistence');
   sockets.connect(server, process.env.URL_FRONT_ADMIN)
 
   await mongo.collection('histories').createIndex({ ownerId: 1 })
+  await mongo.collection('histories').createIndex({
+    ownerId:1,
+    played_at: -1
+  })
   
   intervalWithoutFailed(3 * 1000, [
     CredentialPersistence.refreshAllTokenThatNeedIt,

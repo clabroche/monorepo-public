@@ -11,31 +11,52 @@ router.get('/', userIsAuthenticated, async (req, res, next) => {
   const from = dayjs(fromQuery.toString()).startOf('day').toISOString()
   const to = dayjs(toQuery.toString()).endOf('day').toISOString()
   const jwt = getJwt()
+  const [
+    getBestArtists,
+    getBestTitles,
+    getFeatures,
+    getNbDifferentArtists,
+    getNewArtists,
+    getGenres,
+    getNbListeningByDays,
+    getListeningTopHours,
+    getListeningTopDays,
+  ] = await Promise.all([
+    HistoryPersistence.getBestArtists(jwt.user_id, from, to),
+    HistoryPersistence.getBestTitles(jwt.user_id, from, to),
+    HistoryPersistence.getFeatures(jwt.user_id, from, to),
+    HistoryPersistence.getNbDifferentArtists(jwt.user_id, from, to),
+    HistoryPersistence.getNewArtists(jwt.user_id, from, to),
+    HistoryPersistence.getGenres(jwt.user_id, from, to),
+    HistoryPersistence.getNbListeningByDays(jwt.user_id, from, to),
+    HistoryPersistence.getListeningTopHours(jwt.user_id, from, to),
+    HistoryPersistence.getListeningTopDays(jwt.user_id, from, to),
+  ])
   res.json([{
     type: 'bestArtists',
-    leaderBoard: await HistoryPersistence.getBestArtists(jwt.user_id, from, to)
+    leaderBoard: getBestArtists
   }, {
     type: 'bestTitles',
-    leaderBoard: await HistoryPersistence.getBestTitles(jwt.user_id, from, to)
+    leaderBoard: getBestTitles
   }, {
     type: 'features',
-    leaderBoard: await HistoryPersistence.getFeatures(jwt.user_id, from, to)
+    leaderBoard: getFeatures
   }, {
     type: 'differentArtists',
-    nbDifferentArtists: await HistoryPersistence.getNbDifferentArtists(jwt.user_id, from, to),
-    newArtists: await HistoryPersistence.getNewArtists(jwt.user_id, from, to)
+    nbDifferentArtists: getNbDifferentArtists,
+    newArtists: getNewArtists
   }, {
     type: 'genres',
-    genres: await HistoryPersistence.getGenres(jwt.user_id, from, to),
+    genres: getGenres,
   }, {
     type: 'listeningByDays',
-    value: await HistoryPersistence.getNbListeningByDays(jwt.user_id, from, to),
+    value: getNbListeningByDays,
   }, {
     type: 'listeningTopHours',
-    value: await HistoryPersistence.getListeningTopHours(jwt.user_id, from, to),
+    value: getListeningTopHours,
   }, {
     type: 'listeningTopDays',
-    value: await HistoryPersistence.getListeningTopDays(jwt.user_id, from, to),
+    value: getListeningTopDays,
   }])
 })
 module.exports = router
