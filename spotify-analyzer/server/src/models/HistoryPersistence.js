@@ -12,6 +12,10 @@ const CredentialPersistence = require('./CredentialPersistence');
 const { getClient } = require('../services/spotify');
 const UsersPersistence = require('@clabroche-org/mybank-modules-auth/src/models/Users');
 const { sockets } = require('@clabroche-org/common-socket-server');
+dayjs.locale('fr')
+var utc = require('dayjs/plugin/utc')
+dayjs.extend(utc)
+
 
 const base = Base({ collectionName: 'histories' })
 
@@ -141,13 +145,13 @@ class HistoryPersistence extends History{
       let history = await HistoryPersistence.findOne({
         ownerId: user._id,
         trackId: item.track.id,
-        played_at: item.played_at
+        played_at: dayjs(item.played_at).toISOString()
       })
       if (!history) {
         history = new HistoryPersistence({
           ownerId: user._id,
           trackId: item.track.id,
-          played_at: item.played_at
+          played_at: dayjs(item.played_at).toISOString()
         })
         await history.save()
       }
@@ -190,7 +194,8 @@ class HistoryPersistence extends History{
       { $unwind: '$track' },
       { $unwind: '$track.artistsIds' },
       { $group: { _id: "$track.artistsIds", count: { $sum: 1 } } },
-      { $sort: { count: -1 } }
+      { $sort: { count: -1 } },
+      { $limit: 20 }
     ]).toArray()
   }
 
@@ -267,9 +272,8 @@ class HistoryPersistence extends History{
           count: {$sum: 1}
         }
       },
-      {
-        $sort: {count: -1}
-      }
+      { $sort: { count: -1 } },
+      { $limit: 100 }
     ]).toArray()
   }
 
@@ -350,7 +354,6 @@ class HistoryPersistence extends History{
    */
   static async getListeningTopHours(ownerId, from, to) {
     if (!ownerId) throw new Error('ownerId is required')
-    if (!ownerId) throw new Error('ownerId is required')
     return mongo.collection(base.collectionName).aggregate([
       {
         $match: {
@@ -378,7 +381,7 @@ class HistoryPersistence extends History{
         $group: {
           _id: "$hour",
           count: { $sum: 1 },
-          titles: { $push: '$trackId' }
+          // titles: { $push: '$trackId' }
         }
       }, {
         $sort: {
@@ -424,7 +427,7 @@ class HistoryPersistence extends History{
         $group: {
           _id: "$day",
           count: { $sum: 1 },
-          titles: { $push: '$trackId' }
+          // titles: { $push: '$trackId' }
         }
       }, {
         $sort: {
@@ -466,6 +469,9 @@ class HistoryPersistence extends History{
    * @returns 
    */
   static async getFeatures(ownerId, from, to) {
+
+    const rand = Math.random()
+    console.time(rand)
     if (!ownerId) throw new Error('ownerId is required')
     return mongo.collection(HistoryPersistence.collectionName).aggregate([
       { $match: {
@@ -516,6 +522,7 @@ class HistoryPersistence extends History{
         }
       },
     ]).toArray().then(a => {
+      console.timeEnd(rand)
       return a[0] || {}
     })
   }

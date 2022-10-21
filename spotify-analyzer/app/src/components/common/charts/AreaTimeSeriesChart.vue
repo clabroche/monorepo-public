@@ -45,8 +45,10 @@ export default {
             borderColor: 'rgba(70,108,128, 0.7)',
           },
           point: {
-            borderColor: 'rgba(70,108,128, 0.7)',
-            backgroundColor: 'rgba(70,108,128, 1)',
+            pointBorderColor: 'rgba(0, 0, 0, 0)',
+            pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+            pointHoverBackgroundColor: 'rgba(70,108,128, 0.7)',
+            pointHoverBorderColor: 'rgba(70,108,128, 1)',
             hitRadius: 20
           }
         },

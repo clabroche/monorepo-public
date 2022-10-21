@@ -2,7 +2,9 @@
   <div class="root-home">
       <h1>Analyses de vos musique</h1>
       <div class="dates">
-        <input type="date" v-model="from"> <i class="fas fa-arrow-right"/> <input type="date" v-model="to">
+        <input type="date" v-model="from">
+        <i class="fas fa-arrow-right"></i>
+        <input type="date" v-model="to">
       </div>
       <div class="container line">
         <template v-for="stat of stats">
@@ -15,7 +17,7 @@
                     :img="Dictionnary.artists.value[artist._id]?.images?.[0]?.url"
                     :infos="[
                       {text: `${artist.count} écoutes`, icon:'fas fa-redo'},
-                      {text: Dictionnary.artists.value[artist._id]?.name, icon:'fas fa-user'}
+                      {text: Dictionnary.artists.value[artist._id]?.name || '', icon:'fas fa-user'}
                     ]"
                   />
                 </div>
@@ -151,7 +153,7 @@
                           :img="Dictionnary.artists.value[artist._id]?.images?.[0]?.url"
                           :infos="[
                             {text: `${artist.count} écoutes`, icon:'fas fa-redo'},
-                            {text: Dictionnary.artists.value[artist._id]?.name, icon:'fas fa-user'}
+                            {text: Dictionnary.artists.value[artist._id]?.name || '', icon:'fas fa-user'}
                           ]"
                         />
                       </div>
@@ -184,12 +186,12 @@ dayjs.locale(fr)
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
 
+/** @type {import('vue').Ref<any[]>} */
 const stats = ref([])
 const triggerUpdate = ref(0)
 const from = ref(dayjs().subtract(1, 'week').format('YYYY-MM-DD'))
 const to = ref(dayjs().format('YYYY-MM-DD'))
 onMounted(async () => {
-  triggerUpdate.value++
   History.updated.subscribe(async () => {
     triggerUpdate.value++
   })
@@ -198,7 +200,7 @@ onMounted(async () => {
 watchEffect(async () => {
   triggerUpdate.value
   stats.value = await History.stats(from.value, to.value)
-  await stats.value.forEach(stat => {
+  stats.value.forEach(stat => {
     if (stat.type === 'bestArtists') Dictionnary.addArtist(...stat.leaderBoard.map(l => l._id))
     if (stat.type === 'bestTitles') Dictionnary.addTrack(...stat.leaderBoard.map(l => l._id))
   })
