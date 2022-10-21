@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.26](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.25...v1.1.1-beta.26) (2022-10-21)
+
+### Bug Fixes
+
+* **spotify-analyzer:** reduce concurrency for import lifetime files ([9e06bcd](https://github.com/clabroche-org/monorepo/commit/9e06bcd95c3f6df88802cb132aa485d2a7ff92f4))
+
 ## [1.1.1-beta.25](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.24...v1.1.1-beta.25) (2022-10-20)
 
 ### Bug Fixes
