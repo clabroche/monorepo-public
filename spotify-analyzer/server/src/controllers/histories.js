@@ -19,7 +19,7 @@ const router = express.Router()
 router.get('/', userIsAuthenticated, shouldBeConnectedToSpotify, async (req, res, next) => {
   const jwt = getJwt()
   const user = await User.findOne({ _id: jwt.user_id })
-  const allHistory = await HistoryPersistence.find({ filter: { ownerId: user._id }, sort: { played_at: -1 } })
+  const allHistory = await HistoryPersistence.find({ filter: { ownerId: user._id }, sort: { played_at: -1 } , limit: 100})
   res.json(allHistory)
 })
 router.post('/', userIsAuthenticated, shouldBeConnectedToSpotify, async (req, res, next) => {
