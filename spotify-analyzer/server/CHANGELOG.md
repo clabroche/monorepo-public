@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.27](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.26...v1.1.1-beta.27) (2022-10-21)
+
+### Bug Fixes
+
+* **spotify-analyzer:** reduce history length to send to client ([c787b81](https://github.com/clabroche-org/monorepo/commit/c787b8155b647a76e0a83301368a8540325ef01d))
+
 ## [1.1.1-beta.26](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.25...v1.1.1-beta.26) (2022-10-21)
 
 ### Bug Fixes
