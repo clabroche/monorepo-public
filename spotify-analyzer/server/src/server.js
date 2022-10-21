@@ -1,4 +1,5 @@
-const { launch } = require('@clabroche-org/common-express')
+const { launch } = require('@clabroche-org/common-express');
+const { mongo } = require('@clabroche-org/common-mongo');
 const { sockets } = require('@clabroche-org/common-socket-server')
 const PromiseB = require('bluebird')
 const CredentialPersistence = require('./models/CredentialPersistence');
@@ -13,6 +14,8 @@ const HistoryPersistence = require('./models/HistoryPersistence');
   })
   sockets.connect(server, process.env.URL_FRONT_ADMIN)
 
+  await mongo.collection('histories').createIndex({ ownerId: 1 })
+  
   intervalWithoutFailed(3 * 1000, [
     CredentialPersistence.refreshAllTokenThatNeedIt,
     CredentialPersistence.detectAllExpiredTokens
