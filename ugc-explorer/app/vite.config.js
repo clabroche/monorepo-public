@@ -85,4 +85,3 @@ function getPackagesToTransform() {
     .map(a => `@clabroche-org/${path.basename(a)}`)
   return packagesToTransform
 }
-
