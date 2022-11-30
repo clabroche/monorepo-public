@@ -61,16 +61,9 @@ onMounted(async () => {
 })
 const _debounce = debounce
 const search = ref('')
-const date = ref('2022-12-01')
+const date = ref('')
 const loading = ref(false)
-const routine = ref([
-  {
-    title: 'fefjzlefjkzeflj', time: {
-      start: '08:01',
-      end: '14:02'
-    }
-  }
-])
+const routine = ref([])
 const set = _debounce((set, value) => search.value = value, 50)
 watchEffect(async () => {
   loading.value = true
