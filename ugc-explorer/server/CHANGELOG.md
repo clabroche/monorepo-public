@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.32](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.31...v1.1.1-beta.32) (2022-11-30)
+
+### Bug Fixes
+
+* **ugc:** add more infos to films ([88e8eb1](https://github.com/clabroche-org/monorepo/commit/88e8eb136a133d8fc8380ecae436b99f92eff8bf))
+
 ## [1.1.1-beta.30](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.29...v1.1.1-beta.30) (2022-11-30)
 
 ### Bug Fixes
