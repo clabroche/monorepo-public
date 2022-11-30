@@ -1,7 +1,6 @@
 <template>
   <div class="root-bottom-bar">
-    <button class="bordered" @click="sync">
-      <i class="fas fa-sync-alt"></i>
+    <button class="bordered">
     </button>
     <button class="bordered main" @click="$router.push({ name: 'home' })">
       <i class="fas fa-home"></i>
