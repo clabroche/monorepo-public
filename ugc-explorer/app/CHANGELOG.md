@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.31](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.30...v1.1.1-beta.31) (2022-11-30)
+
+### Bug Fixes
+
+* **ugc:** remove default value ([58932d1](https://github.com/clabroche-org/monorepo/commit/58932d1aa4a042d2053ce43243838bc0fec696c6))
+
 ## [1.1.1-beta.30](https://github.com/clabroche-org/monorepo/compare/v1.1.1-beta.29...v1.1.1-beta.30) (2022-11-30)
 
 ### Bug Fixes
