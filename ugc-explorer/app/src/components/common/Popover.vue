@@ -32,6 +32,7 @@ export default {
         interactive: true,
         content: refContent.value,
         trigger: props.trigger,
+        hideOnClick: true,
         allowHTML: true,
         animateFill: true,
         theme: 'light-border',
@@ -49,6 +50,10 @@ export default {
 </script>
 
 <style>
+.popover-root {
+  height: 100%;
+  width: 100%;
+}
 .trigger {
   height: 100%;
   width: 100%;

@@ -10,7 +10,6 @@ class ScreeningPersistence extends Screening {
   /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<ScreeningPersistence>} screening */
   constructor(screening) {
     super(screening)
-    console.log(screening)
   }
   static async all(date = dayjs(), search = '') {
     const dateToSearch = dayjs(date).format('DD/MM/YYYY')
@@ -29,16 +28,19 @@ class ScreeningPersistence extends Screening {
         .map(i => cheerio.load(i).text().trim())
       let out = allInfos.filter(f => f.startsWith('Sortie le')).pop()?.replace('Sortie le', '').trim().split('   ')[0].split('(')[0].trim()
       let categories = allInfos.filter(f => f?.includes('('))[0]?.split('(')[0].trim().split(',').map(a => a.trim())
-      console.log(allInfos)
       let realisators = allInfos.filter(f => f.startsWith('De'))[0]?.split('       ').pop()?.replace('De', '').trim().split(',').map(a => a.trim())
       let actors = allInfos.filter(f => f.startsWith('Avec'))[0]?.replace('Avec', '').trim().split(',').map(a => a.trim())
       let resume = allInfos.filter(f => f.startsWith('Synopsis'))[0]?.replace('Synopsis', '').replace('voir plus', '').trim()
+      let cover = $film('img')[0]?.attribs?.['data-src']?.trim()
+      let external = $film('.visu-wrapper a')[0]?.attribs?.['href']
       return {
         title: $film('.component--film-presentation .block--title').text().trim(),
         out,
+        external: external ? `${axios.defaults.baseURL}/${external}`: '',
         realisators,
         categories,
         actors,
+        cover,
         resume,
         screenings: [...$film('.screening-date-wrapper')].map((screeningWrapper) => {
           const version = cheerio.load(screeningWrapper.parent)('.screening-lang').text().trim()
