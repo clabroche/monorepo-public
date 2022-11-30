@@ -1,18 +1,58 @@
 <template>
   <div class="root-home">
     <div class="container">
-      <input type="date" v-model="date">
-      <input type="text" @input="set(search, $event.target.value)">
-      <spinner v-if="loading"></spinner>
+      <div v-if="!loading">
+        <button :disabled="dayjs(date).isBefore(dayjs().endOf('day'))" @click="previousDate"><i class="fas fa-chevron-left"></i></button>
+        <button  @click="nextDate"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <spinner v-else :size="40"></spinner>
+      <input type="date" v-model="date" placeholder="Date...">
+      <input type="text" placeholder="Nom de film..." @input="set(search, $event.target.value)">
+
       <div class="time-container">
         <div class="film" v-for="film of films">
-          <div class="title">{{ film.title }}</div>
+          <div class="title">
+            <Popover trigger="click">
+              <template #trigger>
+                <div class="title-trigger">
+                  <img :src="film.cover" alt="">
+                  {{ film.title }}
+                </div>
+              </template>
+              <template #content>
+                <div>
+                  <label>Sortie le: </label>
+                  {{film?.out}}
+                </div>
+                <div>
+                  <label>De</label>
+                  {{film?.realisators?.join(', ')}}
+                </div>
+                <div>
+                  <label>Avec</label>
+                  {{film?.actors?.join(', ')}}
+                </div>
+                <div>
+                  <label>Categories: </label>
+                  {{film?.categories?.join(', ')}}
+                </div>
+
+                <div>
+                  <label>Synopsis: </label>
+                  {{film.resume}}
+                </div>
+
+                <a :href="film.external" v-if="film.external">Voir plus</a>
+
+              </template>
+            </Popover>
+          </div>
           <div class="times">
             <template v-for="time of film.screenings">
               <Popover v-if="(time?.start && time?.end)" class="time" :style="{
                 left: getPeriod(time).offsetPercent + '%',
                 width: getPeriod(time).durationPercent + '%'
-              }" trigger="mouseenter" :class="{ disabled: time.disable }">
+              }" trigger="mouseenter" :class="{ disabled: time.disable, 'not-vf': time.version !== 'VF'}">
                 <template #trigger>
                   <div class="bar">
                   </div>
@@ -61,7 +101,7 @@ onMounted(async () => {
 })
 const _debounce = debounce
 const search = ref('')
-const date = ref('')
+const date = ref(dayjs().format('YYYY-MM-DD'))
 const loading = ref(false)
 const routine = ref([])
 const set = _debounce((set, value) => search.value = value, 50)
@@ -71,6 +111,13 @@ watchEffect(async () => {
   screenings.value = await Screening.all('', day)
   loading.value = false
 })
+
+function nextDate() {
+  date.value = dayjs(date.value).add(1, 'day').format('YYYY-MM-DD')
+}
+function previousDate() {
+  date.value = dayjs(date.value).subtract(1, 'day').format('YYYY-MM-DD')
+}
 
 function group(films) {
   const versions = {}
@@ -121,8 +168,10 @@ function getPeriod({ start, end }) {
   const duration = endHour.diff(startHour, 'minutes')
   const nbMinutesInDay = endOfDay.diff(startOfDay, 'minutes')
   const offset = startHour.diff(startOfDay, 'minutes')
-  const durationPercent = Math.floor(duration * 100 / nbMinutesInDay)
+  let durationPercent = Math.floor(duration * 100 / nbMinutesInDay)
   const offsetPercent = Math.floor(offset * 100 / nbMinutesInDay)
+  console.log(durationPercent, offsetPercent)
+  if(durationPercent<0) durationPercent = 100 - offsetPercent 
   return {
     start, end,
     durationPercent,
@@ -137,9 +186,9 @@ function getPeriod({ start, end }) {
   box-sizing: border-box;
   gap: 10px;
 
-          @media screen and (max-width: 800px) {
-            flex-direction: column;
-            }
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+  }
 
   .container {
     width: 100%;
@@ -151,7 +200,7 @@ function getPeriod({ start, end }) {
       .film {
         display: flex;
         flex-direction: row;
-        height: 35px;
+        height: 75px;
 
         .title {
           overflow: hidden;
@@ -160,12 +209,25 @@ function getPeriod({ start, end }) {
             width: 140px;
             font-size: 0.8em;
           }
+          padding: 5px;
           display: flex;
           flex-shrink: 0;
           align-items: center;
-          padding: 10px;
           background-color: rgba(0, 0, 0, 0.5);
           color: white;
+
+          .title-trigger {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            img {
+              height: 100%;
+              object-fit: contain;
+              max-width: 100px;
+            }
+          }
         }
 
         .times {
@@ -178,7 +240,9 @@ function getPeriod({ start, end }) {
             position: absolute;
             height: 10px;
             @include backgroundGradient;
-
+            &.not-vf {
+              @include backgroundGradient(#d02727, #3c0e0e);
+            }
             top: 50%;
             transform: translateY(-50%);
             border-radius: 100px;

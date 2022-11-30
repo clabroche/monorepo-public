@@ -9,14 +9,18 @@ class Screening {
     this.title = screenings.title || ''
     /** @type {string} */
     this.out = screenings.out || ''
-    /** @type {string} */
-    this.realisators = screenings.realisators || ''
-    /** @type {string} */
-    this.actors = screenings.actors || ''
+    /** @type {string[]} */
+    this.realisators = screenings.realisators || []
+    /** @type {string[]} */
+    this.actors = screenings.actors || []
     /** @type {string} */
     this.resume = screenings.resume || ''
     /** @type {string} */
-    this.categories = screenings.categories || ''
+    this.cover = screenings.cover || ''
+    /** @type {string} */
+    this.external = screenings.external || ''
+    /** @type {string[]} */
+    this.categories = screenings.categories || []
     /** @type {{
      * start: string,
      * end: string,
