@@ -1,13 +1,13 @@
-const { express } = require('@clabroche-org/common-express')
-const { userIsAuthenticated, getJwt } = require('@clabroche-org/common-jwt')
+const { express } = require('@clabroche/common-express')
+const { userIsAuthenticated, getJwt } = require('@clabroche/common-jwt')
 const { shouldBeConnectedToSpotify } = require('../middlewares/spotify')
-const { User } = require('@clabroche-org/mybank-modules-auth').models
+const { User } = require('@clabroche/mybank-modules-auth').models
 const ArtistPersistence = require('../models/ArtistPersistence')
 const HistoryPersistence = require('../models/HistoryPersistence')
 const TrackPersistence = require('../models/TrackPersistence')
 const { getClient } = require('../services/spotify')
 const CredentialPersistence = require('../models/CredentialPersistence')
-const {sockets} = require('@clabroche-org/common-socket-server')
+const {sockets} = require('@clabroche/common-socket-server')
 const PromiseB = require('bluebird')
 const fse = require('fs-extra')
 const multer = require('multer')

@@ -84,7 +84,7 @@
 
 <script setup>
 
-import Screening from "@clabroche-org/ugc-explorer-models/src/models/Screening";
+import Screening from "@clabroche/ugc-explorer-models/src/models/Screening";
 import debounce from 'debounce'
 import dayjs from "dayjs";
 import fr from "dayjs/locale/fr";

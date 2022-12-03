@@ -1,4 +1,4 @@
-import { apis } from "@clabroche-org/ugc-explorer-models"
+import { apis } from "@clabroche/ugc-explorer-models"
 import Auth from "./Auth"
 
 /**

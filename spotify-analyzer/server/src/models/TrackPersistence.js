@@ -1,20 +1,20 @@
-const { Base } = require("@clabroche-org/common-crud");
+const { Base } = require("@clabroche/common-crud");
 const CredentialPersistence = require('./CredentialPersistence');
 const dayjs = require('dayjs');
 const { getClient } = require('../services/spotify');
-const { Track } = require("@clabroche-org/spotify-analyzer-models").models;
+const { Track } = require("@clabroche/spotify-analyzer-models").models;
 const base = Base({ collectionName: 'tracks' })
 const PromiseB = require('bluebird');
-const { mongo } = require("@clabroche-org/common-mongo");
+const { mongo } = require("@clabroche/common-mongo");
 
 class TrackPersistence extends Track{
   static collectionName = base.collectionName
-  /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<TrackPersistence>} track */
+  /** @param {import('@clabroche/common-typings').NonFunctionProperties<TrackPersistence>} track */
   constructor(track = {}) {
     super(track)
   }
   /**
-  * @param {import('@clabroche-org/common-typings').NonFunctionProperties<TrackPersistence>} filter
+  * @param {import('@clabroche/common-typings').NonFunctionProperties<TrackPersistence>} filter
   * @returns {Promise<TrackPersistence>}
   */
   static findOne(filter) {
@@ -22,8 +22,8 @@ class TrackPersistence extends Track{
   }
   /**
  * @param {{
- * filter?: import('@clabroche-org/common-typings').NonFunctionProperties<TrackPersistence>
- * sort?: import('@clabroche-org/common-typings').NonFunctionPropertiesNumber<TrackPersistence>,
+ * filter?: import('@clabroche/common-typings').NonFunctionProperties<TrackPersistence>
+ * sort?: import('@clabroche/common-typings').NonFunctionPropertiesNumber<TrackPersistence>,
  * skip?: number,
  * limit?: number
  * }} filter

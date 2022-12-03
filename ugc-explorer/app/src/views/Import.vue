@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { apis } from '@clabroche-org/ugc-explorer-models'
+import { apis } from '@clabroche/ugc-explorer-models'
 
 const onchange = (ev) => {
   var formData = new FormData();
