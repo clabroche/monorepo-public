@@ -1,4 +1,4 @@
-const { launch } = require('@clabroche-org/common-express');
+const { launch } = require('@clabroche/common-express');
 const PromiseB = require('bluebird')
 
 ;(async () => {

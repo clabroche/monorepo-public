@@ -1,5 +1,5 @@
 // @ts-ignore
-const { mongo } = require('@clabroche-org/common-mongo')
+const { mongo } = require('@clabroche/common-mongo')
 
 const errors = {
   ObjIsUndefined: 'You should specify a class',
@@ -22,7 +22,7 @@ class Base {
 
   /**
    * @param {{
-   * filter?: import('@clabroche-org/common-typings').NonFunctionProperties<T>,
+   * filter?: import('@clabroche/common-typings').NonFunctionProperties<T>,
    * Obj?: { new(): T }
    * }} param0
    * @returns {Promise<T>}
@@ -47,7 +47,7 @@ class Base {
 
   /**
    * @param {{
-   * obj?: import('@clabroche-org/common-typings').NonFunctionProperties<T> ,
+   * obj?: import('@clabroche/common-typings').NonFunctionProperties<T> ,
    * Obj?: { new(): T }
    * }} obj
    * @returns {Promise<T>}
@@ -67,9 +67,9 @@ class Base {
 
   /**
    * @param {{
-   * filter?: import('@clabroche-org/common-typings').NonFunctionProperties<T>
-   * sort?: import('@clabroche-org/common-typings').NonFunctionPropertiesNumber<T>,
-   * Obj?: {new(t:import('@clabroche-org/common-typings').NonFunctionProperties<{ new(): T }>): T},
+   * filter?: import('@clabroche/common-typings').NonFunctionProperties<T>
+   * sort?: import('@clabroche/common-typings').NonFunctionPropertiesNumber<T>,
+   * Obj?: {new(t:import('@clabroche/common-typings').NonFunctionProperties<{ new(): T }>): T},
    * skip?: number,
    * limit?: number
    * }} param0
@@ -108,7 +108,7 @@ class Base {
 
   /**
    * @param {{
-   * filter?: import('@clabroche-org/common-typings').NonFunctionProperties<T>
+   * filter?: import('@clabroche/common-typings').NonFunctionProperties<T>
    * }} param0
    * @returns {Promise<number>}
    * @template T
@@ -121,7 +121,7 @@ class Base {
 
   /**
    * @param {{
-   * obj?: import('@clabroche-org/common-typings').NonFunctionProperties<T>,
+   * obj?: import('@clabroche/common-typings').NonFunctionProperties<T>,
    * excludedFields?: string[],
    * Obj?: { new(): T }
    * }} param0
@@ -142,7 +142,7 @@ class Base {
 
   /**
    * @param {{
-   * obj?: import('@clabroche-org/common-typings').NonFunctionProperties<T>,
+   * obj?: import('@clabroche/common-typings').NonFunctionProperties<T>,
    * excludedFields?: string[],
    * Obj?: {new(): T},
    * }} param0
@@ -168,8 +168,8 @@ class Base {
 
   /**
    * @param {{
-   * obj?: import('@clabroche-org/common-typings').NonFunctionProperties<T>,
-   * filter?: import('@clabroche-org/common-typings').NonFunctionProperties<T>,
+   * obj?: import('@clabroche/common-typings').NonFunctionProperties<T>,
+   * filter?: import('@clabroche/common-typings').NonFunctionProperties<T>,
    * excludedFields?: string[],
    * Obj?: {new(): T},
    * }} param0
@@ -190,7 +190,7 @@ class Base {
 
   /**
    * @param {{
-   * obj?: import('@clabroche-org/common-typings').NonFunctionProperties<T>,
+   * obj?: import('@clabroche/common-typings').NonFunctionProperties<T>,
    * excludedFields?: string[],
    * Obj?: { new(): T }
    * }} param0

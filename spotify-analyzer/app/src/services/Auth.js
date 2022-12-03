@@ -1,6 +1,6 @@
 import User from './User'
 import { ref } from 'vue'
-import { apis } from '@clabroche-org/spotify-analyzer-models'
+import { apis } from '@clabroche/spotify-analyzer-models'
 function Auth() {
   /**
    * @type {import('vue').Ref<import('./User').default>}

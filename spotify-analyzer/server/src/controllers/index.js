@@ -1,5 +1,5 @@
-const { controllers: authControllers } = require('@clabroche-org/mybank-modules-auth')
-const { express } = require('@clabroche-org/common-express')
+const { controllers: authControllers } = require('@clabroche/mybank-modules-auth')
+const { express } = require('@clabroche/common-express')
 
 const router = express.Router()
 

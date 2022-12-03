@@ -1,6 +1,6 @@
 const clonedeep = require('lodash.clonedeep')
-const { mongo } = require('@clabroche-org/common-mongo')
-const context = require('@clabroche-org/common-context')
+const { mongo } = require('@clabroche/common-mongo')
+const context = require('@clabroche/common-context')
 
 function setJWT() {
   context.createContext()

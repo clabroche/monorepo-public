@@ -1,7 +1,7 @@
 const { core } = require('../apis/Core')
 
 class Account {
-  /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<Account>} accounts */
+  /** @param {import('@clabroche/common-typings').NonFunctionProperties<Account>} accounts */
   constructor(accounts = {}) {
     /** @type {string | undefined} */
     this._id = accounts._id

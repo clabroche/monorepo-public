@@ -1,5 +1,5 @@
 {
-  "name": "@clabroche-org/ugc-explorer-server",
+  "name": "@clabroche/ugc-explorer-server",
   "version": "1.1.1-beta.32",
   "description": "",
   "main": "index.js",
@@ -7,21 +7,21 @@
   "scripts": {
     "serve": "gulp",
     "test": "",
-    "postpublish": "EVENT_TYPE=ugc-explorer-server REPO=clabroche-org/monorepo npx @clabroche-org/common-trigger-workflow"
+    "postpublish": "EVENT_TYPE=ugc-explorer-server REPO=clabroche/monorepo npx @clabroche/common-trigger-workflow"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@clabroche-org/common-crud": "workspace:*",
-    "@clabroche-org/common-express": "workspace:*",
-    "@clabroche-org/common-express-gulp": "workspace:*",
-    "@clabroche-org/common-jwt": "workspace:*",
-    "@clabroche-org/common-mongo": "workspace:*",
-    "@clabroche-org/common-socket-server": "workspace:*",
-    "@clabroche-org/common-trigger-workflow": "workspace:*",
-    "@clabroche-org/common-typings": "workspace:*",
-    "@clabroche-org/mybank-modules-auth": "workspace:*",
-    "@clabroche-org/ugc-explorer-models": "workspace:*",
+    "@clabroche/common-crud": "workspace:*",
+    "@clabroche/common-express": "workspace:*",
+    "@clabroche/common-express-gulp": "workspace:*",
+    "@clabroche/common-jwt": "workspace:*",
+    "@clabroche/common-mongo": "workspace:*",
+    "@clabroche/common-socket-server": "workspace:*",
+    "@clabroche/common-trigger-workflow": "workspace:*",
+    "@clabroche/common-typings": "workspace:*",
+    "@clabroche/mybank-modules-auth": "workspace:*",
+    "@clabroche/ugc-explorer-models": "workspace:*",
     "axios": "^1.2.0",
     "bluebird": "^3.7.2",
     "cheerio": "^1.0.0-rc.12",
@@ -31,6 +31,6 @@
     "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
-    "@clabroche-org/common-retrigger-all-build": "workspace:*"
+    "@clabroche/common-retrigger-all-build": "workspace:*"
   }
 }

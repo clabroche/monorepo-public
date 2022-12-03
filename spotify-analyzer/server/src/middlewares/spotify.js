@@ -1,5 +1,5 @@
-const { getJwt } = require('@clabroche-org/common-jwt')
-const { User } = require('@clabroche-org/mybank-modules-auth').models
+const { getJwt } = require('@clabroche/common-jwt')
+const { User } = require('@clabroche/mybank-modules-auth').models
 const Credential = require('../models/CredentialPersistence')
 const { getClient } = require('../services/spotify')
 const dayjs = require('dayjs')
