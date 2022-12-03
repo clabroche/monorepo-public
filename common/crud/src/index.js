@@ -1,4 +1,4 @@
-const context = require("@clabroche-org/common-context")
+const context = require("@clabroche/common-context")
 module.exports = {
   Base: require('./base'),
   middlewares: {

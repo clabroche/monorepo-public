@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { apis } from '@clabroche-org/spotify-analyzer-models'
+import { apis } from '@clabroche/spotify-analyzer-models'
 
 const onchange = (ev) => {
   var formData = new FormData();

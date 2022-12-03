@@ -21,8 +21,8 @@ import Auth from "./services/Auth";
 import Notification from "./components/common/Notification.vue";
 import notif from "./services/notification";
 import BottomBar from "./components/common/BottomBar.vue";
-import { core } from "@clabroche-org/ugc-explorer-models/src/apis/Core";
-import {Socket} from '@clabroche-org/common-socket-front';
+import { core } from "@clabroche/ugc-explorer-models/src/apis/Core";
+import {Socket} from '@clabroche/common-socket-front';
 
 Auth.getUser()
   .then(async () => {

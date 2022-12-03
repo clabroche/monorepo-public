@@ -1,4 +1,4 @@
-import { apis } from "@clabroche-org/spotify-analyzer-models"
+import { apis } from "@clabroche/spotify-analyzer-models"
 import Auth from "./Auth"
 
 /**

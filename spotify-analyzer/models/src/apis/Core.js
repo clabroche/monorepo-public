@@ -1,6 +1,6 @@
 const Axios = require('axios').default
-const CustomObservable = require('@clabroche-org/common-custom-observable')
-const envs = require('@clabroche-org/spotify-analyzer-env')
+const CustomObservable = require('@clabroche/common-custom-observable')
+const envs = require('@clabroche/spotify-analyzer-env')
 
 class Core {
   constructor() {

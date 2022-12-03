@@ -1,8 +1,8 @@
 const jsonwebtoken = require('jsonwebtoken')
-const env = require('@clabroche-org/mybank-libs-env')
-const { mongo } = require('@clabroche-org/common-mongo')
-const context = require('@clabroche-org/common-context')
-const { checkPermissions } = require('@clabroche-org/common-permissions')
+const env = require('@clabroche/mybank-libs-env')
+const { mongo } = require('@clabroche/common-mongo')
+const context = require('@clabroche/common-context')
+const { checkPermissions } = require('@clabroche/common-permissions')
 const JWT_PRIVATE_KEY = env.JWT_PRIVATE_KEY
 module.exports = {
   /** 

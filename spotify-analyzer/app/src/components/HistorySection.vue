@@ -16,14 +16,14 @@
 </template>
 
 <script setup>
-import History from '@clabroche-org/spotify-analyzer-models/src/models/History';
+import History from '@clabroche/spotify-analyzer-models/src/models/History';
 import {ref, onMounted, computed, onBeforeUnmount} from 'vue'
 import TitleInfosLine from './TitleInfosLine.vue';
 import Popover from './common/Popover.vue';
 import dayjs from 'dayjs';
 import Dictionnary from '../services/Dictionnary';
 window.innerWidth
-/** @type {import('vue').Ref<import('@clabroche-org/spotify-analyzer-models/src/models/History')[]>} */
+/** @type {import('vue').Ref<import('@clabroche/spotify-analyzer-models/src/models/History')[]>} */
 const history = ref([])
 const windowWidth = ref(window.innerWidth)
 onMounted(async () => {

@@ -3,7 +3,7 @@ const dayjs = require('dayjs')
 
 class Screening {
 
-  /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<Screening>} screenings */
+  /** @param {import('@clabroche/common-typings').NonFunctionProperties<Screening>} screenings */
   constructor(screenings = {}) {
     /** @type {string} */
     this.title = screenings.title || ''

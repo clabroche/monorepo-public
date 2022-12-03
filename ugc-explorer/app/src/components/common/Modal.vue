@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import Subject from '@clabroche-org/common-custom-observable'
+import Subject from '@clabroche/common-custom-observable'
 import { v4 as uuid } from 'uuid';
 export default {
   props: [

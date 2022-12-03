@@ -1,24 +1,24 @@
-const { Base } = require("@clabroche-org/common-crud");
+const { Base } = require("@clabroche/common-crud");
 const dayjs = require("dayjs");
 const { getClient } = require("../services/spotify");
-const { Credential } = require("@clabroche-org/spotify-analyzer-models").models;
+const { Credential } = require("@clabroche/spotify-analyzer-models").models;
 const sendinblue = require('../services/sendinblue');
 const PromiseB = require('bluebird');
 const path = require('path')
 const { readFileSync } = require('fs-extra');
-const { mongo } = require('@clabroche-org/common-mongo')
+const { mongo } = require('@clabroche/common-mongo')
 const reconnectTemplate = readFileSync(path.resolve(__dirname, '..', 'templatesEmail', 'reconnect.html'), 'utf-8')
-const { User } = require('@clabroche-org/mybank-modules-auth').models;
+const { User } = require('@clabroche/mybank-modules-auth').models;
 
 const base = Base({ collectionName: 'credentials' })
 
 class CredentialPersistence extends Credential{
-  /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<CredentialPersistence>} credential */
+  /** @param {import('@clabroche/common-typings').NonFunctionProperties<CredentialPersistence>} credential */
   constructor(credential = {}) {
     super(credential)
   }
   /**
-  * @param {import('@clabroche-org/common-typings').NonFunctionProperties<CredentialPersistence>} filter
+  * @param {import('@clabroche/common-typings').NonFunctionProperties<CredentialPersistence>} filter
   * @returns {Promise<CredentialPersistence>}
   */
   static findOne(filter) {
@@ -26,8 +26,8 @@ class CredentialPersistence extends Credential{
   }
   /**
  * @param {{
- * filter?: import('@clabroche-org/common-typings').NonFunctionProperties<CredentialPersistence>
- * sort?: import('@clabroche-org/common-typings').NonFunctionPropertiesNumber<CredentialPersistence>,
+ * filter?: import('@clabroche/common-typings').NonFunctionProperties<CredentialPersistence>
+ * sort?: import('@clabroche/common-typings').NonFunctionPropertiesNumber<CredentialPersistence>,
  * skip?: number,
  * limit?: number
  * }} filter

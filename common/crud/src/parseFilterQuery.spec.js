@@ -1,5 +1,5 @@
 const parseFilterQuery = require('./parseFilterQuery')
-const context = require('@clabroche-org/common-context')
+const context = require('@clabroche/common-context')
 const { ObjectId } = require('mongodb')
 const getMockReq = () => ({ headers: {}, query: {} })
 const getMockRes = () => ({ json: jest.fn(), status() { return this }, send: jest.fn() })
