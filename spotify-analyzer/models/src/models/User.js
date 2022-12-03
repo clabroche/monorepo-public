@@ -4,7 +4,7 @@ const Account = require('./Account')
 class User {
   /**
    * 
-   * @param {import('@clabroche-org/common-typings').NonFunctionProperties<User>} user
+   * @param {import('@clabroche/common-typings').NonFunctionProperties<User>} user
    */
   constructor(user = {}) {
     /** @type {string | undefined} */

@@ -1,15 +1,15 @@
-const {mongo} = require('@clabroche-org/common-mongo')
-const { Base } = require("@clabroche-org/common-crud");
-const { Album } = require("@clabroche-org/spotify-analyzer-models").models;
+const {mongo} = require('@clabroche/common-mongo')
+const { Base } = require("@clabroche/common-crud");
+const { Album } = require("@clabroche/spotify-analyzer-models").models;
 const base = Base({ collectionName: 'albums' })
 
 class AlbumPersistence extends Album{
-  /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<AlbumPersistence>} album */
+  /** @param {import('@clabroche/common-typings').NonFunctionProperties<AlbumPersistence>} album */
   constructor(album = {}) {
     super(album)
   }
   /**
-  * @param {import('@clabroche-org/common-typings').NonFunctionProperties<AlbumPersistence>} filter
+  * @param {import('@clabroche/common-typings').NonFunctionProperties<AlbumPersistence>} filter
   * @returns {Promise<AlbumPersistence>}
   */
   static findOne(filter) {
@@ -17,8 +17,8 @@ class AlbumPersistence extends Album{
   }
   /**
  * @param {{
- * filter?: import('@clabroche-org/common-typings').NonFunctionProperties<AlbumPersistence>
- * sort?: import('@clabroche-org/common-typings').NonFunctionPropertiesNumber<AlbumPersistence>,
+ * filter?: import('@clabroche/common-typings').NonFunctionProperties<AlbumPersistence>
+ * sort?: import('@clabroche/common-typings').NonFunctionPropertiesNumber<AlbumPersistence>,
  * skip?: number,
  * limit?: number
  * }} filter

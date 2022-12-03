@@ -1,9 +1,9 @@
-const CustomObservable = require('@clabroche-org/common-custom-observable')
+const CustomObservable = require('@clabroche/common-custom-observable')
 const { core } = require('../apis/Core')
 
 class History {
   static updated = new CustomObservable()
-  /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<History>} history */
+  /** @param {import('@clabroche/common-typings').NonFunctionProperties<History>} history */
   constructor(history = {}) {
     /** @type {string | undefined} */
     this._id = history._id

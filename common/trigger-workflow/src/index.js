@@ -16,7 +16,7 @@ if (!REPO) {
   process.exit(1)
 }
 
-const path = execSync(`yarn workspace @clabroche-org/${EVENT_TYPE} exec pwd`)
+const path = execSync(`yarn workspace @clabroche/${EVENT_TYPE} exec pwd`)
 const files = readdirSync(path.toString().trim())
 
 if (files.includes('Dockerfile')) {

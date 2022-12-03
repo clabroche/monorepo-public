@@ -18,7 +18,7 @@ class Mock {
   /**
    * @param {{
    * filter?: MockWithoutMethods,
-   * sort?: import('@clabroche-org/common-typings').NonFunctionPropertiesNumber<Mock>,
+   * sort?: import('@clabroche/common-typings').NonFunctionPropertiesNumber<Mock>,
    * skip?: number,
    * limit?: number
    * }} param0
@@ -70,5 +70,5 @@ module.exports.collectionName = collectionName
 
 
 /**
- * @typedef {import('@clabroche-org/common-typings').NonFunctionProperties<Mock>} MockWithoutMethods
+ * @typedef {import('@clabroche/common-typings').NonFunctionProperties<Mock>} MockWithoutMethods
  */

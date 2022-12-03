@@ -1,6 +1,6 @@
-const { launch } = require('@clabroche-org/common-express');
-const { mongo } = require('@clabroche-org/common-mongo');
-const { sockets } = require('@clabroche-org/common-socket-server')
+const { launch } = require('@clabroche/common-express');
+const { mongo } = require('@clabroche/common-mongo');
+const { sockets } = require('@clabroche/common-socket-server')
 const PromiseB = require('bluebird')
 const CredentialPersistence = require('./models/CredentialPersistence');
 const HistoryPersistence = require('./models/HistoryPersistence');

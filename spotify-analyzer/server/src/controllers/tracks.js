@@ -1,5 +1,5 @@
-const { express } = require('@clabroche-org/common-express')
-const { userIsAuthenticated, getJwt } = require('@clabroche-org/common-jwt')
+const { express } = require('@clabroche/common-express')
+const { userIsAuthenticated, getJwt } = require('@clabroche/common-jwt')
 const TrackPersistence = require('../models/TrackPersistence')
 const router = express.Router()
 
