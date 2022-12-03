@@ -28,11 +28,11 @@ onMounted(async () => {
   await Dictionnary.addTrack(props.trackId)
 })
 
-/** @type {import('vue').Ref<import('@clabroche-org/spotify-analyzer-models/src/models/Track')>} */
+/** @type {import('vue').Ref<import('@clabroche/spotify-analyzer-models/src/models/Track')>} */
 const track = computed(() => Dictionnary.tracks.value[props.trackId])
-/** @type {import('vue').Ref<import('@clabroche-org/spotify-analyzer-models/src/models/Album')>} */
+/** @type {import('vue').Ref<import('@clabroche/spotify-analyzer-models/src/models/Album')>} */
 const album = computed(() => Dictionnary.albums.value[track.value?.albumId])
-/** @type {import('vue').Ref<import('@clabroche-org/spotify-analyzer-models/src/models/Artist')>} */
+/** @type {import('vue').Ref<import('@clabroche/spotify-analyzer-models/src/models/Artist')>} */
 const artist = computed(() => Dictionnary.artists.value[track.value?.artistsIds?.[0]])
 
 

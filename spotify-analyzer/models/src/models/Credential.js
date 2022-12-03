@@ -1,7 +1,7 @@
 const { core } = require('../apis/Core')
 
 class Credential {
-  /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<Credential>} credential */
+  /** @param {import('@clabroche/common-typings').NonFunctionProperties<Credential>} credential */
   constructor(credential = {}) {
     /** @type {string | undefined} */
     this._id = credential._id

@@ -4,8 +4,8 @@ ARG NPM_TOKEN
 ARG PACKAGE_VERSION
 WORKDIR /core
 RUN echo -e "\n//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" >> .npmrc
-RUN echo -e "\n@clabroche-org:registry=https://npm.pkg.github.com" >> .npmrc
-RUN yarn add "@clabroche-org/ugc-explorer-app@${PACKAGE_VERSION}"
+RUN echo -e "\n@clabroche:registry=https://npm.pkg.github.com" >> .npmrc
+RUN yarn add "@clabroche/ugc-explorer-app@${PACKAGE_VERSION}"
 RUN rm -f .npmrc
 
-CMD node node_modules/@clabroche-org/ugc-explorer-app/server.js
+CMD node node_modules/@clabroche/ugc-explorer-app/server.js

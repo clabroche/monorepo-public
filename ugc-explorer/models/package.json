@@ -1,8 +1,8 @@
 {
-  "name": "@clabroche-org/ugc-explorer-models",
+  "name": "@clabroche/ugc-explorer-models",
   "version": "1.1.1-beta.32",
   "description": "",
-  "repository": "https://github.com/clabroche-org/monorepo",
+  "repository": "https://github.com/clabroche/monorepo",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0"
@@ -11,16 +11,16 @@
   "license": "ISC",
   "dependencies": {
     "@babel/core": "7.18.2",
-    "@clabroche-org/common-context": "workspace:*",
-    "@clabroche-org/common-custom-observable": "workspace:*",
-    "@clabroche-org/common-typings": "workspace:*",
-    "@clabroche-org/ugc-explorer-env": "workspace:*",
+    "@clabroche/common-context": "workspace:*",
+    "@clabroche/common-custom-observable": "workspace:*",
+    "@clabroche/common-typings": "workspace:*",
+    "@clabroche/ugc-explorer-env": "workspace:*",
     "axios": "^0.26.1",
     "dayjs": "^1.11.6",
     "jest-environment-node": "27.5.1"
   },
   "gitHead": "130d53f826acd5311d738a4097b22ce0a2861c49",
   "devDependencies": {
-    "@clabroche-org/common-retrigger-all-build": "workspace:*"
+    "@clabroche/common-retrigger-all-build": "workspace:*"
   }
 }

@@ -1,17 +1,17 @@
-const {mongo} = require('@clabroche-org/common-mongo')
-const { Base } = require("@clabroche-org/common-crud");
+const {mongo} = require('@clabroche/common-mongo')
+const { Base } = require("@clabroche/common-crud");
 const ArtistPersistence = require('./ArtistPersistence');
 const AlbumPersistence = require('./AlbumPersistence');
 const TrackPersistence = require('./TrackPersistence');
-const { History } = require("@clabroche-org/spotify-analyzer-models").models;
+const { History } = require("@clabroche/spotify-analyzer-models").models;
 const PromiseB = require('bluebird');
 const SpotifyWebApi = require('spotify-web-api-node');
 const dayjs = require('dayjs');
 const { getAllDatesBetween } = require('../services/dates');
 const CredentialPersistence = require('./CredentialPersistence');
 const { getClient } = require('../services/spotify');
-const UsersPersistence = require('@clabroche-org/mybank-modules-auth/src/models/Users');
-const { sockets } = require('@clabroche-org/common-socket-server');
+const UsersPersistence = require('@clabroche/mybank-modules-auth/src/models/Users');
+const { sockets } = require('@clabroche/common-socket-server');
 dayjs.locale('fr')
 var utc = require('dayjs/plugin/utc')
 dayjs.extend(utc)
@@ -21,12 +21,12 @@ const base = Base({ collectionName: 'histories' })
 
 class HistoryPersistence extends History{
   static collectionName = base.collectionName
-  /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<HistoryPersistence>} history */
+  /** @param {import('@clabroche/common-typings').NonFunctionProperties<HistoryPersistence>} history */
   constructor(history = {}) {
     super(history)
   }
   /**
-  * @param {import('@clabroche-org/common-typings').NonFunctionProperties<HistoryPersistence>} filter
+  * @param {import('@clabroche/common-typings').NonFunctionProperties<HistoryPersistence>} filter
   * @returns {Promise<HistoryPersistence>}
   */
   static findOne(filter) {
@@ -34,8 +34,8 @@ class HistoryPersistence extends History{
   }
   /**
  * @param {{
- * filter?: import('@clabroche-org/common-typings').NonFunctionProperties<HistoryPersistence>
- * sort?: import('@clabroche-org/common-typings').NonFunctionPropertiesNumber<HistoryPersistence>,
+ * filter?: import('@clabroche/common-typings').NonFunctionProperties<HistoryPersistence>
+ * sort?: import('@clabroche/common-typings').NonFunctionPropertiesNumber<HistoryPersistence>,
  * skip?: number,
  * limit?: number
  * }} filter

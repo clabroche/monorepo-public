@@ -170,7 +170,7 @@
 </template>
 
 <script setup>
-import History from "@clabroche-org/spotify-analyzer-models/src/models/History";
+import History from "@clabroche/spotify-analyzer-models/src/models/History";
 import Dictionnary from '../services/Dictionnary'
 import {onMounted, ref, computed, watchEffect} from 'vue'
 import TitleInfosLine from "../components/TitleInfosLine.vue";

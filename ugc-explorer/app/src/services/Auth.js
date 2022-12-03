@@ -1,6 +1,6 @@
 import User from './User'
 import { ref } from 'vue'
-import { apis } from '@clabroche-org/ugc-explorer-models'
+import { apis } from '@clabroche/ugc-explorer-models'
 function Auth() {
   /**
    * @type {import('vue').Ref<import('./User').default>}

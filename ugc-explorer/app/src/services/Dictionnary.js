@@ -1,20 +1,20 @@
 import {watch, ref, computed} from 'vue'
-import Album from '@clabroche-org/ugc-explorer-models/src/models/Album'
-import Artist from '@clabroche-org/ugc-explorer-models/src/models/Artist'
-import Track from '@clabroche-org/ugc-explorer-models/src/models/Track'
+import Album from '@clabroche/ugc-explorer-models/src/models/Album'
+import Artist from '@clabroche/ugc-explorer-models/src/models/Artist'
+import Track from '@clabroche/ugc-explorer-models/src/models/Track'
 import debounce from 'debounce'
 
-/** @type {import('vue').Ref<Object<string, import('@clabroche-org/ugc-explorer-models/src/models/Artist')>>} */
+/** @type {import('vue').Ref<Object<string, import('@clabroche/ugc-explorer-models/src/models/Artist')>>} */
 const artists = ref({})
 /** @type {import('vue').Ref<string[]>} */
 const artistsId = ref([])
 
-/** @type {import('vue').Ref<Object<string, import('@clabroche-org/ugc-explorer-models/src/models/Album')>>} */
+/** @type {import('vue').Ref<Object<string, import('@clabroche/ugc-explorer-models/src/models/Album')>>} */
 const albums = ref({})
 /** @type {import('vue').Ref<string[]>} */
 const albumsId = ref([])
 
-/** @type {import('vue').Ref<Object<string, import('@clabroche-org/ugc-explorer-models/src/models/Track')>>} */
+/** @type {import('vue').Ref<Object<string, import('@clabroche/ugc-explorer-models/src/models/Track')>>} */
 const tracks = ref({})
 /** @type {import('vue').Ref<string[]>} */
 const tracksId = ref([])

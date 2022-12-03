@@ -1,6 +1,6 @@
-const {mongo} = require('@clabroche-org/common-mongo')
-const { Base } = require("@clabroche-org/common-crud");
-const { Artist } = require("@clabroche-org/spotify-analyzer-models").models;
+const {mongo} = require('@clabroche/common-mongo')
+const { Base } = require("@clabroche/common-crud");
+const { Artist } = require("@clabroche/spotify-analyzer-models").models;
 const PromiseB = require('bluebird');
 const { getClient } = require('../services/spotify');
 const dayjs = require('dayjs');
@@ -9,12 +9,12 @@ const base = Base({ collectionName: 'artists' })
 
 class ArtistPersistence extends Artist{
   static collectionName = base.collectionName
-  /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<ArtistPersistence>} artist */
+  /** @param {import('@clabroche/common-typings').NonFunctionProperties<ArtistPersistence>} artist */
   constructor(artist = {}) {
     super(artist)
   }
   /**
-  * @param {import('@clabroche-org/common-typings').NonFunctionProperties<ArtistPersistence>} filter
+  * @param {import('@clabroche/common-typings').NonFunctionProperties<ArtistPersistence>} filter
   * @returns {Promise<ArtistPersistence>}
   */
   static findOne(filter) {
@@ -22,8 +22,8 @@ class ArtistPersistence extends Artist{
   }
   /**
  * @param {{
- * filter?: import('@clabroche-org/common-typings').NonFunctionProperties<ArtistPersistence>
- * sort?: import('@clabroche-org/common-typings').NonFunctionPropertiesNumber<ArtistPersistence>,
+ * filter?: import('@clabroche/common-typings').NonFunctionProperties<ArtistPersistence>
+ * sort?: import('@clabroche/common-typings').NonFunctionPropertiesNumber<ArtistPersistence>,
  * skip?: number,
  * limit?: number
  * }} filter
