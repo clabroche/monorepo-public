@@ -1,4 +1,4 @@
-const { models } = require("@clabroche-org/ugc-explorer-models")
+const { models } = require("@clabroche/ugc-explorer-models")
 const { Screening } = models
 const cheerio = require('cheerio');
 const axios = require('axios').default.create({
@@ -7,7 +7,7 @@ const axios = require('axios').default.create({
 const dayjs = require('dayjs')
 
 class ScreeningPersistence extends Screening {
-  /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<ScreeningPersistence>} screening */
+  /** @param {import('@clabroche/common-typings').NonFunctionProperties<ScreeningPersistence>} screening */
   constructor(screening) {
     super(screening)
   }

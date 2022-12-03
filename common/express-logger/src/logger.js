@@ -1,7 +1,7 @@
 const uuid = require('uuid').v4
 const rfs = require('rotating-file-stream')
 const dayjs = require('dayjs')
-const HTTPError = require('@clabroche-org/common-express-http-error')
+const HTTPError = require('@clabroche/common-express-http-error')
 dayjs.locale('fr')
 function Logger() { }
 

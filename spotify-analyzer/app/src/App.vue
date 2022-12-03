@@ -21,11 +21,11 @@ import Auth from "./services/Auth";
 import Notification from "./components/common/Notification.vue";
 import notif from "./services/notification";
 import BottomBar from "./components/common/BottomBar.vue";
-import { core } from "@clabroche-org/spotify-analyzer-models/src/apis/Core";
-import Credential from "@clabroche-org/spotify-analyzer-models/src/models/Credential";
+import { core } from "@clabroche/spotify-analyzer-models/src/apis/Core";
+import Credential from "@clabroche/spotify-analyzer-models/src/models/Credential";
 import HistorySection from "./components/HistorySection.vue";
-import {Socket} from '@clabroche-org/common-socket-front';
-import History from "@clabroche-org/spotify-analyzer-models/src/models/History";
+import {Socket} from '@clabroche/common-socket-front';
+import History from "@clabroche/spotify-analyzer-models/src/models/History";
 
 Auth.getUser()
   .then(async () => {

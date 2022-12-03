@@ -12,7 +12,7 @@
   </div>
 </template>
 <script setup>
-import History from '@clabroche-org/spotify-analyzer-models/src/models/History';
+import History from '@clabroche/spotify-analyzer-models/src/models/History';
 import router from '../../router/index.js';
 import Auth from '../../services/Auth.js';
 import notification from '../../services/notification';

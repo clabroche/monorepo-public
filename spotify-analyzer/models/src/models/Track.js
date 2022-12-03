@@ -2,7 +2,7 @@ const { core } = require('../apis/Core');
 const genres = require('./genres');
 
 class Track {
-  /** @param {import('@clabroche-org/common-typings').NonFunctionProperties<Track&{artists?:{id: string}[], album?:{id: string}}>} track */
+  /** @param {import('@clabroche/common-typings').NonFunctionProperties<Track&{artists?:{id: string}[], album?:{id: string}}>} track */
   constructor(track = {}) {
     /** @type {string | undefined} */
     this._id = track.id

@@ -1,7 +1,7 @@
 {
-  "name": "@clabroche-org/spotify-analyzer-app",
+  "name": "@clabroche/spotify-analyzer-app",
   "version": "1.1.1-beta.28",
-  "repository": "https://github.com/clabroche-org/monorepo",
+  "repository": "https://github.com/clabroche/monorepo",
   "publishAppID": "634b791aced974f2ec74c2fb",
   "files": [
     "dist/*",
@@ -16,7 +16,7 @@
     "capacitor:android:generate:keystore": "keytool -genkey -v -keystore my-release-key.keystore -alias spotify-analyzer -keyalg RSA -keysize 2048 -validity 1000000 && keytool -importkeystore -srckeystore my-release-key.keystore -destkeystore my-release-key.keystore -deststoretype pkcs12",
     "capacitor:build": "cd android && ./build.sh",
     "preview": "vite preview --port 5050",
-    "postpublish": "EVENT_TYPE=spotify-analyzer-app REPO=clabroche-org/monorepo npx @clabroche-org/common-trigger-workflow",
+    "postpublish": "EVENT_TYPE=spotify-analyzer-app REPO=clabroche/monorepo npx @clabroche/common-trigger-workflow",
     "test": ""
   },
   "type": "module",
@@ -24,7 +24,7 @@
     "@capacitor/android": "^3.6.0",
     "@capacitor/cli": "^3.6.0",
     "@capacitor/core": "^3.6.0",
-    "@clabroche-org/common-socket-front": "workspace:*",
+    "@clabroche/common-socket-front": "workspace:*",
     "chart.js": "^3.9.1",
     "chartjs-adapter-luxon": "^1.2.0",
     "debounce": "^1.2.1",
@@ -33,11 +33,11 @@
     "vue-chartjs": "^4.1.2"
   },
   "devDependencies": {
-    "@clabroche-org/common-custom-observable": "workspace:*",
-    "@clabroche-org/common-retrigger-all-build": "workspace:*",
-    "@clabroche-org/common-trigger-workflow": "workspace:*",
-    "@clabroche-org/spotify-analyzer-env": "workspace:*",
-    "@clabroche-org/spotify-analyzer-models": "workspace:*",
+    "@clabroche/common-custom-observable": "workspace:*",
+    "@clabroche/common-retrigger-all-build": "workspace:*",
+    "@clabroche/common-trigger-workflow": "workspace:*",
+    "@clabroche/spotify-analyzer-env": "workspace:*",
+    "@clabroche/spotify-analyzer-models": "workspace:*",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@vitejs/plugin-vue": "^2.3.1",
     "apexcharts": "^3.32.1",

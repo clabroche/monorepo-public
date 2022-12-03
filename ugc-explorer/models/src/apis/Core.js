@@ -1,6 +1,6 @@
 const Axios = require('axios').default
-const CustomObservable = require('@clabroche-org/common-custom-observable')
-const envs = require('@clabroche-org/ugc-explorer-env')
+const CustomObservable = require('@clabroche/common-custom-observable')
+const envs = require('@clabroche/ugc-explorer-env')
 
 class Core {
   constructor() {

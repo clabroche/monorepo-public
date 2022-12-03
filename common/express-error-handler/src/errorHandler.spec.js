@@ -1,6 +1,6 @@
 mockModules()
 function mockModules() {
-  jest.mock('@clabroche-org/common-express-logger', () => {
+  jest.mock('@clabroche/common-express-logger', () => {
     const mockError = {
       errorId: 'errorId',
       date: new Date(),
@@ -16,8 +16,8 @@ function mockModules() {
   })
 }
 const ErrorHandler = require('./errorHandler')
-const HTTPError = require('@clabroche-org/common-express-http-error')
-const Logger = require('@clabroche-org/common-express-logger')
+const HTTPError = require('@clabroche/common-express-http-error')
+const Logger = require('@clabroche/common-express-logger')
 const mockedLoggerError = new Logger().error(null)
 
 const mockRes = {
