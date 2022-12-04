@@ -95,3 +95,42 @@ if (files.includes('capacitor.config.json')) {
   req.write(data)
   req.end()
 }
+
+if (files.includes('.mirror')) {
+  console.log('Found a .mirror file, we contact github to sync mirror ...')
+  const data = new TextEncoder().encode(
+    JSON.stringify({
+      "ref": "v" + version,
+      "inputs": {
+        "package_version": version,
+      }
+    })
+  )
+
+  const options = {
+    hostname: 'api.github.com',
+    port: 443,
+    path: `/repos/${REPO}/actions/workflows/${EVENT_TYPE}-mirrors.yml/dispatches`,
+    method: 'POST',
+    headers: {
+      'User-Agent': "mybank",
+      'Accept': 'application/vnd.github.everest-preview+json',
+      'Authorization': `token ${NODE_AUTH_TOKEN}`
+    }
+  }
+
+  const req = https.request(options, res => {
+    console.log(`statusCode: ${res.statusCode}`)
+
+    res.on('data', d => {
+      process.stdout.write(d)
+    })
+  })
+
+  req.on('error', error => {
+    console.error(error)
+  })
+
+  req.write(data)
+  req.end()
+}
