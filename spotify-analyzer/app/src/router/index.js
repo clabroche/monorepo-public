@@ -18,6 +18,10 @@ const router = createRouter({
       name: 'register',
       props: { register: true },
       component: Login
+    }, {
+      path: '/import',
+      name: 'import',
+      component: () => import('../views/Import.vue')
     }
   ]
 })  

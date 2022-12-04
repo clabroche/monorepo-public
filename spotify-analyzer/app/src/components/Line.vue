@@ -1,7 +1,9 @@
 <template>
-<div class="root">
-  <img class="logo" :src="img" alt="">
-  <div class="infos">
+<div class="root" :style="{
+  justifyContent: !infos?.length ? 'center' : 'flex-start'
+}">
+  <img class="logo" :src="img || questionMark" alt="">
+  <div class="infos" v-if="infos?.length">
     <div class="info-line" v-for="info of infos">
       <i :class="info?.icon"></i>
       {{info?.text}}
@@ -12,6 +14,7 @@
 
 <script setup>
 import {defineProps} from "vue"
+import questionMark from '../assets/question-mark.jpg'
 defineProps({
   img: { type: String },
   infos: {

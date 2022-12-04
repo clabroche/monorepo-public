@@ -1,8 +1,8 @@
 const { ObjectID } = require('mongodb')
-const context = require("@clabroche-org/common-context")
+const context = require("@clabroche/common-context")
 /**
  * Set a filter field on req. This object can be used to query mongo 
- * @param {import('@clabroche-org/common-typings').FieldDescriptior[]} availableFilters All your filter available (used to protect backend from front that query a forbidden field)
+ * @param {import('@clabroche/common-typings').FieldDescriptior[]} availableFilters All your filter available (used to protect backend from front that query a forbidden field)
  * @return {import('express').RequestHandler}
  */
 module.exports = (availableFilters) => (req, res, next) => {

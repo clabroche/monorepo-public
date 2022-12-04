@@ -1,16 +1,16 @@
 const morgan = require('morgan')
 const express = require('express')
-const { initSwagger } = require('@clabroche-org/common-swagger')
-const swagger = require('@clabroche-org/common-swagger')
+const { initSwagger } = require('@clabroche/common-swagger')
+const swagger = require('@clabroche/common-swagger')
 const morganBody = require('morgan-body')
-const { mongo } = require('@clabroche-org/common-mongo')
-const Logger = require('@clabroche-org/common-express-logger')
+const { mongo } = require('@clabroche/common-mongo')
+const Logger = require('@clabroche/common-express-logger')
 const logger = new Logger()
 const cors = require('cors');
 const pathfs = require('path')
 const fs = require('fs')
 const asciify = require('asciify')
-const context = require('@clabroche-org/common-context').middleware
+const context = require('@clabroche/common-context').middleware
 const helmet = require("helmet");
 const path = require('path')
 
@@ -80,10 +80,10 @@ module.exports = {
     }
 
     console.log('Enable error handling...')
-    app.use(require('@clabroche-org/common-express-error-handler')({ logger }))
+    app.use(require('@clabroche/common-express-error-handler')({ logger }))
 
     console.log('Enable 404 handling...')
-    app.use(require('@clabroche-org/common-express-404'))
+    app.use(require('@clabroche/common-express-404'))
 
     if (mongoDbURL) {
       console.log('Enable Mongodb...')
@@ -99,7 +99,7 @@ module.exports = {
 
     console.log('Launch...')
     const server = app.listen(port, function () {
-      asciify(appName.replace('@clabroche-org/', '').replace('service-', ''), { font: 'starwars' }, (err, _appName) => {
+      asciify(appName.replace('@clabroche/', '').replace('service-', ''), { font: 'starwars' }, (err, _appName) => {
         console.log(_appName)
         console.log(`v${appVersion} started, listening on port ${port}.`)
       })

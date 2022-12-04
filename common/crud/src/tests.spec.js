@@ -1,7 +1,7 @@
 // @ts-ignore
 process.env.MONGODB_ENV_URL = global.__MONGO_URI__ + '?authSource=admin'
 const { CRUDTests } = require('.')
-const { mongo } = require('@clabroche-org/common-mongo')
+const { mongo } = require('@clabroche/common-mongo')
 const collectionName = require('../tests/MockUser').collectionName
 const Mock = require('../tests/MockUser')
 const Base = require('../src/base')

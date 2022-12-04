@@ -19,7 +19,8 @@ import 'tippy.js/animations/shift-away.css';
 export default {
   props: {
     maxHeight: {default: 'auto'},
-    trigger: {default: 'click'},
+    trigger: { default: 'click' },
+    placement: { default: 'bottom' },
   },
   setup(props) {
     const refTrigger = ref(null)
@@ -27,7 +28,7 @@ export default {
     const tippyInstance = ref()
     onMounted(() => {
       tippyInstance.value = tippy(refTrigger.value, {
-        placement: 'bottom',
+        placement: props.placement,
         interactive: true,
         content: refContent.value,
         trigger: props.trigger,

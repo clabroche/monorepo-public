@@ -1,26 +1,26 @@
 {
-  "name": "@clabroche-org/common-crud",
-  "version": "1.1.1-beta.0",
+  "name": "@clabroche/common-crud",
+  "version": "1.1.1",
   "description": "",
-  "repository": "https://github.com/clabroche-org/monorepo",
+  "repository": "https://github.com/clabroche/monorepo",
   "main": "src/index.js",
   "scripts": {
-    "test": "clabroche-org-jest"
+    "test": "clabroche-jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@clabroche-org/common-context": "workspace:*",
-    "@clabroche-org/common-jest": "workspace:*",
-    "@clabroche-org/common-mongo": "workspace:*",
-    "@clabroche-org/common-typings": "workspace:*",
+    "@clabroche/common-context": "workspace:*",
+    "@clabroche/common-jest": "workspace:*",
+    "@clabroche/common-mongo": "workspace:*",
+    "@clabroche/common-typings": "workspace:*",
     "jest": "27.5.1",
     "lodash.clonedeep": "^4.5.0",
     "mongodb": "^4.5.0"
   },
   "devDependencies": {
     "@babel/core": "7.18.2",
-    "@clabroche-org/common-retrigger-all-build": "workspace:*",
+    "@clabroche/common-retrigger-all-build": "workspace:*",
     "@shelf/jest-mongodb": "2.2.2",
     "jest-environment-node": "27.5.1",
     "jest-sonar-reporter": "2.0.0"
