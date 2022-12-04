@@ -1,0 +1,16 @@
+{
+  "name": "@clabroche/common-express-404",
+  "version": "1.1.1-beta.33",
+  "description": "",
+  "repository": "https://github.com/clabroche/monorepo",
+  "main": "src/404.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "author": "",
+  "license": "ISC",
+  "gitHead": "130d53f826acd5311d738a4097b22ce0a2861c49",
+  "devDependencies": {
+    "@clabroche/common-retrigger-all-build": "workspace:*"
+  }
+}

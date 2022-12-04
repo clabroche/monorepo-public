@@ -1,0 +1,24 @@
+{
+  "name": "@clabroche/common-swagger",
+  "version": "1.1.1-beta.33",
+  "description": "",
+  "repository": "https://github.com/clabroche/monorepo",
+  "main": "src/swagger.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "express": "^4.17.3",
+    "fs-extra": "^10.1.0",
+    "openapi-types": "12.0.0",
+    "swagger-jsdoc": "^6.2.1",
+    "swagger-ui-express": "^4.3.0"
+  },
+  "gitHead": "130d53f826acd5311d738a4097b22ce0a2861c49",
+  "devDependencies": {
+    "@clabroche/common-retrigger-all-build": "workspace:*"
+  }
+}

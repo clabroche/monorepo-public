@@ -1,0 +1,6 @@
+{
+  "appId": "com.coco.spotifyanalyzer",
+  "appName": "Spotify Analyzer",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
