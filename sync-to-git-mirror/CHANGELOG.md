@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2-beta.7](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.6...v1.1.2-beta.7) (2022-12-04)
+
+### Bug Fixes
+
+* **corentinlabrochefr:** add dockerfile to trigger docker build ([fe7d3cf](https://github.com/clabroche/monorepo/commit/fe7d3cf51633bcf1636d051fcaf3a96e0e15bfba))
+
 ## [1.1.2-beta.5](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.4...v1.1.2-beta.5) (2022-12-04)
 
 ### Bug Fixes
