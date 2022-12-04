@@ -1,0 +1,6 @@
+{
+  "appId": "com.coco.ugcexplorer",
+  "appName": "UGC Explorer",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}

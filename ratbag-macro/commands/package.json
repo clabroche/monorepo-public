@@ -1,0 +1,20 @@
+{
+  "name": "@clabroche/ratbag-macro-commands",
+  "description": "## Warning THIS PACKAGE RESET SOME IMPORTANT XF86 KEYS",
+  "version": "1.1.1",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "serve": "nodemon --ext js src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "debounce": "^1.2.1",
+    "input-event": "^1.2.6"
+  },
+  "devDependencies": {
+    "@clabroche/common-retrigger-all-build": "workspace:*",
+    "nodemon": "^2.0.20"
+  }
+}

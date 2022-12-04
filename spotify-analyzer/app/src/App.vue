@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="bottom-bar" v-if="!['login', 'register'].includes($route.name)">
-      <BottomBar></BottomBar>
+      <BottomBar></BottomBar >
     </div>
   </div>
   <notification></notification>
@@ -21,11 +21,22 @@ import Auth from "./services/Auth";
 import Notification from "./components/common/Notification.vue";
 import notif from "./services/notification";
 import BottomBar from "./components/common/BottomBar.vue";
-import { core } from "@clabroche-org/spotify-analyzer-models/src/apis/Core";
-import Credential from "@clabroche-org/spotify-analyzer-models/src/models/Credential";
+import { core } from "@clabroche/spotify-analyzer-models/src/apis/Core";
+import Credential from "@clabroche/spotify-analyzer-models/src/models/Credential";
 import HistorySection from "./components/HistorySection.vue";
+import {Socket} from '@clabroche/common-socket-front';
+import History from "@clabroche/spotify-analyzer-models/src/models/History";
 
 Auth.getUser()
+  .then(async () => {
+    const email = Auth.user.value?.email
+    if (email) {
+      Socket.init(email)
+      Socket.socket.on("update:histories", () => {
+        History.updated.next()
+      })
+    }
+  })
 core.errorObservable.subscribe(async err => {
   if (err?.response?.status === 401) {
     notif.next("error", "Vous n'êtes pas authentifié.");
@@ -72,4 +83,6 @@ core.errorObservable.subscribe(async err => {
       overflow: auto;
     }
   }
+
+  
 </style>

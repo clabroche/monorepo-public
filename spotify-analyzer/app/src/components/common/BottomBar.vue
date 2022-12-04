@@ -1,7 +1,7 @@
 <template>
   <div class="root-bottom-bar">
-    <button class="bordered" @click="$router.push({ name: 'transactions' })">
-      <i class="fas fa-list"></i>
+    <button class="bordered" @click="sync">
+      <i class="fas fa-sync-alt"></i>
     </button>
     <button class="bordered main" @click="$router.push({ name: 'home' })">
       <i class="fas fa-home"></i>
@@ -12,12 +12,20 @@
   </div>
 </template>
 <script setup>
+import History from '@clabroche/spotify-analyzer-models/src/models/History';
 import router from '../../router/index.js';
 import Auth from '../../services/Auth.js';
+import notification from '../../services/notification';
 
 const disconnect = async () => {
   await Auth.disconnect()
   router.push({ name: 'login' })
+}
+const sync = async() => {
+  notification.next('sucess', 'Synchronisation manuelle en cours...')
+  History.sync()
+    .then(() => notification.next('sucess', 'Synchronisation manuelle effectuée'))
+    .catch(() => notification.next('error', 'Une erreur c\'est produite'))
 }
 </script>
 <style scoped lang="scss">

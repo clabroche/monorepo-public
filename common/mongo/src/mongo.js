@@ -47,7 +47,7 @@ class MongoConnect {
    * @param {String} prefix
    * @returns {Promise<Db>} 
    */
-  async connect(url, prefix, dbName = 'clabroche-org') {
+  async connect(url, prefix, dbName = 'clabroche') {
     this.url = url
     this.prefix = prefix
     this.dbName = dbName
