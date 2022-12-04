@@ -1,11 +1,12 @@
 {
   "name": "@clabroche/ratbag-macro-commands",
   "description": "## Warning THIS PACKAGE RESET SOME IMPORTANT XF86 KEYS",
-  "version": "1.1.1",
+  "version": "1.1.2-beta.1",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "serve": "nodemon --ext js src/index.js"
+    "serve": "nodemon --ext js src/index.js",
+    "postpublish": "EVENT_TYPE=ratbag-macro-commands REPO=clabroche/monorepo npx @clabroche/common-trigger-workflow"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "@clabroche/common-retrigger-all-build": "workspace:*",
+    "@clabroche/common-trigger-workflow": "workspace:*",
     "nodemon": "^2.0.20"
   }
 }
