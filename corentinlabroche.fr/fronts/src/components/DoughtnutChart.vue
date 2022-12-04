@@ -1,14 +1,17 @@
 <template>
   <div v-if="percentage !== null">
     <section>
-      <svg width="160" height="160" xmlns="http://www.w3.org/2000/svg">
-        <circle stroke="#195267" stroke-width="7" fill="none" cx="80" cy="80" r="60"/>
-        <circle :class="'circle circle-anim-' + anim"
-          stroke="#79bad2"
-          stroke-width="7.3"
-          :stroke-dasharray="(3.8 * percentage) + ' 380'"
-          stroke-linecap="round" fill="none"
-          cx="80" cy="80" r="60"/>
+      <svg viewBox="0 0 36 36">
+        <path d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#195267" stroke-width="2"
+                  stroke-linecap="round" 
+          :stroke-dasharray="`50, 100`" />
+        <path d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#79bad2" stroke-width="1"
+                  stroke-linecap="round" 
+          :stroke-dasharray="`${percentage}, 100`" />
       </svg>
     </section>
   </div>
@@ -21,7 +24,6 @@ const props = defineProps({
     type: Number
   }
 })
-
 const percentage = ref(null)
 const anim = ref(1)
 
@@ -45,9 +47,15 @@ watch(() => props.value, () => calculatePercentage(props.value))
 <style scoped lang="scss">
 section {
   display: inline-block;
-  height: 80px;
+  width: 100%;
   position: relative;
   overflow: hidden;
+  height: 50%;
+}
+svg {
+  width: 100%;
+  height: 200%;
+  transform: rotateZ(-90deg);
 }
 .circle {
   transform: rotate(-180deg);

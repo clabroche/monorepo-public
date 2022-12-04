@@ -1,10 +1,12 @@
 <template>
   <div class="label" v-if="initialized && !error">
     <div class="container">
-      <doughtnut-chart class="chart" :value="percent" style="position: absolute; top: -5px; width: 100%; z-index: -1"/>
-      <img class="current-weather" crossorigin="anonymous" :src="weather.icon" alt="" style="margin-top: 25px; z-index: 1;transform: translateY(15px)">
       <div class="sun">
         <span>{{weather.sunrise}}</span>
+        <div style="position: relative; width: 90px; height: 160px; display: flex;justify-content: center;">
+          <doughtnut-chart class="chart" :value="percent" style="position: absolute;bottom: 0;width: 160px; height: 80px; margin: auto; z-index: -1;  transform: scale(2) translateY(10%)"/>
+          <img class="current-weather" crossorigin="anonymous" :src="weather.icon" alt="" style="position: absolute; bottom: 0;; z-index: 1;transform: translateY(15px)">
+        </div>
         <span>{{weather.sunset}}</span>
       </div>
       <div class="desc-container">
@@ -145,11 +147,17 @@ img{
   position: relative;
   overflow: hidden;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .desc-container {
   margin-top: 30px
 }
 .sun {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
   font-size: 0.6em;
   margin-top: -40px;
   &>span {

@@ -1,38 +1,36 @@
 <template>
-  <div class="main-container">
 
-    <jumbo></jumbo>
+  <jumbo></jumbo>
 
-    <div class="section header">
-      <h2>Mes Skills</h2>
-    </div>
-    <div class="section header">
-      <skills></skills>
-    </div>
+  <div class="section header">
+    <h2>Mes Skills</h2>
+  </div>
+  <div class="section header">
+    <skills></skills>
+  </div>
 
-    <div class="section header">
-      <h2>Mes projets</h2>
-      <input class="filter" type="text" v-model="filterData" @focusin="scroll" @input="scroll" ref="inputRef"
-        placeholder="Filtrer...">
-    </div>
+  <div class="section header">
+    <h2>Mes projets</h2>
+    <input class="filter" type="text" v-model="filterData" @focusin="scroll" @input="scroll" ref="inputRef"
+      placeholder="Filtrer...">
+  </div>
 
-    <div class="categories section">
-      <div class="category" :class="{ active: !currentCategory }" @click="currentCategory = null; scroll()">
-        <div>Tous</div>
-      </div>
-      <div class="category" :class="{ active: currentCategory === category.id }"
-        @click="currentCategory = category.id; scroll()" v-for="category of categories" :key="category.label"
-        :header="category.label">
-        <span>{{ category.nb }}</span>
-        <div>{{ category.label }}</div>
-      </div>
+  <div class="categories section">
+    <div class="category" :class="{ active: !currentCategory }" @click="currentCategory = null; scroll()">
+      <div>Tous</div>
     </div>
-    <div class="section projects">
-      <cards v-for="project of projects" :key="project.label" :header="project.label" :projects="project.values" />
-      <div v-show="noResult" key="noResult" class="section no-result">
-        Je n'ai pas encore fait de projet concernant cette recherche. <br>
-        Peut-être bientôt !
-      </div>
+    <div class="category" :class="{ active: currentCategory === category.id }"
+      @click="currentCategory = category.id; scroll()" v-for="category of categories" :key="category.label"
+      :header="category.label">
+      <span>{{ category.nb }}</span>
+      <div>{{ category.label }}</div>
+    </div>
+  </div>
+  <div class="section projects">
+    <cards v-for="project of projects" :key="project.label" :header="project.label" :projects="project.values" />
+    <div v-show="noResult" key="noResult" class="section no-result">
+      Je n'ai pas encore fait de projet concernant cette recherche. <br>
+      Peut-être bientôt !
     </div>
   </div>
 </template>
@@ -81,7 +79,7 @@ export default {
       projects,
       scroll() {
         const mainContainer = document.querySelector('.main-container')
-        if (mainContainer) mainContainer.scrollTo({ top: inputRef.value.offsetTop - 100, behavior: "smooth" })
+        if (mainContainer) mainContainer.scrollTo({ top: inputRef.value.offsetTop - 20, behavior: "smooth" })
       },
     }
   }
