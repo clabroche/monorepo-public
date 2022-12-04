@@ -57,10 +57,12 @@ section:first-of-type {
   width: 300px;
   border-right: 1px solid #ddd;
   box-shadow: 0 0 10px 0 #ddd;
+
   h2 {
     margin-top: 0;
   }
 }
+
 .lines {
   height: 100%;
   gap: 10px;
