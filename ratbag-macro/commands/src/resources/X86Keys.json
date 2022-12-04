@@ -1,0 +1,34 @@
+{
+  "AudioMute": {
+    "key": "XF86AudioMute",
+    "keycode": 121
+  },
+  "AudioLowerVolume": {
+    "key": "XF86AudioLowerVolume",
+    "keycode": 122
+  },
+  "AudioRaiseVolume": {
+    "key": "XF86AudioRaiseVolume",
+    "keycode": 123
+  },
+  "AudioMicMute": {
+    "key": "XF86AudioMicMute",
+    "keycode": 183
+  },
+  "AudioPrev": {
+    "key": "XF86AudioPrev",
+    "keycode": 173
+  },
+  "AudioPlay": {
+    "key": "XF86AudioPlay",
+    "keycode": 172
+  },
+  "AudioNext": {
+    "key": "XF86AudioNext",
+    "keycode": 171
+  },
+  "Tools": {
+    "key": "XF86Tools",
+    "keycode": 183
+  }
+}
