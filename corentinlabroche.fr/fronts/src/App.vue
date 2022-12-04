@@ -15,6 +15,7 @@ export default {
     Navbar
   },
   setup() {
+    console.log('setup')
   }
 }
 </script>
