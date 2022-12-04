@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@clabroche/common-retrigger-all-build": "workspace:*",
+    "@clabroche/common-trigger-workflow": "workspace:*",
     "@vue/cli-service": "^5.0.8",
     "eslint": "^8.9.0",
     "eslint-plugin-vue": "^8.4.1"
