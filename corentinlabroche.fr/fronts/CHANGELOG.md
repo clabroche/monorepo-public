@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2-beta.8](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.7...v1.1.2-beta.8) (2022-12-04)
+
+### Bug Fixes
+
+* **corentinlabrochefr:** retrigger build ([38db927](https://github.com/clabroche/monorepo/commit/38db927743fcbcfad6a313c3cc3911f83ad0f6ea))
+
 ## [1.1.2-beta.6](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.5...v1.1.2-beta.6) (2022-12-04)
 
 ### Bug Fixes
