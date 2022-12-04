@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2-beta.1](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.0...v1.1.2-beta.1) (2022-12-04)
+
+### Bug Fixes
+
+* **ratbag:** sync to mirror ([c29d50c](https://github.com/clabroche/monorepo/commit/c29d50c5a4fc9be5a39dee9cad1a2768267a97e4))
+
 ## [1.1.2-beta.0](https://github.com/clabroche/monorepo/compare/v1.1.1...v1.1.2-beta.0) (2022-12-04)
 
 ### Bug Fixes
