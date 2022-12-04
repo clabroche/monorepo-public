@@ -42,12 +42,16 @@ describe('Dependencies', () => {
       .filter(workspace => workspace.packageJSON.name !== retriggerAllPackage.packageJSON.name)
       .map(workspace => {
         it(`${workspace.packageJSON.name} should have a devDependencies section`, () => {
-          expect(workspace.packageJSON.devDependencies).not.toBeFalsy()
+          if (!fse.readdirSync(workspace.path).includes('.independant')) {
+            expect(workspace.packageJSON.devDependencies).not.toBeFalsy()
+          }
         })
         it(`${workspace.packageJSON.name} should inherit from the retrigger-all-build package`, () => {
-          expect(workspace.packageJSON.devDependencies).toMatchObject({
-            [retriggerAllPackage.packageJSON.name]: 'workspace:*'
-          })
+          if(!fse.readdirSync(workspace.path).includes('.independant')) {
+            expect(workspace.packageJSON.devDependencies).toMatchObject({
+              [retriggerAllPackage.packageJSON.name]: 'workspace:*'
+            })
+          }
         })
       })
   })

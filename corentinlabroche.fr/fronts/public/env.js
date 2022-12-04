@@ -1,0 +1,3 @@
+envs = {
+  WEATHER_APIKEY: ''
+}
