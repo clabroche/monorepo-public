@@ -1,6 +1,6 @@
 {
   "name": "@clabroche/corentinlabroche.fr-fronts",
-  "version": "1.1.2-beta.5",
+  "version": "1.1.2-beta.6",
   "private": true,
   "scripts": {
     "serve": "vite",

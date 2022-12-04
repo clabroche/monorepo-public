@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2-beta.6](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.5...v1.1.2-beta.6) (2022-12-04)
+
+### Bug Fixes
+
+* **corentinlabrochefr:** add postpublish to trigger Dockerfile build ([699ae19](https://github.com/clabroche/monorepo/commit/699ae19c687c8d5b6a772df6f5a72a13adc90a7d))
+
 ## [1.1.2-beta.5](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.4...v1.1.2-beta.5) (2022-12-04)
 
 ### Bug Fixes
