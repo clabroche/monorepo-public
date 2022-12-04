@@ -1,6 +1,11 @@
 const fse = require('fs-extra')
 const path = require('path')
 const PromiseB = require('bluebird')
+
+module.exports.isBetween = function isBetween(guess, min, max) {
+  return guess >= min && guess <= max
+}
+
 module.exports.reverseObject = (obj) => {
   return Object.keys(obj).reduce((rule, win) => {
     const defeat = obj[win]
@@ -32,7 +37,9 @@ module.exports.launch = async ({
   console.log('Day n°' + path.basename(path.dirname(inputsDir)))
   await PromiseB.mapSeries(tutos, async (tuto, i) => {
     const file = tuto.path || 'tuto'
-    const parsed = module.exports.parse(path.resolve(inputsDir, file), format)
+    const parsed = tuto.input 
+      ? format(tuto.input)
+      : module.exports.parse(path.resolve(inputsDir, file), format)
     const res = await tuto.exec(parsed)
     if(res !== tuto.shouldBe) {
       throw new Error(`Tuto n°${i}: Should be "${tuto.shouldBe}" but "${res}" found`)
@@ -52,7 +59,7 @@ module.exports.arraySum = (entries) => {
 /**
  * @typedef Opts
  * @property {string} inputsDir
- * @property {{exec: (content: any) => string | number, shouldBe: any, path?:string}[]} tutos
+ * @property {{exec: (content: any) => string | number, shouldBe: any, path?:string, input?: string}[]} tutos
  * @property {(fileContent: string) => any} format
  * @property {((content: any) => string | number)[]} parts
  */
