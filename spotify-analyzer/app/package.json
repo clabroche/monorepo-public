@@ -1,6 +1,6 @@
 {
   "name": "@clabroche/spotify-analyzer-app",
-  "version": "1.1.1-beta.28",
+  "version": "1.1.1-beta.33",
   "repository": "https://github.com/clabroche/monorepo",
   "publishAppID": "634b791aced974f2ec74c2fb",
   "files": [
