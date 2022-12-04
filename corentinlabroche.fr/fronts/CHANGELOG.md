@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2-beta.11](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.10...v1.1.2-beta.11) (2022-12-04)
+
+### Bug Fixes
+
+* **corentinlabrochefr:** add workflow ([65ff477](https://github.com/clabroche/monorepo/commit/65ff477511b53079117c17fa2732832d9752da3e))
+
 ## [1.1.2-beta.10](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.9...v1.1.2-beta.10) (2022-12-04)
 
 ### Bug Fixes
