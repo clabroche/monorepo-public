@@ -48,13 +48,13 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.2);
+  background: rgba(255,255,255,0.5);
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0,0,0,0.5);
+  background: rgba(255,255,255, 0.3);
 }
 .main-container {
   height: calc(100vh - 75px);
