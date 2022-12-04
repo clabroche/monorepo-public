@@ -8,14 +8,14 @@
       <div class="wave"></div>
       <div class="wave"></div>
     </div>
-    <div class="goto-bottom left chevron" @click="previous">
+    <div class="center goto-bottom left chevron" @click="previous">
       <font-awesome-icon :icon="['fas', 'chevron-left']" class="bottom chevron"/>
     </div>
-    <div class="goto-bottom right chevron" @click="next">
+    <div class="center goto-bottom right chevron" @click="next">
       <font-awesome-icon :icon="['fas', 'chevron-right']" class="bottom chevron"/>
     </div>
     <transition name="slide-fade">
-      <component :is="components[activeComponentIndex].comp"/>
+      <component class="center" :is="components[activeComponentIndex].comp"/>
     </transition>
     <div class="goto-bottom" @click="scroll">
       <label>Voir la suite</label>
@@ -48,7 +48,8 @@ const components = [
 const activeComponentIndex = ref(0)
 
 const scroll = () => {
-  document.querySelector('.main-container').scrollTo({top: window.innerHeight - 60, behavior: "smooth"})
+  console.log(window.innerHeight - 60)
+  document.querySelector('.main-container')?.scrollTo({top: window.innerHeight - 60, behavior: "smooth"})
 }
 
 const next = () => {
@@ -127,7 +128,7 @@ const previous = () => {
     cursor: pointer;
     &.left, &.right {
       position: absolute;
-      top: 50%;
+      top: calc(50% - 100px);
       z-index: 2;
       font-size: 3em;
     }
@@ -241,6 +242,9 @@ const previous = () => {
   50% {
     transform: scaleY(1);
   }
+}
+.center {
+  transform: translateY(-75px);
 }
 </style>
 
