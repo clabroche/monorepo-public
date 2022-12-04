@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1-beta.33](https://github.com/clabroche/monorepo/compare/v1.1.1-beta.32...v1.1.1-beta.33) (2022-12-04)
+
+### Bug Fixes
+
+* **owner:** change owner ([5fbde86](https://github.com/clabroche/monorepo/commit/5fbde863734787839cd409734ae5871dc5e1772f))
+
 ## [1.1.1-beta.3](https://github.com/clabroche/monorepo/compare/v1.1.1-beta.2...v1.1.1-beta.3) (2022-08-03)
 
 **Note:** Version bump only for package @clabroche/common-express-error-handler
