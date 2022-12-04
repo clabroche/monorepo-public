@@ -1,3 +1,4 @@
+
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
@@ -74,15 +75,15 @@ export default defineConfig({
 
 
 function getPackagesToTransform() {
-  const localNodemodules = path.resolve('node_modules', '@clabroche-org')
+  const localNodemodules = path.resolve('node_modules', '@clabroche')
   const allfoldersToWatch = [
     ...fs.readdirSync(localNodemodules).map(a => path.resolve(localNodemodules, a)),
   ]
   const packagesToTransform = allfoldersToWatch
     .filter(folder => {
-      return packagejson.name !== `@clabroche-org/${path.basename(folder)}`
+      return packagejson.name !== `@clabroche/${path.basename(folder)}`
     })
-    .map(a => `@clabroche-org/${path.basename(a)}`)
+    .map(a => `@clabroche/${path.basename(a)}`)
   return packagesToTransform
 }
 

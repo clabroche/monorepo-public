@@ -1,0 +1,62 @@
+{
+  "name": "@clabroche/ugc-explorer-app",
+  "version": "1.1.1",
+  "repository": "https://github.com/clabroche/monorepo",
+  "publishAppID": "63869baa90bb457d55eb1fc5",
+  "files": [
+    "dist/*",
+    "dist/**/*",
+    "server.js"
+  ],
+  "bin": "server.js",
+  "scripts": {
+    "serve": "./node_modules/.bin/vite",
+    "build": "vite build",
+    "capacitor": "cap",
+    "capacitor:android:generate:keystore": "keytool -genkey -v -keystore my-release-key.keystore -alias ugc-explorer -keyalg RSA -keysize 2048 -validity 1000000 && keytool -importkeystore -srckeystore my-release-key.keystore -destkeystore my-release-key.keystore -deststoretype pkcs12",
+    "capacitor:build": "cd android && ./build.sh",
+    "preview": "vite preview --port 5050",
+    "postpublish": "EVENT_TYPE=ugc-explorer-app REPO=clabroche/monorepo npx @clabroche/common-trigger-workflow",
+    "test": ""
+  },
+  "type": "module",
+  "dependencies": {
+    "@capacitor/android": "^3.6.0",
+    "@capacitor/cli": "^3.6.0",
+    "@capacitor/core": "^3.6.0",
+    "@clabroche/common-socket-front": "workspace:*",
+    "chart.js": "^3.9.1",
+    "chartjs-adapter-luxon": "^1.2.0",
+    "debounce": "^1.2.1",
+    "express": "^4.18.1",
+    "luxon": "^3.0.4",
+    "vue-chartjs": "^4.1.2"
+  },
+  "devDependencies": {
+    "@clabroche/common-custom-observable": "workspace:*",
+    "@clabroche/common-retrigger-all-build": "workspace:*",
+    "@clabroche/common-trigger-workflow": "workspace:*",
+    "@clabroche/ugc-explorer-env": "workspace:*",
+    "@clabroche/ugc-explorer-models": "workspace:*",
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@vitejs/plugin-vue": "^2.3.1",
+    "apexcharts": "^3.32.1",
+    "axios": "^1.1.3",
+    "bluebird": "^3.7.2",
+    "dayjs": "^1.11.1",
+    "lodash-es": "^4.17.21",
+    "sass": "^1.50.1",
+    "sass-loader": "^12.6.0",
+    "tippy.js": "^6.3.7",
+    "uuid": "^8.3.2",
+    "vee-validate": "^4.6.1",
+    "vite": "^2.9.5",
+    "vite-plugin-environment": "^1.1.2",
+    "vite-plugin-restart": "^0.2.0",
+    "vue": "^3.2.33",
+    "vue-router": "^4.0.14",
+    "vue3-apexcharts": "^1.4.1",
+    "yup": "^0.32.11"
+  },
+  "gitHead": "130d53f826acd5311d738a4097b22ce0a2861c49"
+}

@@ -1,4 +1,4 @@
-const HTTPError = require('@clabroche-org/common-express-http-error')
+const HTTPError = require('@clabroche/common-express-http-error')
 
 module.exports = ({
   logger

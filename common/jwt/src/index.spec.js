@@ -1,4 +1,4 @@
-const env = require('@clabroche-org/mybank-libs-env')
+const env = require('@clabroche/mybank-libs-env')
 const jwt = require('./index')
 const mockBearer = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjMsImlhdCI6MTYyMTcyMDIzNH0.P-qqdX2Hy7Hf66VTTKEkPEqw_XnETZiW-PVxIKZHMuQ'
 describe('JWT', () => {

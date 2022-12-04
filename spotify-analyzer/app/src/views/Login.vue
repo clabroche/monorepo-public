@@ -9,7 +9,7 @@
         <div class="inputs">
           <div class="input-container">
             <label><i class="fas fa-user" aria-hidden="true"></i></label>
-            <input type="text" :value="user.email" @input="user.email = $event.target?.value" placeholder="Email/Pseudo"
+            <input type="email" :value="user.email" @input="user.email = $event.target?.value" placeholder="Email"
               @keypress.enter="register ? registerFun() : login()">
           </div>
           <div class="input-container">
