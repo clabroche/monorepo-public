@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/clabroche/monorepo/compare/v1.1.1-beta.34...v1.1.1) (2022-12-04)
+
+**Note:** Version bump only for package @clabroche/common-custom-observable
+
 ## [1.1.1-beta.33](https://github.com/clabroche/monorepo/compare/v1.1.1-beta.32...v1.1.1-beta.33) (2022-12-04)
 
 ### Bug Fixes
