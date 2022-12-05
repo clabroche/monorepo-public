@@ -1,6 +1,6 @@
 {
   "name": "@clabroche/common-express",
-  "version": "1.1.2-beta.5",
+  "version": "1.1.2",
   "description": "",
   "repository": "https://github.com/clabroche/monorepo",
   "main": "src/server.js",

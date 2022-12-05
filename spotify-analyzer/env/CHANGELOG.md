@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.11...v1.1.2) (2022-12-05)
+
+**Note:** Version bump only for package @clabroche/spotify-analyzer-env
+
 ## [1.1.2-beta.5](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.4...v1.1.2-beta.5) (2022-12-04)
 
 ### Bug Fixes
