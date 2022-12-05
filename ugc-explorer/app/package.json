@@ -1,6 +1,6 @@
 {
   "name": "@clabroche/ugc-explorer-app",
-  "version": "1.1.2-beta.5",
+  "version": "1.1.2",
   "repository": "https://github.com/clabroche/monorepo",
   "publishAppID": "63869baa90bb457d55eb1fc5",
   "files": [
