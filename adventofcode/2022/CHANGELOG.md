@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.4-beta.2](https://github.com/clabroche/monorepo/compare/v1.1.4-beta.1...v1.1.4-beta.2) (2022-12-06)
+
+### Bug Fixes
+
+* **adventofcode:** add day 6 ([012d802](https://github.com/clabroche/monorepo/commit/012d802f38e502de06c5e3eee571223b53b68470))
+
 ## [1.1.4-beta.0](https://github.com/clabroche/monorepo/compare/v1.1.3...v1.1.4-beta.0) (2022-12-05)
 
 ### Bug Fixes
