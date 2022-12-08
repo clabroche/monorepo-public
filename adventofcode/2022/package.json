@@ -1,6 +1,6 @@
 {
   "name": "@clabroche/adventofcode-2022",
-  "version": "1.1.4-beta.0",
+  "version": "1.1.4-beta.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.7.2",
+    "cli-color": "^2.0.3",
+    "dot-object": "^2.1.4",
     "fs-extra": "^9.0.1"
   },
   "devDependencies": {
