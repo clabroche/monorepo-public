@@ -56,6 +56,10 @@ module.exports.launch = async ({
 module.exports.arraySum = (entries) => {
   return entries.reduce((a, b) => a + b, 0)
 }
+
+module.exports.arrayMultiply = (entries) => {
+  return entries.reduce((a, b) => a * b, 1)
+}
 /**
  * @typedef Opts
  * @property {string} inputsDir
