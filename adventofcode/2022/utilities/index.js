@@ -63,7 +63,7 @@ module.exports.arrayMultiply = (entries) => {
 /**
  * @typedef Opts
  * @property {string} inputsDir
- * @property {{exec: (content: any) => string | number, shouldBe: any, path?:string, input?: string}[]} tutos
+ * @property {{exec: (content: any) => string | number | Promise<string | number>, shouldBe: any, path?:string, input?: string}[]} tutos
  * @property {(fileContent: string) => any} format
- * @property {((content: any) => string | number)[]} parts
+ * @property {((content: any) => string | number | Promise<string | number>)[]} parts
  */
