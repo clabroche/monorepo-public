@@ -1,6 +1,6 @@
 {
   "name": "@clabroche/common-express-gulp",
-  "version": "1.1.4-beta.0",
+  "version": "1.1.4",
   "description": "",
   "repository": "https://github.com/clabroche/monorepo",
   "main": "src/gulpfile.js",
