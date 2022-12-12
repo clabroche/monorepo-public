@@ -33,7 +33,6 @@ function maxCalories(turn) {
 
 function getCaloriesFromTopElfs(turn, nbElfs) {
   const elfs = turn.elfs
-    .map(e => ({total: e.total, elf: e.elf}))
     .sort((a, b) => b.total - a.total)
     .slice(0, nbElfs)
   return arraySum(elfs.map(e => e.total))
