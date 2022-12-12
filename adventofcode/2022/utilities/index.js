@@ -56,10 +56,14 @@ module.exports.launch = async ({
 module.exports.arraySum = (entries) => {
   return entries.reduce((a, b) => a + b, 0)
 }
+
+module.exports.arrayMultiply = (entries) => {
+  return entries.reduce((a, b) => a * b, 1)
+}
 /**
  * @typedef Opts
  * @property {string} inputsDir
- * @property {{exec: (content: any) => string | number, shouldBe: any, path?:string, input?: string}[]} tutos
+ * @property {{exec: (content: any) => string | number | Promise<string | number>, shouldBe: any, path?:string, input?: string}[]} tutos
  * @property {(fileContent: string) => any} format
- * @property {((content: any) => string | number)[]} parts
+ * @property {((content: any) => string | number | Promise<string | number>)[]} parts
  */

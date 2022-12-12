@@ -40,7 +40,12 @@ if(!patToken) throw new Error('Pass a "patToken" env')
   });
   const rootDir = pathfs.resolve(__dirname, '..')
   const filter = publicWorkspaces.map(w => w.path.replace(rootDir + '/', ''))
-  const cliFilter = filter.map(path => `--path "${path}"`).join(' ')
+  const additionalPathsToKeep = [
+    'README.md',
+    '.gitignore',
+    'LICENSE.md'
+  ]
+  const cliFilter = [...filter, ...additionalPathsToKeep].map(path => `--path "${path}"`).join(' ')
   const pulledPath = pathfs.resolve(__dirname, 'pulled')
   const subRepo = `https://${patToken}@github.com/${login}/monorepo-public`
   if(existsSync(pulledPath)) fse.removeSync(pulledPath)
