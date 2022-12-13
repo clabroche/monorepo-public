@@ -5,6 +5,7 @@ const { execSync } = require('child_process')
 const { saveWindow, switchWindow } = require('./commands/switch')
 const { suspend } = require('./commands/suspend')
 const { alttab } = require('./commands/navigation')
+const { switchSinks } = require('./commands/audio')
 
 const ledBlue = [
   { led: 0, mode: 'breathing', color: '0882ff', duration: 3000, brightness: 255 },
@@ -21,11 +22,11 @@ const ledOrange = [
 
 module.exports = {
   commands: {
-    'M0-G2': alttab,
+    'M0-G2': switchSinks,
     'M0-G3': launchOrDisplaySpotify,
     'M0-G4': switchWindow,
     'M0-G5': saveWindow,
-    'M1-G2': launchOrDisplaySpotify,
+    'M1-G2': alttab,
     'M1-G3': launchOrDisplaySpotify,
     'M1-G4': launchOrDisplaySpotify,
     'M1-G5': launchOrDisplaySpotify,
