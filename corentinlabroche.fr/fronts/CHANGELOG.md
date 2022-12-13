@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.5-beta.0](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.11...v1.1.5-beta.0) (2022-12-13)
+
+### Bug Fixes
+
+* **corentinlabroche:** remove private from packagejson ([9fb0083](https://github.com/clabroche/monorepo/commit/9fb0083be47c9d375f3821bb3d666e3143905679))
+
 ## [1.1.4](https://github.com/clabroche/monorepo/compare/v1.1.4-beta.5...v1.1.4) (2022-12-12)
 
 **Note:** Version bump only for package @clabroche/corentinlabroche.fr-fronts

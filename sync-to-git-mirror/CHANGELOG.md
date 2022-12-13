@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.5-beta.0](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.11...v1.1.5-beta.0) (2022-12-13)
+
+### Bug Fixes
+
+* **mirror:** keep some additional files ([1056913](https://github.com/clabroche/monorepo/commit/105691324f325c85d452b0b1d35837eebffdc0f4))
+
 ## [1.1.4](https://github.com/clabroche/monorepo/compare/v1.1.4-beta.5...v1.1.4) (2022-12-12)
 
 **Note:** Version bump only for package @clabroche/sync-to-git-mirror
