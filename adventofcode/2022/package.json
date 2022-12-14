@@ -7,7 +7,7 @@
     "serve": "nodemon ",
     "start": "node ",
     "all": "find days -type f -iname 'index.js' -exec sh -c 'for n; do node $n || exit 1; done' sh {} +",
-    "test": "npm run all",
+    "test": "NODE_ENV=test npm run all",
     "postpublish": "EVENT_TYPE=adventofcode-2022 REPO=clabroche/monorepo npx @clabroche/common-trigger-workflow"
   },
   "author": "",
