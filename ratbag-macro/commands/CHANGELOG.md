@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.5-beta.1](https://github.com/clabroche/monorepo/compare/v1.1.5-beta.0...v1.1.5-beta.1) (2022-12-13)
+
+### Bug Fixes
+
+* **ratbag:** can switch audio sinks from keyboard ([c059fd7](https://github.com/clabroche/monorepo/commit/c059fd7c9a9afe5636b5d7700d6e6dfbf1480268))
+
+## [1.1.5-beta.0](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.11...v1.1.5-beta.0) (2022-12-13)
+
+**Note:** Version bump only for package @clabroche/ratbag-macro-commands
+
+## [1.1.4](https://github.com/clabroche/monorepo/compare/v1.1.4-beta.5...v1.1.4) (2022-12-12)
+
+**Note:** Version bump only for package @clabroche/ratbag-macro-commands
+
 ## [1.1.4-beta.0](https://github.com/clabroche/monorepo/compare/v1.1.3...v1.1.4-beta.0) (2022-12-05)
 
 **Note:** Version bump only for package @clabroche/ratbag-macro-commands

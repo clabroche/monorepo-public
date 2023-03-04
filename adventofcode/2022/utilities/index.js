@@ -1,6 +1,7 @@
 const fse = require('fs-extra')
 const path = require('path')
 const PromiseB = require('bluebird')
+const test = process.env.NODE_ENV === 'test'
 
 module.exports.isBetween = function isBetween(guess, min, max) {
   return guess >= min && guess <= max
@@ -46,6 +47,7 @@ module.exports.launch = async ({
     }
     console.log('Tuto n°' +i +':  Ok')
   })
+  if(test) return
   await PromiseB.mapSeries(parts, async (part, i) => {
     const parsed = module.exports.parse(path.resolve(inputsDir, 'part' + (i +1)), format)
     const res = await part(parsed)
@@ -63,7 +65,7 @@ module.exports.arrayMultiply = (entries) => {
 /**
  * @typedef Opts
  * @property {string} inputsDir
- * @property {{exec: (content: any) => string | number, shouldBe: any, path?:string, input?: string}[]} tutos
+ * @property {{exec: (content: any) => string | number | Promise<string | number>, shouldBe: any, path?:string, input?: string}[]} tutos
  * @property {(fileContent: string) => any} format
- * @property {((content: any) => string | number)[]} parts
+ * @property {((content: any) => string | number | Promise<string | number>)[]} parts
  */

@@ -1,6 +1,6 @@
 {
   "name": "@clabroche/ugc-explorer-app",
-  "version": "1.1.4-beta.0",
+  "version": "1.1.5-beta.0",
   "repository": "https://github.com/clabroche/monorepo",
   "publishAppID": "63869baa90bb457d55eb1fc5",
   "files": [
@@ -53,7 +53,7 @@
     "vite": "^2.9.5",
     "vite-plugin-environment": "^1.1.2",
     "vite-plugin-restart": "^0.2.0",
-    "vue": "^3.2.45",
+    "vue": "^3.2.33",
     "vue-router": "^4.0.14",
     "vue3-apexcharts": "^1.4.1",
     "yup": "^0.32.11"

@@ -1,6 +1,6 @@
 {
   "name": "@clabroche/corentinlabroche.fr-fronts",
-  "version": "1.1.4-beta.0",
+  "version": "1.1.5-beta.0",
   "scripts": {
     "serve": "vite",
     "preview": "vite preview",
@@ -26,7 +26,7 @@
     "sass": "^1.49.7",
     "stats.js": "^0.17.0",
     "vite": "^2.8.2",
-    "vue": "^3.2.45",
+    "vue": "^3.2.31",
     "vue-router": "^4.0.1"
   },
   "devDependencies": {

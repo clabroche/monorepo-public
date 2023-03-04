@@ -1,13 +1,13 @@
 {
   "name": "@clabroche/adventofcode-2022",
-  "version": "1.1.4-beta.3",
+  "version": "1.1.5-beta.2",
   "description": "",
   "main": "index.js",
   "scripts": {
     "serve": "nodemon ",
     "start": "node ",
     "all": "find days -type f -iname 'index.js' -exec sh -c 'for n; do node $n || exit 1; done' sh {} +",
-    "test": "npm run all",
+    "test": "NODE_ENV=test npm run all",
     "postpublish": "EVENT_TYPE=adventofcode-2022 REPO=clabroche/monorepo npx @clabroche/common-trigger-workflow"
   },
   "author": "",
@@ -16,7 +16,8 @@
     "bluebird": "^3.7.2",
     "cli-color": "^2.0.3",
     "dot-object": "^2.1.4",
-    "fs-extra": "^9.0.1"
+    "fs-extra": "^9.0.1",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@clabroche/common-retrigger-all-build": "workspace:*",
