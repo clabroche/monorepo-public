@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.5-beta.7](https://github.com/clabroche/monorepo/compare/v1.1.5-beta.6...v1.1.5-beta.7) (2023-03-04)
+
+### Bug Fixes
+
+* ci ([13897f3](https://github.com/clabroche/monorepo/commit/13897f371241d8a838e0c863be6a5e010dd88506))
+
 ## [1.1.5-beta.3](https://github.com/clabroche/monorepo/compare/v1.1.5-beta.2...v1.1.5-beta.3) (2023-03-04)
 
 ### Bug Fixes
