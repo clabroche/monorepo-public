@@ -13,6 +13,8 @@ const asciify = require('asciify')
 const context = require('@clabroche/common-context').middleware
 const helmet = require("helmet");
 const path = require('path')
+const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 require('express-async-errors');
 
@@ -21,8 +23,11 @@ module.exports = {
     port = process.env.PORT || 4002,
     mongoDbURL = process.env.MONGO_URL,
     mongoDbPrefix = '',
+    mongoDisablePrefix = false,
     mongoDbDbName = '',
     baseUrl = __dirname,
+    helmetConf = {},
+    corsConf = {},
     beforeAll = () => console.log('No before all function for express'),
     afterAll = () => console.log('No after all function for express'),
     controllers = (req, res, next) => { console.log('No controllers added') },
@@ -37,14 +42,26 @@ module.exports = {
     const appName = pkgJSON.name
 
     const app = express()
-    app.use(helmet())
+    app.use(helmet(
+      helmetConf
+    ))
 
     console.log('Enable cors...')
-    app.use(cors())
+    app.use(cors(corsConf))
+    app.options('*', function (req, res, next) {
+      res.setHeader('Access-Control-Allow-Credentials', 'true')
+      next()
+    })
 
     console.log('Enable JSON body...')
     app.use(express.json({ limit: '50mb' }))
     app.use(express.urlencoded({ extended: true }))
+
+    console.log('Enable Cookie parser...')
+    app.use(cookieParser());
+
+    console.log('Enable Compression...')
+    app.use(compression())
 
     console.log('Enable Logger...')
     logger.init({
@@ -87,8 +104,10 @@ module.exports = {
 
     if (mongoDbURL) {
       console.log('Enable Mongodb...')
-      const dbName = mongoDbDbName || mongoDbURL.split('/').pop().split('?').shift()
-      const prefix = mongoDbPrefix || mongoDbURL.split('/').pop().split('?').shift()
+      const dbName = mongoDbDbName || mongoDbURL.split('/').pop()?.split('?').shift()
+      const prefix = mongoDisablePrefix
+        ? ''
+        : mongoDbPrefix || mongoDbURL.split('/').pop()?.split('?').shift() || ''
       await mongo.connect(mongoDbURL, prefix, dbName)
     } else {
       console.log('Launch without mongo collection')
