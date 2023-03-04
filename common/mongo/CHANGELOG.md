@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.5-beta.3](https://github.com/clabroche/monorepo/compare/v1.1.5-beta.2...v1.1.5-beta.3) (2023-03-04)
+
+### Bug Fixes
+
+* update rhea with common express and mongo ([0f61ead](https://github.com/clabroche/monorepo/commit/0f61ead49befd5e84da2f65bb32b743e7d08b596))
+
+## [1.1.4-beta.0](https://github.com/clabroche/monorepo/compare/v1.1.3...v1.1.4-beta.0) (2022-12-05)
+
+## [1.1.3](https://github.com/clabroche/monorepo/compare/v1.1.3-beta.0...v1.1.3) (2022-12-05)
+
+## [1.1.3-beta.0](https://github.com/clabroche/monorepo/compare/v1.1.2...v1.1.3-beta.0) (2022-12-05)
+
+## [1.1.2](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.11...v1.1.2) (2022-12-05)
+
 ## [1.1.5-beta.0](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.11...v1.1.5-beta.0) (2022-12-13)
 
 **Note:** Version bump only for package @clabroche/common-mongo

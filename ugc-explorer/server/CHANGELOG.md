@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.5-beta.3](https://github.com/clabroche/monorepo/compare/v1.1.5-beta.2...v1.1.5-beta.3) (2023-03-04)
+
+**Note:** Version bump only for package @clabroche/ugc-explorer-server
+
 ## [1.1.5-beta.0](https://github.com/clabroche/monorepo/compare/v1.1.2-beta.11...v1.1.5-beta.0) (2022-12-13)
 
 **Note:** Version bump only for package @clabroche/ugc-explorer-server
