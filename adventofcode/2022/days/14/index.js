@@ -83,8 +83,8 @@ launch({
     { shouldBe: 93, exec: (content) => guess2(content, true) },
   ],
   parts: [
-    (content) => guess(content),
-    (content) => guess2(content),
+    // (content) => guess(content),
+    // (content) => guess2(content),
   ]
 }).catch(err => { console.error(err); process.exit(1) })
 

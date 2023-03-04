@@ -64,7 +64,9 @@ class MongoConnect {
    */
   collection(name) {
     if (this.db) {
-      return this.db.collection(`${this.prefix}-${name}`)
+      return this.prefix
+        ? this.db.collection(`${this.prefix}-${name}`)
+        : this.db.collection(`${name}`)
     }
     throw new Error('DB not instanciate: call mongo.connect(url) before')
   }
