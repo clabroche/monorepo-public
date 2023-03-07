@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.5-beta.16](https://github.com/clabroche/monorepo/compare/v1.1.5-beta.15...v1.1.5-beta.16) (2023-03-07)
+
+### Bug Fixes
+
+* **ratbag:** support for systemctl job canceling ([6eb1170](https://github.com/clabroche/monorepo/commit/6eb1170bd830da720c4842616a36067da9655133))
+
 ## [1.1.5-beta.1](https://github.com/clabroche/monorepo/compare/v1.1.5-beta.0...v1.1.5-beta.1) (2022-12-13)
 
 ### Bug Fixes
