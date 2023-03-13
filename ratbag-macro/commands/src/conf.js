@@ -6,6 +6,7 @@ const { saveWindow, switchWindow } = require('./commands/switch')
 const { suspend } = require('./commands/suspend')
 const { alttab } = require('./commands/navigation')
 const { switchSinks } = require('./commands/audio')
+const { expandWindow } = require('./commands/expandWindow')
 
 const ledBlue = [
   { led: 0, mode: 'breathing', color: '0882ff', duration: 3000, brightness: 255 },
@@ -27,7 +28,7 @@ module.exports = {
     'M0-G4': switchWindow,
     'M0-G5': saveWindow,
     'M1-G2': alttab,
-    'M1-G3': launchOrDisplaySpotify,
+    'M1-G3': expandWindow,
     'M1-G4': launchOrDisplaySpotify,
     'M1-G5': launchOrDisplaySpotify,
     'M2-G2': suspend,
